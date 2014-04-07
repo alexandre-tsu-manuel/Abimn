@@ -128,14 +128,15 @@ namespace Abimn
             cells[cPos.X][cPos.Y].Draw(pos);
         }
         
-        public void Draw(Pos posHero)
+        public void Draw(Pos posHero, Pos shift = null)
         {
             Pos cPosIni = new Pos(posHero.X - C.nbCellsHorizontalOnScreen / 2, posHero.Y - C.nbCellsVerticalOnScreen / 2);
             Pos sPos = new Pos();
-            Pos cPos = new Pos(cPosIni.X, cPosIni.Y);
+            Pos cPos = new Pos();
+            shift = shift != null ? shift : new Pos();
 
-            for (sPos.X = 0, cPos.X = cPosIni.X; sPos.X < C.Screen.Width; sPos.X += 50, cPos.X++)
-                for (sPos.Y = 0, cPos.Y = cPosIni.Y; sPos.Y < C.Screen.Height; sPos.Y += 50, cPos.Y++)
+            for (sPos.X = -shift.X, cPos.X = cPosIni.X; sPos.X < C.Screen.Width; sPos.X += 50, cPos.X++)
+                for (sPos.Y = -shift.Y, cPos.Y = cPosIni.Y; sPos.Y < C.Screen.Height; sPos.Y += 50, cPos.Y++)
                     DrawCell(cPos, sPos);
         }
     }
