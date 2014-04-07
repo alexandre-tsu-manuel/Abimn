@@ -14,12 +14,10 @@ namespace Abimn
     /// <summary>
     /// Combat instancié
     /// </summary>
-    public static class PauseMenu
+    public class PauseMenu : GameType
     {
-        private static Button resume, exit, option;
-        private static Entity fond_menu;
-
-        private static SpriteBatch spriteBatch;
+        private Button resume, exit, option;
+        private Entity fond_menu;
 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
@@ -27,25 +25,24 @@ namespace Abimn
         /// related content.  Calling base.Initialize will enumerate through any components
         /// and initialize them as well.
         /// </summary>
-        public static void Initialize(SpriteBatch spriteBatch)
+        public PauseMenu() : base(false)
         {
-            PauseMenu.spriteBatch = spriteBatch;
             resume = new Button();
             exit = new Button();
             option = new Button();
 
             fond_menu = new Entity();
             fond_menu.Initialize(new Pos(255, 105));
-            fond_menu.LoadContent(1, ref G.pause_menuTiles);
+            fond_menu.LoadContent(1, Tiles.PauseMenu);
 
             resume.Initialize(new Pos(fond_menu.Position.X + 60, fond_menu.Position.Y + 145));
-            resume.LoadContent(2, 6, 8, ref G.pause_menuTiles);
+            resume.LoadContent(2, 6, 8, Tiles.PauseMenu);
 
             option.Initialize(new Pos(fond_menu.Position.X + 60, fond_menu.Position.Y + 195));
-            option.LoadContent(3, 5, 9, ref G.pause_menuTiles);
+            option.LoadContent(3, 5, 9, Tiles.PauseMenu);
 
             exit.Initialize(new Pos(fond_menu.Position.X + 60, fond_menu.Position.Y + 245));
-            exit.LoadContent(4, 7, 10, ref G.pause_menuTiles);
+            exit.LoadContent(4, 7, 10, Tiles.PauseMenu);
         }
 
         /// <summary>
@@ -53,9 +50,8 @@ namespace Abimn
         /// checking for collisions, gathering input, and playing audio.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        public static void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
-            E.Update();
             if (E.LeftIsReleased())
             {
                 if (resume.mouseOver())
@@ -63,14 +59,10 @@ namespace Abimn
                 else if (exit.mouseOver())
                 {
                     G.currentGame.Clear();
-                    G.currentGame.Push(CurrentGame.Menu);
-                    Menu.Initialize(spriteBatch);
+                    G.currentGame.Push(new Menu());
                 }
                 else if (option.mouseOver())
-                {
-                    G.currentGame.Push(CurrentGame.OptionsMenu);
-                    OptionsMenu.Initialize(spriteBatch);
-                }
+                    G.currentGame.Push(new OptionsMenu());
             }
             if (E.IsPushed(Keys.Escape))
                 G.currentGame.Pop();
@@ -79,12 +71,12 @@ namespace Abimn
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
-        public static void Draw()
+        public override void Draw()
         {
-            fond_menu.Draw(spriteBatch);
-            resume.Draw(spriteBatch);
-            exit.Draw(spriteBatch);
-            option.Draw(spriteBatch);
+            fond_menu.Draw();
+            resume.Draw();
+            exit.Draw();
+            option.Draw();
         }
     }
 }

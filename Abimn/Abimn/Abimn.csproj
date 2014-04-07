@@ -117,6 +117,7 @@
     <Compile Include="FightRecap.cs" />
     <Compile Include="G.cs" />
     <Compile Include="GameOver.cs" />
+    <Compile Include="GameType.cs" />
     <Compile Include="Hero.cs" />
     <Compile Include="HeroCreator.cs" />
     <Compile Include="Inventory.cs" />
@@ -132,6 +133,7 @@
     <Compile Include="Rand.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="Tile.cs" />
+    <Compile Include="TilesManager.cs" />
     <Compile Include="Weapon.cs" />
   </ItemGroup>
   <ItemGroup>

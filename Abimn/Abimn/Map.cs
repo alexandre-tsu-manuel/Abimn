@@ -121,14 +121,14 @@ namespace Abimn
             return !cells[pos.X][pos.Y].Blocking;
         }
 
-        public void DrawCell(SpriteBatch spriteBatch, Pos cPos, Pos pos)
+        public void DrawCell(Pos cPos, Pos pos)
         {
             if (cPos.X < 0 || cPos.Y < 0 || cPos.X >= C.nbCellsHorizontal || cPos.Y >= C.nbCellsVertical)
                 return;
-            cells[cPos.X][cPos.Y].Draw(spriteBatch, pos);
+            cells[cPos.X][cPos.Y].Draw(pos);
         }
         
-        public void Draw(SpriteBatch spriteBatch, Pos posHero)
+        public void Draw(Pos posHero)
         {
             Pos cPosIni = new Pos(posHero.X - C.nbCellsHorizontalOnScreen / 2, posHero.Y - C.nbCellsVerticalOnScreen / 2);
             Pos sPos = new Pos();
@@ -136,7 +136,7 @@ namespace Abimn
 
             for (sPos.X = 0, cPos.X = cPosIni.X; sPos.X < C.Screen.Width; sPos.X += 50, cPos.X++)
                 for (sPos.Y = 0, cPos.Y = cPosIni.Y; sPos.Y < C.Screen.Height; sPos.Y += 50, cPos.Y++)
-                    DrawCell(spriteBatch, cPos, sPos);
+                    DrawCell(cPos, sPos);
         }
     }
 }

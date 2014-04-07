@@ -69,13 +69,13 @@ namespace Abimn
             return !cells[pos.Y][pos.X].Blocking;
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw()
         {
             Pos pos = new Pos();
 
             for (pos.X = 0; pos.X < 850; pos.X++)
                 for (pos.Y = 0; pos.Y < 650; pos.Y++ )
-                    cells[pos.Y][pos.X].Draw(spriteBatch, pos, Center.None, true);
+                    cells[pos.Y][pos.X].Draw(pos, Center.None, true);
         }
     }
 }

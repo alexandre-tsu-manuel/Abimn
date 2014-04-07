@@ -18,7 +18,6 @@ namespace Abimn
     public class Game : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
 
         public Game()
         {
@@ -34,81 +33,20 @@ namespace Abimn
         /// </summary>
         protected override void Initialize()
         {
-            G.currentGame = new Stack<CurrentGame>();
-            this.LoadContentFast();
-            G.oldFrame = null;
-            G.currentGame.Push(CurrentGame.Menu);
-            Menu.Initialize(spriteBatch);
+            Rand.Init();
+            G.currentGame = new Stack<GameType>();
 
             this.IsMouseVisible = true;
             this.graphics.IsFullScreen = false;
             this.graphics.PreferredBackBufferWidth = C.Screen.Width;
             this.graphics.PreferredBackBufferHeight = C.Screen.Height;
             this.graphics.ApplyChanges();
-
             this.Window.Title = "Abimn";
-
             this.Window.AllowUserResizing = true;
 
             base.Initialize();
-        }
 
-        private void LoadContentFast()
-        {
-            // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            G.mainTiles = new Tile[C.nbMainTiles];
-            G.mainDecoTiles = new Tile[C.nbMainTiles];
-            G.fightTiles = new Tile[C.nbFightTiles];
-            G.pause_menuTiles = new Tile[C.nbpause_menuTiles];
-            G.inventoryTiles = new Tile[C.nbinventoryTiles];
-            G.heroTiles = new Tile[C.nbheroTiles];
-            G.recapTiles = new Tile[C.nbrecapTiles];
-            G.buttonTiles = new Tile[C.nbButtonTiles];
-
-            for (int i = 1; i <= C.nbMainTiles; i++)
-            {
-                G.mainTiles[i - 1] = new Tile();
-                G.mainTiles[i - 1].LoadContent(Content, "m" + i.ToString());
-            }
-            for (int i = 1; i <= C.nbMainDecoTiles; i++)
-            {
-                G.mainDecoTiles[i - 1] = new Tile();
-                G.mainDecoTiles[i - 1].LoadContent(Content, "md" + i.ToString());
-            }
-            for (int i = 1; i <= C.nbFightTiles; i++)
-            {
-                G.fightTiles[i - 1] = new Tile();
-                G.fightTiles[i - 1].LoadContent(Content, "f" + i.ToString());
-            }
-            for (int i = 1; i <= C.nbpause_menuTiles; i++)
-            {
-                G.pause_menuTiles[i - 1] = new Tile();
-                G.pause_menuTiles[i - 1].LoadContent(Content, "pause_menu" + i.ToString());
-            }
-            for (int i = 1; i <= C.nbinventoryTiles; i++)
-            {
-                G.inventoryTiles[i - 1] = new Tile();
-                G.inventoryTiles[i - 1].LoadContent(Content, "inventory" + i.ToString());
-            }
-            for (int i = 1; i <= C.nbheroTiles; i++)
-            {
-                G.heroTiles[i - 1] = new Tile();
-                G.heroTiles[i - 1].LoadContent(Content, "hero" + i.ToString());
-            }
-            for (int i = 1; i <= C.nbrecapTiles; i++)
-            {
-                G.recapTiles[i - 1] = new Tile();
-                G.recapTiles[i - 1].LoadContent(Content, "recap" + i.ToString());
-            }
-            for (int i = 1; i <= C.nbButtonTiles; i++)
-            {
-                G.buttonTiles[i - 1] = new Tile();
-                G.buttonTiles[i - 1].LoadContent(Content, "menup" + i.ToString());
-            }
-
-            G.vie = Content.Load<SpriteFont>("vie");
+            G.currentGame.Push(new Menu());
         }
 
         /// <summary>
@@ -117,7 +55,9 @@ namespace Abimn
         /// </summary>
         protected override void LoadContent()
         {
-            
+            G.spriteBatch = new SpriteBatch(GraphicsDevice);
+            TilesManager.Initialize(Content);
+            G.vie = Content.Load<SpriteFont>("vie");
         }
 
         /// <summary>
@@ -143,72 +83,11 @@ namespace Abimn
                 return;
             }
 
-            switch (G.currentGame.Peek())
-            {
-                case CurrentGame.Menu:
-                    Menu.Update(gameTime);
-                    break;
-                case CurrentGame.HeroCreator:
-                    HeroCreator.Update(gameTime);
-                    break;
-                case CurrentGame.Main:
-                    Main.Update(gameTime);
-                    break;
-                case CurrentGame.PauseMenu:
-                    PauseMenu.Update(gameTime);
-                    break;
-                case CurrentGame.OptionsMenu:
-                    OptionsMenu.Update(gameTime);
-                    break;
-                case CurrentGame.Fight:
-                    Fight.Update(gameTime);
-                    break;
-                case CurrentGame.FightRecap:
-                    FightRecap.Update(gameTime);
-                    break;
-                case CurrentGame.Inventory:
-                    Inventory.Update(gameTime);
-                    break;
-                case CurrentGame.GameOver:
-                    GameOver.Update(gameTime);
-                    break;
-            }
+            E.Update();
+
+            G.currentGame.Peek().Update(gameTime);
 
             base.Update(gameTime);
-        }
-
-        private void DrawCurrentGame(CurrentGame curr)
-        {
-            switch (curr)
-            {
-                case CurrentGame.Menu:
-                    Menu.Draw();
-                    break;
-                case CurrentGame.HeroCreator:
-                    HeroCreator.Draw();
-                    break;
-                case CurrentGame.Main:
-                    Main.Draw();
-                    break;
-                case CurrentGame.PauseMenu:
-                    PauseMenu.Draw();
-                    break;
-                case CurrentGame.OptionsMenu:
-                    OptionsMenu.Draw();
-                    break;
-                case CurrentGame.Fight:
-                    Fight.Draw();
-                    break;
-                case CurrentGame.FightRecap:
-                    FightRecap.Draw();
-                    break;
-                case CurrentGame.Inventory:
-                    Inventory.Draw();
-                    break;
-                case CurrentGame.GameOver:
-                    GameOver.Draw();
-                    break;
-            }
         }
 
         /// <summary>
@@ -222,18 +101,20 @@ namespace Abimn
 
             int w = GraphicsDevice.PresentationParameters.BackBufferWidth;
             int h = GraphicsDevice.PresentationParameters.BackBufferHeight;
+            Stack<GameType> buffer = new Stack<GameType>();
 
             GraphicsDevice.Clear(Color.Black);
 
-            spriteBatch.Begin();
-            if (G.currentGame.Count != 1)
+            while (G.currentGame.Count != 1 && !G.currentGame.Peek().IsFullScreen)
+                buffer.Push(G.currentGame.Pop());
+            buffer.Push(G.currentGame.Pop());
+            G.spriteBatch.Begin();
+            while (buffer.Count != 0)
             {
-                CurrentGame tmp = G.currentGame.Pop();
-                DrawCurrentGame(G.currentGame.Peek());
-                G.currentGame.Push(tmp);
+                buffer.Peek().Draw();
+                G.currentGame.Push(buffer.Pop());
             }
-            DrawCurrentGame(G.currentGame.Peek());
-            spriteBatch.End();
+            G.spriteBatch.End();
 
             base.Draw(gameTime);
         }

@@ -14,11 +14,10 @@ namespace Abimn
     /// <summary>
     /// Combat instancié
     /// </summary>
-    public static class GameOver
+    public class GameOver : GameType
     {
-        private static SpriteBatch spriteBatch;
-        private static Entity fond;
-        private static Button exit;
+        private Entity fond;
+        private Button exit;
 
 
         /// <summary>
@@ -27,16 +26,13 @@ namespace Abimn
         /// related content.  Calling base.Initialize will enumerate through any components
         /// and initialize them as well.
         /// </summary>
-        public static void Initialize(SpriteBatch spriteBatch)
+        public GameOver() : base(true)
         {
-            GameOver.spriteBatch = spriteBatch;
             fond = new Entity();
-            fond.Initialize(new Pos());
-            fond.LoadContent(7, ref G.fightTiles);
+            fond.LoadContent(7, Tiles.Fight);
 
-            exit = new Button();
-            exit.Initialize(new Pos(C.Screen.Width / 2, 400));
-            exit.LoadContent(2, 2, 2, ref G.recapTiles, Center.All);
+            exit = new Button(new Pos(C.Screen.Width / 2, 400));
+            exit.LoadContent(2, 2, 2, Tiles.Recap, Center.All);
 
 
             // TODO: Add your initialization logic here
@@ -48,14 +44,12 @@ namespace Abimn
         /// checking for collisions, gathering input, and playing audio.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        public static void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
-            E.Update();
             if (E.LeftIsReleased() & exit.mouseOver())
             {
                 G.currentGame.Clear();
-                G.currentGame.Push(CurrentGame.Menu);
-                Menu.Initialize(spriteBatch);
+                G.currentGame.Push(new Menu());
             }
 
             // TODO: Add your update logic here
@@ -66,11 +60,10 @@ namespace Abimn
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
-        public static void Draw()
+        public override void Draw()
         {
-
-            fond.Draw(spriteBatch);
-            exit.Draw(spriteBatch);
+            fond.Draw();
+            exit.Draw();
             // TODO: Add your drawing code here
         }
     }

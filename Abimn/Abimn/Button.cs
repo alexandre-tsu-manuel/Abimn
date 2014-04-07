@@ -11,7 +11,7 @@ namespace Abimn
 {
     public class Button
     {
-        private Tile[] _tiles;
+        private int _tilesRef;
 
         /// <summary>
         /// Récupère ou définit la visibilité du button
@@ -73,6 +73,9 @@ namespace Abimn
         }
         private Rectangle _rect;
 
+        public Button(bool visible = true) { this.Initialize(visible); }
+        public Button(Pos position, bool visible = true) { this.Initialize(position, visible); }
+
         /// <summary>
         /// Initialise les variables du Sprite
         /// </summary>
@@ -100,14 +103,15 @@ namespace Abimn
         /// <param name="content">Le ContentManager qui chargera l'image</param>
         /// <param name="assetName">L'asset name de l'image à charger pour ce Sprite</param>
         /// <param name="center"> Permet de centrer l'image par rapport à se position. Par défaut l'image n'est pas centrée</param>
-        public virtual void LoadContent(int idNormal, int idOver, int idPushed, ref Tile[] tiles, Center center = Center.None)
+        public virtual void LoadContent(int idNormal, Tiles tilesRef, Center center = Center.None) { this.LoadContent(idNormal, idNormal, idNormal, tilesRef, center); }
+        public virtual void LoadContent(int idNormal, int idOver, int idPushed, Tiles tilesRef, Center center = Center.None)
         {
             _idTextureNormal = --idNormal;
             _idTextureOver = --idOver;
             _idTexturePushed = --idPushed;
-            this._tiles = tiles;
-            _rect.Width = _tiles[idNormal].Texture.Width;
-            _rect.Height = _tiles[idNormal].Texture.Height;
+            _tilesRef = (int) tilesRef;
+            _rect.Width = G.tiles[_tilesRef][idNormal].Texture.Width;
+            _rect.Height = G.tiles[_tilesRef][idNormal].Texture.Height;
             if (center == Center.Horizontal || center == Center.All)
                 _position.X = _rect.X = _rect.X - _rect.Width / 2;
             if (center == Center.Vertical || center == Center.All)
@@ -134,16 +138,16 @@ namespace Abimn
         /// Dessine le button en utilisant ses attributs et le spritebatch donné
         /// </summary>
         /// <param name="spriteBatch">Le spritebatch avec lequel dessiner</param>
-        public virtual void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw()
         {
             if (this.Visible)
                 if (this.mouseOver())
                     if (E.LeftIsDown())
-                        _tiles[_idTexturePushed].Draw(spriteBatch, _position);
+                        G.tiles[_tilesRef][_idTexturePushed].Draw(_position);
                     else
-                        _tiles[_idTextureOver].Draw(spriteBatch, _position);
+                        G.tiles[_tilesRef][_idTextureOver].Draw(_position);
                 else
-                    _tiles[_idTextureNormal].Draw(spriteBatch, _position);
+                    G.tiles[_tilesRef][_idTextureNormal].Draw(_position);
         }
     }
 }

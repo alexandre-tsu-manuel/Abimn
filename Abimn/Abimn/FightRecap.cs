@@ -14,11 +14,10 @@ namespace Abimn
     /// <summary>
     /// Combat instancié
     /// </summary>
-    public static class FightRecap
+    public class FightRecap : GameType
     {
-        private static SpriteBatch spriteBatch;
-        private static Entity fond;
-        private static Button exit;
+        private Entity fond;
+        private Button exit;
 
 
         /// <summary>
@@ -27,20 +26,13 @@ namespace Abimn
         /// related content.  Calling base.Initialize will enumerate through any components
         /// and initialize them as well.
         /// </summary>
-        public static void Initialize(SpriteBatch spriteBatch)
+        public FightRecap() : base(false)
         {
-            FightRecap.spriteBatch = spriteBatch;
-            fond = new Entity();
-            fond.Initialize(new Pos(C.Screen.Width / 2, C.Screen.Height / 2));
-            fond.LoadContent(1, ref G.recapTiles, Center.All);
+            fond = new Entity(new Pos(C.Screen.Width / 2, C.Screen.Height / 2));
+            fond.LoadContent(1, Tiles.Recap, Center.All);
 
-            exit = new Button();
-            exit.Initialize(new Pos(fond.Position.X + 70, fond.Position.Y + 370));
-            exit.LoadContent(2, 2, 2, ref G.recapTiles);
-
-
-            // TODO: Add your initialization logic here
-
+            exit = new Button(new Pos(fond.Position.X + 70, fond.Position.Y + 370));
+            exit.LoadContent(2, 2, 2, Tiles.Recap);
         }
 
         /// <summary>
@@ -48,9 +40,8 @@ namespace Abimn
         /// checking for collisions, gathering input, and playing audio.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        public static void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
-            E.Update();
             if (E.LeftIsReleased() & exit.mouseOver())
             {
                 G.currentGame.Pop();
@@ -65,13 +56,13 @@ namespace Abimn
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
-        public static void Draw()
+        public override void Draw()
         {
-            fond.Draw(spriteBatch);
-            exit.Draw(spriteBatch);
-            spriteBatch.DrawString(G.vie, (Hero.Life/100).ToString() + "/100", new Vector2(fond.Position.X + 120, fond.Position.Y + 165), Color.Red);
-            spriteBatch.DrawString(G.vie, "37", new Vector2(fond.Position.X + 162, fond.Position.Y + 233), Color.Yellow);
-            spriteBatch.DrawString(G.vie, "75", new Vector2(fond.Position.X + 162, fond.Position.Y + 308), Color.Green);
+            fond.Draw();
+            exit.Draw();
+            G.spriteBatch.DrawString(G.vie, (Hero.Life/100).ToString() + "/100", new Vector2(fond.Position.X + 120, fond.Position.Y + 165), Color.Red);
+            G.spriteBatch.DrawString(G.vie, "37", new Vector2(fond.Position.X + 162, fond.Position.Y + 233), Color.Yellow);
+            G.spriteBatch.DrawString(G.vie, "75", new Vector2(fond.Position.X + 162, fond.Position.Y + 308), Color.Green);
             // TODO: Add your drawing code here
         }
     }

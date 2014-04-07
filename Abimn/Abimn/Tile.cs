@@ -23,6 +23,9 @@ namespace Abimn
         }
         private Texture2D _texture;
 
+        public Tile() { }
+        public Tile(ContentManager content, string assetName) { this.LoadContent(content, assetName); }
+
         /// <summary>
         /// Charge l'image voulue grâce au ContentManager donné
         /// </summary>
@@ -38,13 +41,13 @@ namespace Abimn
         /// </summary>
         /// <param name="spriteBatch">Le spritebatch avec lequel dessiner</param>
         /// <param name="gameTime">Le GameTime de la frame</param>
-        public virtual void Draw(SpriteBatch spriteBatch, Pos pos, Center center = Center.None)
+        public virtual void Draw(Pos pos, Center center = Center.None)
         {
             if (center == Center.Horizontal || center == Center.All)
                 pos.X = pos.X = pos.X - _texture.Width / 2;
             if (center == Center.Vertical || center == Center.All)
                 pos.Y = pos.Y = pos.Y - _texture.Height / 2;
-            spriteBatch.Draw(_texture, pos.ToVector2(), Color.White);
+            G.spriteBatch.Draw(_texture, pos.ToVector2(), Color.White);
         }
     }
 }

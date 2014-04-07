@@ -14,11 +14,10 @@ namespace Abimn
     /// <summary>
     /// Combat instancié
     /// </summary>
-    public static class Inventory
+    public class Inventory : GameType
     {
-        private static Button armor, weapons, div, quest, cons;
-        private static Entity _inv, shit, overshit;
-        private static SpriteBatch spriteBatch;
+        private Button armor, weapons, div, quest, cons;
+        private Entity _inv, shit, overshit;
 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
@@ -26,40 +25,32 @@ namespace Abimn
         /// related content.  Calling base.Initialize will enumerate through any components
         /// and initialize them as well.
         /// </summary>
-        public static void Initialize(SpriteBatch spriteBatch)
+        public Inventory() : base(false)
         {
-            Inventory.spriteBatch = spriteBatch;
+            armor = new Button(new Pos(230, 14));
+            armor.LoadContent(2, 3, 3, Tiles.Inventory);
 
-            armor = new Button();
-            armor.Initialize(new Pos(230, 14));
-            armor.LoadContent(2, 3, 3, ref G.inventoryTiles);
+            weapons = new Button(new Pos(260, 15));
+            weapons.LoadContent(10, 11, 11, Tiles.Inventory);
 
-            weapons = new Button();
-            weapons.Initialize(new Pos(260, 15));
-            weapons.LoadContent(10, 11, 11, ref G.inventoryTiles);
+            div = new Button(new Pos(314, 13));
+            div.LoadContent(6, 7, 7, Tiles.Inventory);
 
-            div = new Button();
-            div.Initialize(new Pos(314, 13));
-            div.LoadContent(6, 7, 7, ref G.inventoryTiles);
-            quest = new Button();
-            quest.Initialize(new Pos(340, 16));
-            quest.LoadContent(8, 9, 9, ref G.inventoryTiles);
+            quest = new Button(new Pos(340, 16));
+            quest.LoadContent(8, 9, 9, Tiles.Inventory);
 
-            cons = new Button();
-            cons.Initialize(new Pos(287, 8));
-            cons.LoadContent(4, 5, 5, ref G.inventoryTiles);
+            cons = new Button(new Pos(287, 8));
+            cons.Initialize();
+            cons.LoadContent(4, 5, 5, Tiles.Inventory);
 
-            _inv = new Entity();
-            _inv.Initialize(new Pos(15, 10));
-            _inv.LoadContent(1, ref G.inventoryTiles);
+            _inv = new Entity(new Pos(15, 10));
+            _inv.LoadContent(1, Tiles.Inventory);
 
-            shit = new Entity();
-            shit.Initialize(new Pos(225, 50), false);
-            shit.LoadContent(12, ref G.inventoryTiles);
+            shit = new Entity(new Pos(225, 50), false);
+            shit.LoadContent(12, Tiles.Inventory);
 
-            overshit = new Ennemy();
-            overshit.Initialize(new Pos(225, 50), false);
-            overshit.LoadContent(13, ref G.inventoryTiles);
+            overshit = new Ennemy(new Pos(225, 50), false);
+            overshit.LoadContent(13, Tiles.Inventory);
         }
 
         /// <summary>
@@ -67,9 +58,8 @@ namespace Abimn
         /// checking for collisions, gathering input, and playing audio.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        public static void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
-            E.Update();
             if (E.LeftIsPushed() & armor.mouseOver())
                 shit.Visible = true;
             if (E.LeftIsPushed() & weapons.mouseOver())
@@ -86,17 +76,17 @@ namespace Abimn
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
-        public static void Draw()
+        public override void Draw()
         {
-            _inv.Draw(spriteBatch);
-            shit.Draw(spriteBatch);
-            overshit.Draw(spriteBatch);
+            _inv.Draw();
+            shit.Draw();
+            overshit.Draw();
 
-            armor.Draw(spriteBatch);
-            weapons.Draw(spriteBatch);
-            cons.Draw(spriteBatch);
-            div.Draw(spriteBatch);
-            quest.Draw(spriteBatch);
+            armor.Draw();
+            weapons.Draw();
+            cons.Draw();
+            div.Draw();
+            quest.Draw();
 
             // TODO: Add your drawing code here
         }

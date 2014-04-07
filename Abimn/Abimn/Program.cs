@@ -10,7 +10,6 @@ namespace Abimn
         /// </summary>
         static void Main(string[] args)
         {
-            Rand.Init();
             using (Game game = new Game())
             {
                 game.Run();

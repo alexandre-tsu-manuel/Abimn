@@ -14,13 +14,12 @@ namespace Abimn
     /// <summary>
     /// Combat instancié
     /// </summary>
-    public static class Menu
+    public class Menu : GameType
     {
-        private static SpriteBatch spriteBatch;
-        private static Button jouer;
-        private static Button options;
-        private static Button quitter;
-        private static Entity background;
+        private Button jouer;
+        private Button options;
+        private Button quitter;
+        private Entity background;
 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
@@ -28,28 +27,22 @@ namespace Abimn
         /// related content.  Calling base.Initialize will enumerate through any components
         /// and initialize them as well.
         /// </summary>
-        public static void Initialize(SpriteBatch spriteBatch)
+        public Menu() : base(true)
         {
             Hero.LifeMax = 10000;
             Hero.Life = 10000;
 
-            Menu.spriteBatch = spriteBatch;
+            jouer = new Button(new Pos((int)(C.Screen.Width * 0.1), (int)(C.Screen.Height * 0.40)));
+            jouer.LoadContent(1, 2, 1, Tiles.Button);
 
-            jouer = new Button();
-            jouer.Initialize(new Pos((int)(C.Screen.Width * 0.1), (int)(C.Screen.Height * 0.40)));
-            jouer.LoadContent(1, 2, 1, ref G.buttonTiles);
+            options = new Button(new Pos((int)(C.Screen.Width * 0.1), (int)(C.Screen.Height * 0.55)));
+            options.LoadContent(3, 4, 3, Tiles.Button);
 
-            options = new Button();
-            options.Initialize(new Pos((int)(C.Screen.Width * 0.1), (int)(C.Screen.Height * 0.55)));
-            options.LoadContent(3, 4, 3, ref G.buttonTiles);
-
-            quitter = new Button();
-            quitter.Initialize(new Pos((int)(C.Screen.Width * 0.1), (int)(C.Screen.Height * 0.70)));
-            quitter.LoadContent(5, 6, 5, ref G.buttonTiles);
+            quitter = new Button(new Pos((int)(C.Screen.Width * 0.1), (int)(C.Screen.Height * 0.70)));
+            quitter.LoadContent(5, 6, 5, Tiles.Button);
 
             background = new Entity();
-            background.Initialize(new Pos());
-            background.LoadContent(7, ref G.buttonTiles);
+            background.LoadContent(7, Tiles.Button);
 
 
             // TODO: Add your initialization logic here
@@ -62,23 +55,15 @@ namespace Abimn
         /// checking for collisions, gathering input, and playing audio.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        public static void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
-            E.Update();
-
             if (quitter.mouseOver() && E.LeftIsReleased())
                 G.currentGame.Clear();
 
             if (options.mouseOver() && E.LeftIsReleased())
-            {
-                G.currentGame.Push(CurrentGame.OptionsMenu);
-                OptionsMenu.Initialize(spriteBatch);
-            }
+                G.currentGame.Push(new OptionsMenu());
             if (jouer.mouseOver() && E.LeftIsReleased())
-            {
-                G.currentGame.Push(CurrentGame.HeroCreator);
-                HeroCreator.Initialize(spriteBatch);
-            }
+                G.currentGame.Push(new HeroCreator());
 
             // G.currentGame.Pop();
         }
@@ -86,12 +71,12 @@ namespace Abimn
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
-        public static void Draw()
+        public override void Draw()
         {
-            background.Draw(spriteBatch);
-            jouer.Draw(spriteBatch);
-            options.Draw(spriteBatch);
-            quitter.Draw(spriteBatch);
+            background.Draw();
+            jouer.Draw();
+            options.Draw();
+            quitter.Draw();
         }
     }
 }

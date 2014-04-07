@@ -14,12 +14,11 @@ namespace Abimn
     /// <summary>
     /// Combat instancié
     /// </summary>
-    public static class Main
+    public class Main : GameType
     {
-        private static SpriteBatch spriteBatch;
-        private static Map _backmap;
-        private static Pos _poshero;
-        private static int _idhero;
+        private Map _backmap;
+        private Pos _poshero;
+        private int _idhero;
 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
@@ -27,12 +26,11 @@ namespace Abimn
         /// related content.  Calling base.Initialize will enumerate through any components
         /// and initialize them as well.
         /// </summary>
-        public static void Initialize(SpriteBatch spriteBatch)
+        public Main() : base(true)
         {
-            Main.spriteBatch = spriteBatch;
-            Main._poshero = new Pos(8, 6);
-            Main._backmap = new Map();
-            Main._idhero = 4;
+            this._poshero = new Pos(8, 6);
+            this._backmap = new Map();
+            this._idhero = 4;
 
             // TODO: Add your initialization logic here
             /*  G.currentGame.Push(CurrentGame.PauseMenu);
@@ -43,7 +41,7 @@ namespace Abimn
         /// permet de bouger le HERO d'une case à l'autre en fonction de la touche
         /// fonctionne avec zqsd et flèches(haut, bas, gauche, droite)
         /// </summary>
-        public static void MoveHeros()
+        public void MoveHeros()
         {
             if (E.IsPushed(Keys.Q) || E.IsPushed(Keys.Left) || /*E.IsDown(Keys.Q) ||*/ E.IsDown(Keys.Left))
             {
@@ -86,26 +84,17 @@ namespace Abimn
         /// checking for collisions, gathering input, and playing audio.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        public static void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
-            E.Update();
-
             if (E.IsPushed(Keys.Escape))
-            {
-                G.currentGame.Push(CurrentGame.PauseMenu);
-                PauseMenu.Initialize(spriteBatch);
-            }
+                G.currentGame.Push(new PauseMenu());
 
             if (E.IsPushed(Keys.I))
-            {
-                G.currentGame.Push(CurrentGame.Inventory);
-                Inventory.Initialize(spriteBatch);
-            }
+                G.currentGame.Push(new Inventory());
 
             if (_backmap.Decoration(_poshero) == 1)
             {
-                G.currentGame.Push(CurrentGame.Fight);
-                Fight.Initialize(spriteBatch);
+                G.currentGame.Push(new Fight());
                 _backmap.SetCell(_poshero, new Cell(false, 1, 0));
             }
 
@@ -126,16 +115,17 @@ namespace Abimn
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
-        public static void Draw()
+        public override void Draw()
         {
-            _backmap.Draw(spriteBatch, _poshero);
+            _backmap.Draw(_poshero);
 
             /*((_poshero.X) * 50), ((_poshero.Y * 50)))*/
 
-            Entity EntityHero = new Entity();
-            EntityHero.Initialize(new Pos((8 * 50), (6 * 50)));
-            EntityHero.LoadContent(_idhero, ref G.heroTiles);
-            EntityHero.Draw(spriteBatch);
+            Entity EntityHero = new Entity(new Pos((8 * 50), (6 * 50)));
+            EntityHero.LoadContent(_idhero, Tiles.Hero);
+            EntityHero.Draw();
+
+            base.Draw();
         }
     }
 }

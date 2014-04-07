@@ -61,8 +61,12 @@ namespace Abimn
         }
         private Rectangle _rect;
 
-        private int id;
-        private Tile[] tiles;
+        private int _id;
+        private int _tilesRef;
+
+        public Entity(bool visible = true) { this.Initialize(visible); }
+        public Entity(Pos position, bool visible = true) { this.Initialize(position, visible); }
+        public Entity(Pos position, Vector2 direction, float speed, bool visible = true) { this.Initialize(position, direction, speed, visible); }
 
         /// <summary>
         /// Initialise les variables de l'entity
@@ -94,9 +98,9 @@ namespace Abimn
         /// <param name="direction">La direction de l'entity</param>
         /// <param name="speed">La vitesse de l'entity</param>
         /// </summary>
-        public virtual void Initialize(Vector2 direction, float speed, bool visible = true)
+        public virtual void Initialize(Pos position, Vector2 direction, float speed, bool visible = true)
         {
-            _position = new Pos();
+            _position = position;
             _direction = direction;
             _speed = speed;
             _rect = new Rectangle();
@@ -109,12 +113,12 @@ namespace Abimn
         /// <param name="content">Le ContentManager qui chargera l'image</param>
         /// <param name="assetName">L'asset name de l'image à charger pour ce Sprite</param>
         /// <param name="center"> Permet de centrer l'image par rapport à se position</param>
-        public virtual void LoadContent(int id, ref Tile[] tiles, Center center = Center.None)
+        public virtual void LoadContent(int id, Tiles tilesRef, Center center = Center.None)
         {
-            this.id = --id;
-            this.tiles = tiles;
-            _rect.Width = tiles[id].Texture.Width;
-            _rect.Height = tiles[id].Texture.Height;
+            _id = --id;
+            _tilesRef = (int)tilesRef;
+            _rect.Width = G.tiles[_tilesRef][id].Texture.Width;
+            _rect.Height = G.tiles[_tilesRef][id].Texture.Height;
             if (center == Center.Horizontal || center == Center.All)
                 _position.X = _rect.X = _rect.X - _rect.Width / 2;
             if (center == Center.Vertical || center == Center.All)
@@ -152,10 +156,10 @@ namespace Abimn
         /// </summary>
         /// <param name="spriteBatch">Le spritebatch avec lequel dessiner</param>
         /// <param name="gameTime">Le GameTime de la frame</param>
-        public virtual void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw()
         {
             if (this.Visible)
-                tiles[id].Draw(spriteBatch, _position);
+                G.tiles[_tilesRef][_id].Draw(_position);
         }
     }
 }

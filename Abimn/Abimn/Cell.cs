@@ -38,15 +38,15 @@ namespace Abimn
             IdDeco = idDeco;
         }
 
-        public void Draw(SpriteBatch spriteBatch, Pos pos, Center center = Center.None, bool fighting = false)
+        public void Draw(Pos pos, Center center = Center.None, bool fighting = false)
         {
             if (fighting)
-                G.fightTiles[IdFloor - 1].Draw(spriteBatch, pos, center);
+                G.tiles[(int)Tiles.Fight][IdFloor - 1].Draw(pos, center);
             else
             {
-                G.mainTiles[IdFloor - 1].Draw(spriteBatch, pos, center);
+                G.tiles[(int)Tiles.Main][IdFloor - 1].Draw(pos, center);
                 if (IdDeco != 0)
-                    G.mainDecoTiles[IdDeco].Draw(spriteBatch, pos, center);
+                    G.tiles[(int)Tiles.MainDeco][IdDeco].Draw(pos, center);
             }
         }
     }
