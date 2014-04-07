@@ -99,8 +99,6 @@ namespace Abimn
             if (G.currentGame.Count == 0)
                 return;
 
-            int w = GraphicsDevice.PresentationParameters.BackBufferWidth;
-            int h = GraphicsDevice.PresentationParameters.BackBufferHeight;
             Stack<GameType> buffer = new Stack<GameType>();
 
             GraphicsDevice.Clear(Color.Black);
