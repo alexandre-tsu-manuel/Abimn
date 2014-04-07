@@ -21,10 +21,6 @@ namespace Abimn
             this._isFullScreen = isFullScreen;
         }
 
-        public virtual void Initialize(SpriteBatch spriteBatch)
-        {
-        }
-
         public virtual void Update(GameTime gameTime)
         {
         }
