@@ -24,12 +24,12 @@ namespace Abimn
         /// <summary>
         /// Récupère ou définit la position de l'entity
         /// </summary>
-        public Pos Position
+        public Pos Pos
         {
-            get { return _position; }
-            set { _position = value; }
+            get { return _pos; }
+            set { _pos = value; }
         }
-        private Pos _position;
+        private Pos _pos;
 
         /// <summary>
         /// Récupère ou définit la direction de l'entity. Lorsque la direction est modifiée, elle est automatiquement normalisée.
@@ -73,7 +73,7 @@ namespace Abimn
         /// </summary>
         public virtual void Initialize(bool visible = true)
         {
-            _position = new Pos();
+            _pos = new Pos();
             _direction = Vector2.Zero;
             _speed = 0;
             _rect = new Rectangle();
@@ -86,10 +86,10 @@ namespace Abimn
         /// </summary>
         public virtual void Initialize(Pos position, bool visible = true)
         {
-            _position = position;
+            _pos = position;
             _direction = Vector2.Zero;
             _speed = 0;
-            _rect = new Rectangle((int)_position.X, (int)_position.Y, 0, 0);
+            _rect = new Rectangle((int)_pos.X, (int)_pos.Y, 0, 0);
             _visible = visible;
         }
 
@@ -100,7 +100,7 @@ namespace Abimn
         /// </summary>
         public virtual void Initialize(Pos position, Vector2 direction, float speed, bool visible = true)
         {
-            _position = position;
+            _pos = position;
             _direction = direction;
             _speed = speed;
             _rect = new Rectangle();
@@ -120,9 +120,9 @@ namespace Abimn
             _rect.Width = G.tiles[_tilesRef][id].Texture.Width;
             _rect.Height = G.tiles[_tilesRef][id].Texture.Height;
             if (center == Center.Horizontal || center == Center.All)
-                _position.X = _rect.X = _rect.X - _rect.Width / 2;
+                _pos.X = _rect.X = _rect.X - _rect.Width / 2;
             if (center == Center.Vertical || center == Center.All)
-                _position.Y = _rect.Y = _rect.Y - _rect.Height / 2;
+                _pos.Y = _rect.Y = _rect.Y - _rect.Height / 2;
         }
 
         /// <summary>
@@ -131,9 +131,9 @@ namespace Abimn
         /// <param name="gameTime">Le GameTime associé à la frame</param>
         public virtual void Update(GameTime gameTime)
         {
-            _position += _direction * _speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-            _rect.X = (int) _position.X;
-            _rect.Y = (int) _position.Y;
+            _pos += _direction * _speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+            _rect.X = (int) _pos.X;
+            _rect.Y = (int) _pos.Y;
         }
 
         /// <summary>
@@ -159,7 +159,7 @@ namespace Abimn
         public virtual void Draw()
         {
             if (this.Visible)
-                G.tiles[_tilesRef][_id].Draw(_position);
+                G.tiles[_tilesRef][_id].Draw(_pos);
         }
     }
 }

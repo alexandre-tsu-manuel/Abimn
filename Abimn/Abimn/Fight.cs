@@ -72,7 +72,7 @@ namespace Abimn
             }
 
             _ennemy.Update(gameTime);
-            if (_ennemy.Position.X < _hero.Position.X + 50)
+            if (_ennemy.Pos.X < _hero.Pos.X + 50)
             {
                 _ennemy.Speed = 0;
                 _fightContact = true;
@@ -87,12 +87,12 @@ namespace Abimn
             if (E.IsDown(Keys.Right))
             {
                 _hero.LoadContent(1, Tiles.Fight);
-                _hero.Position.X++;
+                _hero.Pos.X++;
             }
             if (E.IsDown(Keys.Left))
             {
                 _hero.LoadContent(2, Tiles.Fight);
-                _hero.Position.X--;
+                _hero.Pos.X--;
             }
             if (!_jumping && E.IsPushed(Keys.Space))
             {

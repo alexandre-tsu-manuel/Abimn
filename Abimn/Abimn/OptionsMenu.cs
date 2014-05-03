@@ -35,14 +35,14 @@ namespace Abimn
             background = new Entity(new Pos(C.Screen.Width/2, C.Screen.Height/2));
             background.LoadContent(1, Tiles.Button2, Center.All);
 
-            sonEnabled = new Button(new Pos(background.Position.X / 2, background.Position.Y / 2));
+            sonEnabled = new Button(new Pos(background.Pos.X + background.Rect.Width / 2, background.Pos.Y + background.Rect.Height / 2));
             sonEnabled.LoadContent(2, 3, 2, Tiles.Button2, Center.All);
 
-            sonDisabled = new Button(new Pos((int)(C.Screen.Width * 0.4), (int)(C.Screen.Height * 0.3)), false);
+            sonDisabled = new Button(sonEnabled.Pos, false);
             sonDisabled.LoadContent(4, 5, 4, Tiles.Button2);
 
-            retour = new Button(new Pos((int)(C.Screen.Width * 0.4), (int)(C.Screen.Height * 0.5)));
-            retour.LoadContent(2, 6, 2, Tiles.PauseMenu);
+            retour = new Button(new Pos(background.Pos.X + background.Rect.Width / 2, background.Pos.Y + background.Rect.Height / 2 + 100));
+            retour.LoadContent(2, 6, 2, Tiles.PauseMenu, Center.All);
 
             son = true; // de base, la musique est activee
         }

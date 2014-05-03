@@ -57,12 +57,12 @@ namespace Abimn
         /// <summary>
         /// Récupère ou définit la position du button
         /// </summary>
-        public Pos Position
+        public Pos Pos
         {
-            get { return _position; }
-            set { _position = value; }
+            get { return _pos; }
+            set { _pos = value; }
         }
-        private Pos _position;
+        private Pos _pos;
 
         /// <summary>
         /// Récupère ou définit la hitbox du button
@@ -82,7 +82,7 @@ namespace Abimn
         /// </summary>
         public virtual void Initialize(bool visible = true)
         {
-            _position = new Pos();
+            _pos = new Pos();
             _rect = new Rectangle();
             _visible = visible;
         }
@@ -93,8 +93,8 @@ namespace Abimn
         /// <param name="position">La position à laquelle sera placé le button</param>
         public virtual void Initialize(Pos position, bool visible = true)
         {
-            _position = position;
-            _rect = new Rectangle((int)_position.X, (int)_position.Y, 0, 0);
+            _pos = position;
+            _rect = new Rectangle((int)_pos.X, (int)_pos.Y, 0, 0);
             _visible = visible;
         }
 
@@ -114,9 +114,9 @@ namespace Abimn
             _rect.Width = G.tiles[_tilesRef][idNormal].Texture.Width;
             _rect.Height = G.tiles[_tilesRef][idNormal].Texture.Height;
             if (center == Center.Horizontal || center == Center.All)
-                _position.X = _rect.X = _rect.X - _rect.Width / 2;
+                _pos.X = _rect.X = _rect.X - _rect.Width / 2;
             if (center == Center.Vertical || center == Center.All)
-                _position.Y = _rect.Y = _rect.Y - _rect.Height / 2;
+                _pos.Y = _rect.Y = _rect.Y - _rect.Height / 2;
         }
 
         /// <summary>
@@ -124,10 +124,10 @@ namespace Abimn
         /// </summary>
         public virtual bool mouseOver()
         {
-            return E.GetMousePosX() >= _position.X
-                && E.GetMousePosX() <= _position.X + _rect.Width
-                && E.GetMousePosY() >= _position.Y
-                && E.GetMousePosY() <= _position.Y + _rect.Height;
+            return E.GetMousePosX() >= _pos.X
+                && E.GetMousePosX() <= _pos.X + _rect.Width
+                && E.GetMousePosY() >= _pos.Y
+                && E.GetMousePosY() <= _pos.Y + _rect.Height;
         }
 
         public virtual bool IntersectsWith(Entity entity)
@@ -144,11 +144,11 @@ namespace Abimn
             if (this.Visible)
                 if (this.mouseOver())
                     if (E.LeftIsDown())
-                        G.tiles[_tilesRef][_idTexturePushed].Draw(_position);
+                        G.tiles[_tilesRef][_idTexturePushed].Draw(_pos);
                     else
-                        G.tiles[_tilesRef][_idTextureOver].Draw(_position);
+                        G.tiles[_tilesRef][_idTextureOver].Draw(_pos);
                 else
-                    G.tiles[_tilesRef][_idTextureNormal].Draw(_position);
+                    G.tiles[_tilesRef][_idTextureNormal].Draw(_pos);
         }
     }
 }

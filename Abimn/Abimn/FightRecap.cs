@@ -31,7 +31,7 @@ namespace Abimn
             fond = new Entity(new Pos(C.Screen.Width / 2, C.Screen.Height / 2));
             fond.LoadContent(1, Tiles.Recap, Center.All);
 
-            exit = new Button(new Pos(fond.Position.X + 70, fond.Position.Y + 370));
+            exit = new Button(new Pos(fond.Pos.X + 70, fond.Pos.Y + 370));
             exit.LoadContent(2, 2, 2, Tiles.Recap);
         }
 
@@ -60,9 +60,9 @@ namespace Abimn
         {
             fond.Draw();
             exit.Draw();
-            G.spriteBatch.DrawString(G.vie, (Hero.Life/100).ToString() + "/100", new Vector2(fond.Position.X + 120, fond.Position.Y + 165), Color.Red);
-            G.spriteBatch.DrawString(G.vie, "37", new Vector2(fond.Position.X + 162, fond.Position.Y + 233), Color.Yellow);
-            G.spriteBatch.DrawString(G.vie, "75", new Vector2(fond.Position.X + 162, fond.Position.Y + 308), Color.Green);
+            G.spriteBatch.DrawString(G.vie, (Hero.Life/100).ToString() + "/100", new Vector2(fond.Pos.X + 120, fond.Pos.Y + 165), Color.Red);
+            G.spriteBatch.DrawString(G.vie, "37", new Vector2(fond.Pos.X + 162, fond.Pos.Y + 233), Color.Yellow);
+            G.spriteBatch.DrawString(G.vie, "75", new Vector2(fond.Pos.X + 162, fond.Pos.Y + 308), Color.Green);
             // TODO: Add your drawing code here
         }
     }

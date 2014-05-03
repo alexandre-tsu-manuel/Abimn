@@ -35,13 +35,13 @@ namespace Abimn
             fond_menu.Initialize(new Pos(255, 105));
             fond_menu.LoadContent(1, Tiles.PauseMenu);
 
-            resume.Initialize(new Pos(fond_menu.Position.X + 60, fond_menu.Position.Y + 145));
+            resume.Initialize(new Pos(fond_menu.Pos.X + 60, fond_menu.Pos.Y + 145));
             resume.LoadContent(2, 6, 8, Tiles.PauseMenu);
 
-            option.Initialize(new Pos(fond_menu.Position.X + 60, fond_menu.Position.Y + 195));
+            option.Initialize(new Pos(fond_menu.Pos.X + 60, fond_menu.Pos.Y + 195));
             option.LoadContent(3, 5, 9, Tiles.PauseMenu);
 
-            exit.Initialize(new Pos(fond_menu.Position.X + 60, fond_menu.Position.Y + 245));
+            exit.Initialize(new Pos(fond_menu.Pos.X + 60, fond_menu.Pos.Y + 245));
             exit.LoadContent(4, 7, 10, Tiles.PauseMenu);
         }
 
