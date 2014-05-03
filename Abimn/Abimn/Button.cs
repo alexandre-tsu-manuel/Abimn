@@ -16,6 +16,7 @@ namespace Abimn
         /// <summary>
         /// Récupère ou définit la visibilité du button
         /// </summary>
+        /// // bat les couilles.
         public bool Visible
         {
             get { return _visible; }
