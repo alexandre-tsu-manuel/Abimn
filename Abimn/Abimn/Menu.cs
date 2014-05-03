@@ -32,13 +32,13 @@ namespace Abimn
             Hero.LifeMax = 10000;
             Hero.Life = 10000;
 
-            jouer = new Button(new Pos((int)(C.Screen.Width * 0.1), (int)(C.Screen.Height * 0.40)));
+            jouer = new Button(new Pos((int)(C.Screen.Width * 0.15), (int)(C.Screen.Height * 0.30)));
             jouer.LoadContent(1, 2, 1, Tiles.Button);
 
-            options = new Button(new Pos((int)(C.Screen.Width * 0.1), (int)(C.Screen.Height * 0.55)));
+            options = new Button(new Pos((int)(C.Screen.Width * 0.15), (int)(C.Screen.Height * 0.45)));
             options.LoadContent(3, 4, 3, Tiles.Button);
 
-            quitter = new Button(new Pos((int)(C.Screen.Width * 0.1), (int)(C.Screen.Height * 0.70)));
+            quitter = new Button(new Pos((int)(C.Screen.Width * 0.15), (int)(C.Screen.Height * 0.60)));
             quitter.LoadContent(5, 6, 5, Tiles.Button);
 
             background = new Entity();
