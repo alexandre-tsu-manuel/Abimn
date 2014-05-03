@@ -17,6 +17,13 @@ namespace Abimn
     public class OptionsMenu : GameType
     {
 
+        private Button sonEnabled;
+        private Button sonDisabled;
+        private Button retour;
+        private Entity background;
+
+        bool son; // vrai si l'utilisateur veux entendre de la musique.
+
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
         /// This is where it can query for any required services and load any non-graphic
@@ -25,7 +32,19 @@ namespace Abimn
         /// </summary>
         public OptionsMenu() : base(false)
         {
+            background = new Entity(new Pos(C.Screen.Width/2, C.Screen.Height/2));
+            background.LoadContent(1, Tiles.Button2, Center.All);
 
+            sonEnabled = new Button(new Pos(background.Position.X / 2, background.Position.Y / 2));
+            sonEnabled.LoadContent(2, 3, 2, Tiles.Button2, Center.All);
+
+            sonDisabled = new Button(new Pos((int)(C.Screen.Width * 0.4), (int)(C.Screen.Height * 0.3)), false);
+            sonDisabled.LoadContent(4, 5, 4, Tiles.Button2);
+
+            retour = new Button(new Pos((int)(C.Screen.Width * 0.4), (int)(C.Screen.Height * 0.5)));
+            retour.LoadContent(2, 6, 2, Tiles.PauseMenu);
+
+            son = true; // de base, la musique est activee
         }
 
         /// <summary>
@@ -35,7 +54,21 @@ namespace Abimn
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
-            G.currentGame.Pop();
+            if (retour.mouseOver() && E.LeftIsReleased())
+                G.currentGame.Pop();
+
+            if (sonEnabled.mouseOver() && E.LeftIsReleased() && sonEnabled.Visible)
+            {
+                sonEnabled.Visible = false;
+                sonDisabled.Visible = true;
+                son = false;
+            }
+            else if (sonDisabled.mouseOver() && E.LeftIsReleased() && sonDisabled.Visible)
+            {
+                sonEnabled.Visible = true;
+                sonDisabled.Visible = false;
+                son = true;
+            }
         }
 
         /// <summary>
@@ -43,6 +76,10 @@ namespace Abimn
         /// </summary>
         public override void Draw()
         {
+            background.Draw();
+            sonEnabled.Draw();
+            sonDisabled.Draw();
+            retour.Draw();
             
         }
     }

@@ -13,8 +13,8 @@ namespace Abimn
     {
         public struct Screen
         {
-            public const int Width = 850;
-            public const int Height = 650;
+            public const int Width = 950;
+            public const int Height = 750;
         }
         public const int sizeCell = 50;
         public const int nbCellsVertical = 50;
