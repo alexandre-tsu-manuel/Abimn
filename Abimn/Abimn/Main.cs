@@ -21,6 +21,7 @@ namespace Abimn
         private int _idhero;
         float _timeSinceMove = 0f;
         float _timeSinceStart = 0f;
+        private Pos _shift;
 
 
 
@@ -33,9 +34,10 @@ namespace Abimn
         public Main()
             : base(true)
         {
-            this._poshero = new Pos(8, 6);
+            this._poshero = new Pos(9, 7);
             this._backmap = new Map();
             this._idhero = 4;
+            this._shift = null;
 
 
             // TODO: Add your initialization logic here
@@ -118,14 +120,14 @@ namespace Abimn
 
             if (E.IsDown(Keys.B)) //courrir
             {
-                if (_timeSinceMove > 0.15f)//règle la vitesse de défilement
+                if (_timeSinceMove > 0.1f)//règle la vitesse de défilement
                     MoveHeros(); //Vérifie les touches de mouvements
 
             }
 
             else
             {
-                if (_timeSinceMove > 0.3f)//règle la vitesse de défilement
+                if (_timeSinceMove > 0.2f)//règle la vitesse de défilement
                     MoveHeros(); //Vérifie les touches de mouvements
             }
 
@@ -157,22 +159,22 @@ namespace Abimn
             if (E.IsPushed(Keys.Q) || E.IsPushed(Keys.Left) || E.IsDown(Keys.Q) || E.IsDown(Keys.Left))
             {
                 _idhero = 1;
-                EntHero.Position.X -= 5;
+                EntHero.Pos.X -= 5;
             }
             if (E.IsPushed(Keys.D) || E.IsPushed(Keys.Right) || E.IsDown(Keys.D) || E.IsDown(Keys.Right))
             {
                 _idhero = 2;
-                EntHero.Position.X += 5;
+                EntHero.Pos.X += 5;
             }
             if (E.IsPushed(Keys.Z) || E.IsPushed(Keys.Up) || E.IsDown(Keys.Z) || E.IsDown(Keys.Up))
             {
                 _idhero = 3;
-                EntHero.Position.Y -= 5;
+                EntHero.Pos.Y -= 5;
             }
             if (E.IsPushed(Keys.S) || E.IsPushed(Keys.Down) || E.IsDown(Keys.S) || E.IsDown(Keys.Down))
             {
                 _idhero = 4;
-                EntHero.Position.Y += 5;
+                EntHero.Pos.Y += 5;
             }
         }
 
@@ -183,8 +185,8 @@ namespace Abimn
         /// </summary>
         public override void Draw()
         {
-            _backmap.Draw(_poshero);
-            Entity EntityHero = new Entity(new Pos((8 * 50), (6 * 50)));
+            _backmap.Draw(_poshero, _shift);
+            Entity EntityHero = new Entity(new Pos((9 * 50), (7 * 50)));
 
 
 
