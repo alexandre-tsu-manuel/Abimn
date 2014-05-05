@@ -139,6 +139,7 @@
   <ItemGroup>
     <Content Include="Game.ico" />
     <Content Include="GameThumbnail.png" />
+    <Content Include="menus10.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AbimnContent\AbimnContent.contentproj">

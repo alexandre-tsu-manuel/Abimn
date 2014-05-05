@@ -55,8 +55,8 @@ namespace Abimn
             retour = new Button(new Pos(background.Pos.X + background.Rect.Width / 2, background.Pos.Y + background.Rect.Height / 2 + 100));
             retour.LoadContent(2, 6, 2, Tiles.PauseMenu, Center.All);
 
-            cannaVol = new Button(sonEnabled.Pos);
-            cannaLum = cannaVol;
+            cannaVol = new Button(new Pos(volume.Pos.X + 46, volume.Pos.Y + 38));
+            cannaLum = new Button(new Pos(luminosite.Pos.X + 46, luminosite.Pos.Y + 38));
             cannaVol.LoadContent(8, 9, 10, Tiles.Button2);
             cannaLum.LoadContent(8, 9, 10, Tiles.Button2);
 
@@ -70,9 +70,6 @@ namespace Abimn
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
-            if (retour.mouseOver() && E.LeftIsReleased())
-                G.currentGame.Pop();
-
             if (sonEnabled.mouseOver() && E.LeftIsReleased() && sonEnabled.Visible)
             {
                 sonEnabled.Visible = false;
@@ -85,6 +82,19 @@ namespace Abimn
                 sonDisabled.Visible = false;
                 son = true;
             }
+
+            if (volume.mouseOver(new Pos(30, 0)) && E.LeftIsDown())
+            {
+                cannaVol.Pos.X = E.GetMousePosX() - 10;
+            }
+
+            if (luminosite.mouseOver(new Pos(30, 0)) && E.LeftIsDown())
+            {
+                cannaLum.Pos.X = E.GetMousePosX() - 10;
+            }
+
+            if (retour.mouseOver() && E.LeftIsReleased())
+                G.currentGame.Pop();
         }
 
         /// <summary>
@@ -98,6 +108,8 @@ namespace Abimn
             retour.Draw();
             volume.Draw();
             luminosite.Draw();
+            cannaLum.Draw();
+            cannaVol.Draw();
             
         }
     }
