@@ -122,12 +122,13 @@ namespace Abimn
         /// <summary>
         /// Indique si la souris survole le button
         /// </summary>
-        public virtual bool mouseOver()
+        public virtual bool mouseOver(Pos strict = null)
         {
-            return E.GetMousePosX() >= _pos.X
-                && E.GetMousePosX() <= _pos.X + _rect.Width
-                && E.GetMousePosY() >= _pos.Y
-                && E.GetMousePosY() <= _pos.Y + _rect.Height;
+            if (strict == null) strict = new Pos();
+            return E.GetMousePosX() >= _pos.X + strict.X
+                && E.GetMousePosX() <= _pos.X + _rect.Width - strict.X
+                && E.GetMousePosY() >= _pos.Y + strict.Y
+                && E.GetMousePosY() <= _pos.Y + _rect.Height - strict.Y;
         }
 
         public virtual bool IntersectsWith(Entity entity)
