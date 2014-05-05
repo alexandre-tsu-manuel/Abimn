@@ -64,7 +64,7 @@ namespace Abimn
                     ret.Tag = "menup";
                     break;
                 case Tiles.Button2:
-                    ret.Size = 8;
+                    ret.Size = 10;
                     ret.Tag = "menus";
                     break;
             }

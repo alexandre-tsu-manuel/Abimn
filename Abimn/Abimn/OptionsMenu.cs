@@ -22,8 +22,8 @@ namespace Abimn
         private Button retour;
         private Button volume;
         private Button luminosite;
-        private Button cannabis;
-        private Button cannacanna;
+        private Button cannaVol;
+        private Button cannaLum;
 
         private Entity background;
 
@@ -53,9 +53,12 @@ namespace Abimn
             luminosite.LoadContent(7, Tiles.Button2, Center.All);
 
             retour = new Button(new Pos(background.Pos.X + background.Rect.Width / 2, background.Pos.Y + background.Rect.Height / 2 + 100));
-            retour.LoadContent(7, Tiles.PauseMenu, Center.All);
+            retour.LoadContent(2, 6, 2, Tiles.PauseMenu, Center.All);
 
-            
+            cannaVol = new Button(sonEnabled.Pos);
+            cannaLum = cannaVol;
+            cannaVol.LoadContent(8, 9, 10, Tiles.Button2);
+            cannaLum.LoadContent(8, 9, 10, Tiles.Button2);
 
             son = true; // de base, la musique est activee
         }
