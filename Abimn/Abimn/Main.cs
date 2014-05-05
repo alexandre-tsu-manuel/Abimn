@@ -187,13 +187,6 @@ namespace Abimn
         {
             _backmap.Draw(_poshero, _shift);
             Entity EntityHero = new Entity(new Pos((9 * 50), (7 * 50)));
-
-
-
-<<<<<<< HEAD
-            Entity EntityHero = new Entity(new Pos((9 * 50), (7 * 50)));
-=======
->>>>>>> 26311b6a9305ac9581696adcdc92c03dd6013e38
             EntityHero.LoadContent(_idhero, Tiles.Hero);
             DrawMoveHeros(EntityHero);
             EntityHero.Draw();
