@@ -20,6 +20,11 @@ namespace Abimn
         private Button sonEnabled;
         private Button sonDisabled;
         private Button retour;
+        private Button volume;
+        private Button luminosite;
+        private Button cannabis;
+        private Button cannacanna;
+
         private Entity background;
 
         bool son; // vrai si l'utilisateur veux entendre de la musique.
@@ -41,8 +46,16 @@ namespace Abimn
             sonDisabled = new Button(sonEnabled.Pos, false);
             sonDisabled.LoadContent(4, 5, 4, Tiles.Button2);
 
+            volume = new Button(new Pos(background.Pos.X + background.Rect.Width / 2 - 130, background.Pos.Y + background.Rect.Height / 2 - 100));
+            volume.LoadContent(6, Tiles.Button2, Center.All);
+
+            luminosite = new Button(new Pos(background.Pos.X + background.Rect.Width / 2 + 130, background.Pos.Y + background.Rect.Height / 2 - 100));
+            luminosite.LoadContent(7, Tiles.Button2, Center.All);
+
             retour = new Button(new Pos(background.Pos.X + background.Rect.Width / 2, background.Pos.Y + background.Rect.Height / 2 + 100));
-            retour.LoadContent(2, 6, 2, Tiles.PauseMenu, Center.All);
+            retour.LoadContent(7, Tiles.PauseMenu, Center.All);
+
+            
 
             son = true; // de base, la musique est activee
         }
@@ -80,6 +93,8 @@ namespace Abimn
             sonEnabled.Draw();
             sonDisabled.Draw();
             retour.Draw();
+            volume.Draw();
+            luminosite.Draw();
             
         }
     }

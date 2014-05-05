@@ -121,7 +121,7 @@ namespace Abimn
 
             /*((_poshero.X) * 50), ((_poshero.Y * 50)))*/
 
-            Entity EntityHero = new Entity(new Pos((8 * 50), (6 * 50)));
+            Entity EntityHero = new Entity(new Pos((9 * 50), (7 * 50)));
             EntityHero.LoadContent(_idhero, Tiles.Hero);
             EntityHero.Draw();
 
