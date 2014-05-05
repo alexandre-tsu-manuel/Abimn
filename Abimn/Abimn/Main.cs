@@ -22,6 +22,7 @@ namespace Abimn
         float _timeSinceMove = 0f;
         float _timeSinceStart = 0f;
         private Pos _shift;
+        private Entity EntityHero;
 
 
 
@@ -37,13 +38,11 @@ namespace Abimn
             this._poshero = new Pos(9, 7);
             this._backmap = new Map();
             this._idhero = 4;
-            this._shift = null;
-
-
-            // TODO: Add your initialization logic here
-            /*  G.currentGame.Push(CurrentGame.PauseMenu);
-              G.currentGame.Push(CurrentGame.Fight);*/
+            this._shift = new Pos();
+            EntityHero = new Entity(new Pos((9 * 50), (7 * 50)));
         }
+
+
 
         /// <summary>
         /// permet de bouger le HERO d'une case à l'autre en fonction de la touche
@@ -55,33 +54,100 @@ namespace Abimn
 
             if (E.IsPushed(Keys.Q) || E.IsPushed(Keys.Left) || E.IsDown(Keys.Q) || E.IsDown(Keys.Left))
             {
+                _idhero = 1;
                 Pos NextStep = new Pos(_poshero.X - 1, _poshero.Y);
                 if (_backmap.CanMoveOn(NextStep))
-                { _poshero.X = _poshero.X - 1; }
+                { _shift.X -= 3; }
+
+                else
+                {
+                    _shift.X = 0;
+                    EntityHero.Pos.X -= 5;
+                }
+
+
             }
 
-            if (E.IsPushed(Keys.D) || E.IsPushed(Keys.Right) || E.IsDown(Keys.D) || E.IsDown(Keys.Right))
+            else
             {
-                Pos NextStep = new Pos(_poshero.X + 1, _poshero.Y);
-                if (_backmap.CanMoveOn(NextStep))
-                { _poshero.X = _poshero.X + 1; }
-            }
-            if (E.IsPushed(Keys.Z) || E.IsPushed(Keys.Up) || E.IsDown(Keys.Z) || E.IsDown(Keys.Up))
-            {
-                Pos NextStep = new Pos(_poshero.X, _poshero.Y - 1);
-                if (_backmap.CanMoveOn(NextStep))
-                { _poshero.Y = _poshero.Y - 1; }
-            }
-            if (E.IsPushed(Keys.S) || E.IsPushed(Keys.Down) || E.IsDown(Keys.S) || E.IsDown(Keys.Down))
-            {
-                Pos NextStep = new Pos(_poshero.X, _poshero.Y + 1);
-                if (_backmap.CanMoveOn(NextStep))
-                { _poshero.Y = _poshero.Y + 1; }
+                if (E.IsPushed(Keys.D) || E.IsPushed(Keys.Right) || E.IsDown(Keys.D) || E.IsDown(Keys.Right))
+                {
+                    _idhero = 2;
+                    Pos NextStep = new Pos(_poshero.X + 1, _poshero.Y);
+                    if (_backmap.CanMoveOn(NextStep))
+                    { _shift.X += 3; }
+
+                    else
+                    {
+                        _shift.X = 0;
+                        EntityHero.Pos.X += 5;
+                    }
+                }
+                else
+                {
+                    if (E.IsPushed(Keys.Z) || E.IsPushed(Keys.Up) || E.IsDown(Keys.Z) || E.IsDown(Keys.Up))
+                    {
+                        _idhero = 3;
+                        Pos NextStep = new Pos(_poshero.X, _poshero.Y - 1);
+                        if (_backmap.CanMoveOn(NextStep))
+                        { _shift.Y -= 3; }
+
+                        else
+                        {
+                            _shift.Y = 0;
+                            EntityHero.Pos.Y -= 5;
+                        }
+                    }
+                    else
+                    {
+                        if (E.IsPushed(Keys.S) || E.IsPushed(Keys.Down) || E.IsDown(Keys.S) || E.IsDown(Keys.Down))
+                        {
+                            _idhero = 4;
+                            Pos NextStep = new Pos(_poshero.X, _poshero.Y + 1);
+                            if (_backmap.CanMoveOn(NextStep))
+                            { _shift.Y += 3; }
+
+                            else
+                            {
+                                _shift.Y = 0;
+                                EntityHero.Pos.Y += 5;
+                            }
+                        }
+                    }
+                }
             }
         }
+       
 
 
 
+        public void MoveTile()
+        {
+            if (_shift.X <= -30)
+            {
+                _shift.X = 20;
+                _poshero.X--;
+            }
+
+            if (_shift.X >= 30)
+            {
+                _shift.X = -20;
+                _poshero.X++;
+            }
+
+            if (_shift.Y <= -50)
+            {
+                _shift.Y = 0;
+                _poshero.Y--;
+            }
+
+            if (_shift.Y >= 10)
+            {
+                _shift.Y = -40;
+                _poshero.Y++;
+            }
+
+        }
 
 
 
@@ -102,7 +168,7 @@ namespace Abimn
         {
             _timeSinceMove += (float)gameTime.ElapsedGameTime.TotalSeconds;
             _timeSinceStart += (float)gameTime.TotalGameTime.TotalSeconds;
-
+            EntityHero = new Entity(new Pos((9 * 50), (7 * 50)));
 
             //Change CurrentGame
             if (E.IsPushed(Keys.Escape))
@@ -120,17 +186,18 @@ namespace Abimn
 
             if (E.IsDown(Keys.B)) //courrir
             {
-                if (_timeSinceMove > 0.1f)//règle la vitesse de défilement
+                if (_timeSinceMove > 0.002f)//règle la vitesse de défilement
                     MoveHeros(); //Vérifie les touches de mouvements
 
             }
 
             else
             {
-                if (_timeSinceMove > 0.2f)//règle la vitesse de défilement
+                if (_timeSinceMove > 0.01f)//règle la vitesse de défilement
                     MoveHeros(); //Vérifie les touches de mouvements
             }
-
+            EntityHero.LoadContent(_idhero, Tiles.Hero);
+            MoveTile();
 
 
             //mouv NPCs
@@ -149,36 +216,6 @@ namespace Abimn
 
 
 
-        /// <summary>
-        /// permet de bouger le HERO sans changer de case
-        /// A utiliser pour bouger de façon continue et fluide
-        /// </summary>
-        public void DrawMoveHeros(Entity EntHero)
-        {
-
-            if (E.IsPushed(Keys.Q) || E.IsPushed(Keys.Left) || E.IsDown(Keys.Q) || E.IsDown(Keys.Left))
-            {
-                _idhero = 1;
-                EntHero.Pos.X -= 5;
-            }
-            if (E.IsPushed(Keys.D) || E.IsPushed(Keys.Right) || E.IsDown(Keys.D) || E.IsDown(Keys.Right))
-            {
-                _idhero = 2;
-                EntHero.Pos.X += 5;
-            }
-            if (E.IsPushed(Keys.Z) || E.IsPushed(Keys.Up) || E.IsDown(Keys.Z) || E.IsDown(Keys.Up))
-            {
-                _idhero = 3;
-                EntHero.Pos.Y -= 5;
-            }
-            if (E.IsPushed(Keys.S) || E.IsPushed(Keys.Down) || E.IsDown(Keys.S) || E.IsDown(Keys.Down))
-            {
-                _idhero = 4;
-                EntHero.Pos.Y += 5;
-            }
-        }
-
-
 
         /// <summary>
         /// This is called when the game should draw itself.
@@ -186,16 +223,6 @@ namespace Abimn
         public override void Draw()
         {
             _backmap.Draw(_poshero, _shift);
-            Entity EntityHero = new Entity(new Pos((9 * 50), (7 * 50)));
-
-
-
-<<<<<<< HEAD
-            Entity EntityHero = new Entity(new Pos((9 * 50), (7 * 50)));
-=======
->>>>>>> 26311b6a9305ac9581696adcdc92c03dd6013e38
-            EntityHero.LoadContent(_idhero, Tiles.Hero);
-            DrawMoveHeros(EntityHero);
             EntityHero.Draw();
             base.Draw();
         }
