@@ -36,7 +36,7 @@ namespace Abimn
             : base(true)
         {
             this._poshero = new Pos(9, 7);
-            this._backmap = new Map();
+            this._backmap = new Map(1);
             this._idhero = 4;
             this._shift = new Pos();
             EntityHero = new Entity(new Pos((9 * 50), (7 * 50)));
@@ -57,12 +57,19 @@ namespace Abimn
                 _idhero = 1;
                 Pos NextStep = new Pos(_poshero.X - 1, _poshero.Y);
                 if (_backmap.CanMoveOn(NextStep))
-                { _shift.X -= 3; }
+                    _shift.X -= 3;
 
                 else
                 {
-                    _shift.X = 0;
-                    EntityHero.Pos.X -= 5;
+                    if ( _shift.X <= 4)
+                    {
+                        _shift.X = 0;
+                        EntityHero.Pos.X -= 5;
+                    }
+
+                    else
+                        _shift.X -= 3;
+
                 }
 
 
@@ -79,8 +86,14 @@ namespace Abimn
 
                     else
                     {
-                        _shift.X = 0;
-                        EntityHero.Pos.X += 5;
+                        if (_shift.X >= -4)
+                        {
+                            _shift.X = 0;
+                            EntityHero.Pos.X += 5;
+                        }
+
+                        else
+                            _shift.X += 3;
                     }
                 }
                 else
@@ -94,8 +107,14 @@ namespace Abimn
 
                         else
                         {
-                            _shift.Y = 0;
-                            EntityHero.Pos.Y -= 5;
+                            if (_shift.Y <= 4)
+                            {
+                                _shift.Y = 0;
+                                EntityHero.Pos.Y -= 5;
+                            }
+
+                            else
+                                _shift.Y -= 3;
                         }
                     }
                     else
@@ -109,53 +128,51 @@ namespace Abimn
 
                             else
                             {
-                                _shift.Y = 0;
-                                EntityHero.Pos.Y += 5;
+                                if (_shift.Y >= -4)
+                                {
+                                    _shift.Y = 0;
+                                    EntityHero.Pos.Y += 5;
+                                }
+
+                                else
+                                    _shift.Y += 3;
                             }
                         }
                     }
                 }
             }
         }
-       
+
 
 
 
         public void MoveTile()
         {
-            if (_shift.X <= -30)
+            if (_shift.X <= -25)
             {
-                _shift.X = 20;
+                _shift.X = 25;
                 _poshero.X--;
             }
 
-            if (_shift.X >= 30)
+            if (_shift.X >= 27)
             {
-                _shift.X = -20;
+                _shift.X = -23;
                 _poshero.X++;
             }
 
-            if (_shift.Y <= -50)
+            if (_shift.Y <= -40)
             {
-                _shift.Y = 0;
+                _shift.Y = 10;
                 _poshero.Y--;
             }
 
-            if (_shift.Y >= 10)
+            if (_shift.Y >= 15)
             {
-                _shift.Y = -40;
+                _shift.Y = -35;
                 _poshero.Y++;
             }
 
         }
-
-
-
-
-
-
-
-
 
 
 
@@ -174,6 +191,11 @@ namespace Abimn
             if (E.IsPushed(Keys.Escape))
                 G.currentGame.Push(new PauseMenu());
 
+            if (_poshero.IdDeco == 3 )
+            {
+                
+            }
+
             if (E.IsPushed(Keys.I))
                 G.currentGame.Push(new Inventory());
 
@@ -187,7 +209,9 @@ namespace Abimn
             if (E.IsDown(Keys.B)) //courrir
             {
                 if (_timeSinceMove > 0.002f)//règle la vitesse de défilement
-                    MoveHeros(); //Vérifie les touches de mouvements
+                    MoveHeros();
+                    MoveHeros();
+                    MoveHeros();//Vérifie les touches de mouvements, accumulation pour course (update trop proches)
 
             }
 
