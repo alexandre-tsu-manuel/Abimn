@@ -223,12 +223,7 @@ namespace Abimn
         public override void Draw()
         {
             _backmap.Draw(_poshero, _shift);
-<<<<<<< HEAD
-=======
-            Entity EntityHero = new Entity(new Pos((9 * 50), (7 * 50)));
-            EntityHero.LoadContent(_idhero, Tiles.Hero);
-            DrawMoveHeros(EntityHero);
->>>>>>> 472f81002a79529938dc45fe4cecab49b5b60918
+
             EntityHero.Draw();
             base.Draw();
         }
