@@ -65,7 +65,7 @@ namespace Abimn
             string ret = dimensions.X.ToString();
 
             for (int i = 0; i < dimensions.X * dimensions.Y; i++)
-                ret += ";" + cells[i / dimensions.X][i % dimensions.X].ToString();
+                ret += ";" + cells[i / dimensions.X][i % dimensions.X].Save();
 
             return ret;
         }
@@ -73,6 +73,11 @@ namespace Abimn
         public void SetCell(Pos pos, Cell cell)
         {
             cells[pos.X][pos.Y] = cell;
+        }
+
+        public Cell GetCell(Pos pos)
+        {
+            return cells[pos.X][pos.Y];
         }
 
         public bool IsBlocking(Pos pos)

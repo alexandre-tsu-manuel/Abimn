@@ -19,12 +19,16 @@ namespace Abimn
         private Map map;
         private byte slot;
         private Pos camera;
+        private bool decorating;
+        private int currBlock;
 
         public MapEditor(Map map, byte slot) : base(true)
         {
             this.map = map;
             this.slot = slot;
             this.camera = new Pos(map.Dimensions.X * C.sizeCell / 2, map.Dimensions.Y * C.sizeCell / 2);
+            this.decorating = false;
+            this.currBlock = 1;
         }
 
         public override void Update(GameTime gameTime)
@@ -42,6 +46,31 @@ namespace Abimn
                 camera.Y -= 10 * (C.sizeCell - E.GetMousePosY()) / C.sizeCell;
             if (E.GetMousePosY() > C.Screen.Height - C.sizeCell && camera.Y < (map.Dimensions.Y + 1) * C.sizeCell)
                 camera.Y += 10 * (E.GetMousePosY() - C.Screen.Height + C.sizeCell) / C.sizeCell;
+
+            if (E.RightIsReleased())
+                this.decorating = !this.decorating;
+
+            if (E.getMouseWheel() != 0)
+            {
+                if (E.getMouseWheel() > 0)
+                    currBlock++;
+                else
+                    currBlock--;
+                currBlock--;
+                currBlock += TileProperty.getFrom(decorating ? Tiles.MainDeco : Tiles.Main).Size;
+                currBlock = currBlock % (TileProperty.getFrom(decorating ? Tiles.MainDeco : Tiles.Main).Size);
+                currBlock++;
+            }
+
+            if (E.LeftIsReleased())
+            {
+                Pos under = new Pos(camera.Y / 50, camera.X / 50);
+                Cell buff = map.GetCell(under);
+                buff.setBackground((byte) currBlock);
+                map.SetCell(under, buff);
+            }
+            
+            Cursor.setCursor(decorating ? Tiles.MainDeco : Tiles.Main, currBlock, currBlock);
         }
 
         public override void Draw()

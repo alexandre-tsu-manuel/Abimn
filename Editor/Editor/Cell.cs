@@ -39,26 +39,43 @@ namespace Abimn
                 _id.Enqueue(item);
         }
 
+        public void setBackground(byte back)
+        {
+            byte[] clone = _id.ToArray();
+            _id.Clear();
+            _id.Enqueue(back);
+            for (byte i = 0; i < clone.Length; i++)
+                _id.Enqueue(clone[i]);
+        }
+
+        public void addDecoration(byte deco)
+        {
+            _id.Enqueue(deco);
+        }
+
+        public void clearDecoration()
+        {
+            byte buff = _id.Dequeue();
+
+            _id.Clear();
+            _id.Enqueue(buff);
+        }
+
         public void Draw(Pos pos, Center center = Center.None)
         {
             byte[] clone = _id.ToArray();
-            byte i;
 
-            for (i = 0; i < clone.Length; i++)
+            for (byte i = 0; i < clone.Length; i++)
                 G.tiles[(int)Tiles.Main][clone[i] - 1].Draw(pos, center);
         }
 
-        public string ToString()
+        public string Save()
         {
-            Queue<byte> clone = new Queue<byte>(_id);
+            byte[] clone = _id.ToArray();
             string ret = Blocking ? "y" : "n";
 
-            try
-            {
-                while (true)
-                    ret += ":" + clone.Dequeue().ToString();
-            }
-            catch (InvalidOperationException) { }
+            for (byte i = 0; i < clone.Length; i++)
+                ret += ":" + clone[i].ToString();
 
             return ret;
         }
