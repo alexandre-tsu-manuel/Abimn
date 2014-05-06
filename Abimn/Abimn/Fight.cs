@@ -55,6 +55,13 @@ namespace Abimn
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
+            float velocity_ennemy = 0.66f;
+            _ennemy.Pos = _ennemy.Pos + getDirection(_ennemy, _hero, velocity_ennemy);
+            if (E.IsDown(Keys.Right))
+                _hero.Pos += new Vector2(2, 0);
+            else if (E.IsDown(Keys.Left))
+                _hero.Pos += new Vector2(-2, 0);
+            /*
             if (_fightContact)
             {
                 _ennemy.Life -= 30;
@@ -102,6 +109,20 @@ namespace Abimn
                 _hero.Speed = 0;
 
             //_hero.Update(gameTime);
+             */
+
+        }
+
+        public Vector2 getDirection(Entity needMove, Entity e2, float velocity)
+        {
+            Vector2 left = new Vector2(-velocity, 0f);
+            Vector2 right = new Vector2(1, 0f);
+            if (needMove.Pos.X < e2.Pos.X)
+                return right;
+            else if (needMove.Pos.X > e2.Pos.X)
+                return left;
+            else
+                return new Vector2(0, 0);
         }
 
         /// <summary>
