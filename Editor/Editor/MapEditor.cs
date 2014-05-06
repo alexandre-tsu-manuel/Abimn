@@ -17,20 +17,38 @@ namespace Abimn
     public class MapEditor : GameType
     {
         Map map;
+        byte slot;
 
-        public MapEditor(Map map) : base(true)
+        public MapEditor(Map map, byte slot) : base(true)
         {
             this.map = map;
+            this.slot = slot;
         }
 
         public override void Update(GameTime gameTime)
         {
-            //G.currentGame.Pop();
+            if (E.IsPushed(Keys.S))
+                save();
+            else if (E.IsPushed(Keys.Q))
+                G.currentGame.Pop();
         }
 
         public override void Draw()
         {
             map.Draw(new Pos(1));
+        }
+
+        public void save()
+        {
+            string[] maps = new string[C.nbSlots];
+            for (byte i = 0; i < C.nbSlots; i++)
+                maps[i] = "";
+            string[] buffer = System.IO.File.ReadAllLines(C.mapsPath);
+            for (byte i = 0; i < buffer.Length; i++)
+                maps[i] = buffer[i];
+
+            maps[slot] = map.save();
+            System.IO.File.WriteAllLines(C.mapsPath, maps);
         }
     }
 }

@@ -34,7 +34,7 @@ namespace Abimn
 
         public Map Load(int id = 0)
         {
-            string[] maps = System.IO.File.ReadAllLines(@"Files/Maps.txt");
+            string[] maps = System.IO.File.ReadAllLines(C.mapsPath);
             id = id >= maps.Length ? maps.Length - 1 : id;
             return this.Load(maps[id]);
         }
@@ -53,6 +53,16 @@ namespace Abimn
                     cells[i][j] = new Cell(mapElmts[i * dimensions.X + j + 1]);
             }
             return this;
+        }
+
+        public string save()
+        {
+            string ret = dimensions.X.ToString();
+
+            for (int i = 0; i < dimensions.X * dimensions.Y; i++)
+                ret += ";" + cells[i / dimensions.X][i % dimensions.X].ToString();
+
+            return ret;
         }
 
         public void SetCell(Pos pos, Cell cell)

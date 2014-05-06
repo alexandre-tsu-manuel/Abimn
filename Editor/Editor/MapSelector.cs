@@ -16,16 +16,16 @@ namespace Abimn
     /// </summary>
     public class MapSelector : GameType
     {
-        private Button[] slots = new Button[8];
-        private bool[] slotIsEmpty = new bool[8];
+        private Button[] slots = new Button[C.nbSlots];
+        private bool[] slotIsEmpty = new bool[C.nbSlots];
         private string[] maps;
         private bool creating;
 
         public MapSelector(bool creating) : base(true)
         {
             this.creating = creating;
-            maps = System.IO.File.ReadAllLines(@"Files/Maps.txt");
-            int i = 0;
+            maps = System.IO.File.ReadAllLines(C.mapsPath);
+            byte i = 0;
 
             while (i < maps.Length && i < slots.Length)
                 slotIsEmpty[i++] = false;
@@ -44,13 +44,11 @@ namespace Abimn
 
         public override void Update(GameTime gameTime)
         {
-            for (int i = 0; i < slots.Length; i++)
+            for (byte i = 0; i < slots.Length; i++)
                 if (creating && slotIsEmpty[i] && slots[i].IsClicked())
-                {
-                    G.currentGame.Push(new MapEditor(Map.Generate()));
-                }
+                    G.currentGame.Push(new MapEditor(Map.Generate(), i));
                 else if (!creating && !slotIsEmpty[i] && slots[i].IsClicked())
-                    G.currentGame.Push(new MapEditor(new Map().Load(maps[i])));
+                    G.currentGame.Push(new MapEditor(new Map().Load(maps[i]), i));
             //G.currentGame.Pop();
         }
 

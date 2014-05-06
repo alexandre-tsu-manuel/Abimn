@@ -19,5 +19,7 @@ namespace Abimn
         public const int sizeCell = 50;
         public const int nbCellsVerticalOnScreen = C.Screen.Height / sizeCell;
         public const int nbCellsHorizontalOnScreen = C.Screen.Width / sizeCell;
+        public const int nbSlots = 8;
+        public const string mapsPath = "Files/Maps.txt";
     }
 }

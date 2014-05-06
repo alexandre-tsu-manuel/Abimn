@@ -50,5 +50,20 @@ namespace Abimn
             }
             catch (InvalidOperationException) { }
         }
+
+        public string ToString()
+        {
+            Queue<byte> clone = new Queue<byte>(_id);
+            string ret = Blocking ? "y" : "n";
+
+            try
+            {
+                while (true)
+                    ret += ":" + clone.Dequeue().ToString();
+            }
+            catch (InvalidOperationException) { }
+
+            return ret;
+        }
     }
 }
