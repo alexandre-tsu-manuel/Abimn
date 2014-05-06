@@ -189,57 +189,100 @@ namespace Abimn
         {
             Pos FrontTile = new Pos();
 
-            if (_idhero == 1)
-                FrontTile = new Pos(_poshero.X - 1, _poshero.Y);
 
-            if (_idhero == 2)
-                FrontTile = new Pos(_poshero.X + 1, _poshero.Y);
 
-            if (_idhero == 3)
-                FrontTile = new Pos(_poshero.X, _poshero.Y + 1);
 
-            if (_idhero == 4)
-                FrontTile = new Pos(_poshero.X, _poshero.Y - 1);
+            if (FrontTile.X == 0 && FrontTile.X == 49)
+            {
+                if (_idhero == 1)
+                    FrontTile = new Pos(_poshero.X - 1, _poshero.Y);
 
-            if (_backmap.Decoration(FrontTile) == 5) //id du marchant pour la Soutenance2
-                return true;
+                if (_idhero == 2)
+                    FrontTile = new Pos(_poshero.X + 1, _poshero.Y);
+
+                if (_idhero == 3)
+                    FrontTile = new Pos(_poshero.X, _poshero.Y + 1);
+
+
+                if (_idhero == 4)
+                    FrontTile = new Pos(_poshero.X, _poshero.Y - 1);
+
+                if (FrontTile.X == 0 && FrontTile.X == 49 && _backmap.Decoration(FrontTile) == 4)
+                    return true;
+            }
 
             else
-                return false;
+            {
+                Pos FrontTileLeft = new Pos();
+                Pos FrontTileRight = new Pos();
+                Pos FrontTileFront = new Pos();
+
+
+                if (_idhero == 1)
+                    FrontTile = new Pos(_poshero.X - 1, _poshero.Y);
+                FrontTileLeft = new Pos(FrontTile.X, FrontTile.Y - 1);
+                FrontTileRight = new Pos(FrontTile.X, FrontTile.Y + 1);
+                FrontTileFront = new Pos(FrontTile.X - 1, FrontTile.Y);
+                if (_idhero == 2)
+                    FrontTile = new Pos(_poshero.X + 1, _poshero.Y);
+                FrontTileLeft = new Pos(FrontTile.X, FrontTile.Y - 1);
+                FrontTileRight = new Pos(FrontTile.X, FrontTile.Y + 1);
+                FrontTileFront = new Pos(FrontTile.X + 1, FrontTile.Y);
+
+                if (_idhero == 4)
+                    FrontTile = new Pos(_poshero.X, _poshero.Y + 1);
+                FrontTileLeft = new Pos(FrontTile.X - 1, FrontTile.Y);
+                FrontTileRight = new Pos(FrontTile.X + 1, FrontTile.Y);
+                FrontTileFront = new Pos(FrontTile.X, FrontTile.Y + 1);
+
+
+                if (_idhero == 3)
+                    FrontTile = new Pos(_poshero.X, _poshero.Y - 1);
+                FrontTileLeft = new Pos(FrontTile.X - 1, FrontTile.Y);
+                FrontTileRight = new Pos(FrontTile.X + 1, FrontTile.Y);
+                FrontTileFront = new Pos(FrontTile.X, FrontTile.Y - 1);
+
+
+                if (_backmap.Decoration(FrontTile) == 4 || _backmap.Decoration(FrontTileLeft) == 4 || _backmap.Decoration(FrontTileRight) == 4 || _backmap.Decoration(FrontTileFront) == 4) //id du marchant pour la Soutenance2
+                    return true;
+
+            }
+            return false;
+
         }
 
 
 
-      /*  /// <summary>
-        /// Appelle une nouvelle map
-        /// </summary>
-        public void Travel()
-        {
-            Pos HighTile = new Pos(_poshero.X, _poshero.Y + 1);
-            if (_backmap.CanChangeMap(HighTile) && ( E.IsPushed(Keys.Up) || E.IsDown(Keys.Up)))
-            {
-                if (_idmap == 1)
-                {
-                    _idmap = 2;
-                    _poshero = _backmap.StartPos;
-                }
+        /*  /// <summary>
+          /// Appelle une nouvelle map
+          /// </summary>
+          public void Travel()
+          {
+              Pos HighTile = new Pos(_poshero.X, _poshero.Y + 1);
+              if (_backmap.CanChangeMap(HighTile) && ( E.IsPushed(Keys.Up) || E.IsDown(Keys.Up)))
+              {
+                  if (_idmap == 1)
+                  {
+                      _idmap = 2;
+                      _poshero = _backmap.StartPos;
+                  }
 
-                else
-                {
-                    _idmap = 1;
-                    _poshero = new Pos(1, 7);
-                }
+                  else
+                  {
+                      _idmap = 1;
+                      _poshero = new Pos(1, 7);
+                  }
 
-                _idmap = 2;
-                _poshero = _backmap.StartPos;
-                _backmap = new Map(_idmap);
-                _idhero = _backmap.IdStartHero;
-                _shift = new Pos(0, 0);
+                  _idmap = 2;
+                  _poshero = _backmap.StartPos;
+                  _backmap = new Map(_idmap);
+                  _idhero = _backmap.IdStartHero;
+                  _shift = new Pos(0, 0);
 
 
-                //TODO: ajouter un freeze de quelques milisecondes pour recentrer le perso
-            }
-        }*/
+                  //TODO: ajouter un freeze de quelques milisecondes pour recentrer le perso
+              }
+          }*/
 
 
         /// <summary>
@@ -266,20 +309,20 @@ namespace Abimn
                 _backmap.SetCell(_poshero, new Cell(false, 1, 0));
             }
 
-            if(Interact() == true && E.IsPushed(Keys.Space))
+            if (Interact() == true && E.IsPushed(Keys.Space))
                 G.currentGame.Push(new Shop());
 
 
 
             //Change de map
-            if ( _backmap.Decoration(_poshero) == 2)
+            if (_backmap.Decoration(_poshero) == 2)
             {
                 _idmap = 2;
                 _backmap = new Map(_idmap);
                 _poshero = _backmap.StartPos;
                 _idhero = _backmap.IdStartHero;
                 _shift = new Pos(0, 0);
-        }
+            }
 
             if (_backmap.Decoration(_poshero) == 3)
             {
