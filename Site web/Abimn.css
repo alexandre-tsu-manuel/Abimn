@@ -136,3 +136,5 @@ ul.nav a:hover {
 	font-size: 1px;
 	line-height: 0px;
 }
+
+.team { border:dotted 1px black;  height:150px;}
