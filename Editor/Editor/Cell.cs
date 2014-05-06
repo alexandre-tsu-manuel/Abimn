@@ -41,14 +41,11 @@ namespace Abimn
 
         public void Draw(Pos pos, Center center = Center.None)
         {
-            Queue<byte> clone = new Queue<byte>(_id);
+            byte[] clone = _id.ToArray();
+            byte i;
 
-            try
-            {
-                while (true)
-                    G.tiles[(int)Tiles.Main][clone.Dequeue() - 1].Draw(pos, center);
-            }
-            catch (InvalidOperationException) { }
+            for (i = 0; i < clone.Length; i++)
+                G.tiles[(int)Tiles.Main][clone[i] - 1].Draw(pos, center);
         }
 
         public string ToString()

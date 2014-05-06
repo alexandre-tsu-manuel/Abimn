@@ -11,11 +11,16 @@ namespace Abimn
     public class Map
     {
         private Cell[][] cells;
+
+        public Pos Dimensions
+        {
+            get { return dimensions; }
+        }
         private Pos dimensions;
 
         public static Map Generate(Pos dimensions = null)
         {
-            dimensions = dimensions != null ? dimensions : new Pos(5);
+            dimensions = dimensions != null ? dimensions : new Pos(25);
             Map ret = new Map();
             ret.dimensions = dimensions;
             ret.cells = new Cell[dimensions.Y][];

@@ -26,11 +26,9 @@ namespace Abimn
             this.creating = creating;
             maps = System.IO.File.ReadAllLines(C.mapsPath);
             byte i = 0;
-
-            while (i < maps.Length && i < slots.Length)
-                slotIsEmpty[i++] = false;
-            while (i < slots.Length)
-                slotIsEmpty[i++] = true;
+            
+            while (i < C.nbSlots)
+                slotIsEmpty[i] = maps[i++] == "";
 
             for (i = 0; i < slots.Length; i++)
             {
