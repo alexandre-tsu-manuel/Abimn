@@ -10,72 +10,36 @@ namespace Abimn
 {
     class FightMap
     {
-        private Cell[][] cells;
+        private Cell cells;
 
         public FightMap()
         {
-            cells = new Cell[650][];
-
-            for (int i = 0; i < 500; i++)
-            {
-                cells[i] = new Cell[850];
-                for (int j = 0; j < 850; j++)
-                    cells[i][j] = new Cell(false, 4, 0);
-            }
-            for (int i = 500; i < 520; i++)
-            {
-                cells[i] = new Cell[850];
-                for (int j = 0; j < 850; j++)
-                    cells[i][j] = new Cell(true, 5, 0);
-            }
-            for (int i = 520; i < 650; i++)
-            {
-                cells[i] = new Cell[850];
-                for (int j = 0; j < 850; j++)
-                    cells[i][j] = new Cell(true, 6, 0);
-            }
-        }
-
-        public FightMap(Pos dimensions, int sizeCell)
-        {
-            cells = new Cell[dimensions.Y][];
-
-            for (int i = 0; i < dimensions.Y; i++)
-            {
-                cells[i] = new Cell[dimensions.X];
-                for (int j = 0; j < C.nbCellsHorizontal; j++)
-                {
-                    cells[i][j] = new Cell(false, 1, 0);
-                    if (cells[i][j].IdFloor == 2)
-                        cells[i][j].Blocking = true;
-                }
-            }
+            cells = new Cell(false, 5, 0);
         }
 
         public int Decoration(Pos pos)
         {
-            return cells[pos.X][pos.Y].IdDeco;
+            return cells.IdDeco;
         }
 
-        public void SetCell(Pos pos, Cell cell)
-        {
-            cells[pos.X][pos.Y] = cell;
-        }
 
         public bool CanMoveOn(Pos pos)
         {
             if (pos.X < 0 || pos.Y < 0 || pos.X >= C.nbCellsHorizontal || pos.Y >= C.nbCellsVertical)
                 return false;
-            return !cells[pos.Y][pos.X].Blocking;
+            return !cells.Blocking;
         }
 
         public void Draw()
         {
             Pos pos = new Pos();
-
-            for (pos.X = 0; pos.X < 850; pos.X++)
-                for (pos.Y = 0; pos.Y < 650; pos.Y++ )
-                    cells[pos.Y][pos.X].Draw(pos, Center.None, true);
+            Cell ciel = new Cell(false, 9, 0);
+           
+            ciel.Draw(new Pos(0, 0), Center.None, true);
+            for (pos.X = 0; pos.X < C.Screen.Width; pos.X+=32)
+                for (pos.Y = 480; pos.Y < C.Screen.Height; pos.Y+=32 )
+                    cells.Draw(pos, Center.None, true);
+            
         }
     }
 }

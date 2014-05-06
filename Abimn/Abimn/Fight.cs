@@ -18,8 +18,8 @@ namespace Abimn
     {
         private Entity _hero;
         private Ennemy _ennemy;
+         
         private FightMap _map;
-        private Rectangle _one;
         private bool _fightContact;
         private bool _jumping;
 
@@ -35,8 +35,6 @@ namespace Abimn
             _ennemy = new Ennemy(new Pos(550, 450), new Vector2(-1, 0), 0.02F);
 
             _map = new FightMap();
-
-            _one = new Rectangle(100, 400, 200, 50);
             _hero.LoadContent(1, Tiles.Fight);
             _ennemy.LoadContent(3, Tiles.Fight);
             _ennemy.Life = 10000;
@@ -53,14 +51,29 @@ namespace Abimn
         /// checking for collisions, gathering input, and playing audio.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        /// +
+        /// 
+        
+
+
+        public void moveHero()
+        {
+            if (E.IsDown(Keys.Right))
+            {
+                _hero.LoadContent(1, Tiles.Fight);
+                _hero.Pos += new Vector2(2, 0);
+            }
+            else if (E.IsDown(Keys.Left))
+            {
+                _hero.LoadContent(2, Tiles.Fight);
+                _hero.Pos += new Vector2(-2, 0);
+            }
+        }
+
         public override void Update(GameTime gameTime)
         {
-            float velocity_ennemy = 0.66f;
-            _ennemy.Pos = _ennemy.Pos + getDirection(_ennemy, _hero, velocity_ennemy);
-            if (E.IsDown(Keys.Right))
-                _hero.Pos += new Vector2(2, 0);
-            else if (E.IsDown(Keys.Left))
-                _hero.Pos += new Vector2(-2, 0);
+            _ennemy.Pos = _ennemy.Pos + getDirection(_ennemy, _hero);
+            moveHero();
             /*
             if (_fightContact)
             {
@@ -113,14 +126,20 @@ namespace Abimn
 
         }
 
-        public Vector2 getDirection(Entity needMove, Entity e2, float velocity)
+        public Vector2 getDirection(Entity needMove, Entity e2)
         {
-            Vector2 left = new Vector2(-velocity, 0f);
+            Vector2 left = new Vector2(-1, 0f);
             Vector2 right = new Vector2(1, 0f);
             if (needMove.Pos.X < e2.Pos.X)
+            {
+                needMove.LoadContent(10, Tiles.Fight);
                 return right;
+            }
             else if (needMove.Pos.X > e2.Pos.X)
+            {
+                needMove.LoadContent(3, Tiles.Fight);
                 return left;
+            }
             else
                 return new Vector2(0, 0);
         }
