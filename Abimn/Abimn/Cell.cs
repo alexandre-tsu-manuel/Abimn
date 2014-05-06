@@ -10,6 +10,17 @@ namespace Abimn
 {
     class Cell
     {
+
+        /// <summary>
+        /// Recupere ou definit si une case permet de passer sur une autre carte
+        /// </summary>
+        public bool Travel
+        {
+            get { return travel; }
+            set { travel = value; }
+        }
+        private bool travel;
+
         public byte IdFloor
         {
             get { return _idFloor; }
@@ -36,6 +47,7 @@ namespace Abimn
             Blocking = blocking;
             IdFloor = idFloor;
             IdDeco = idDeco;
+            Travel = travel;
         }
 
         public void Draw(Pos pos, Center center = Center.None, bool fighting = false)
