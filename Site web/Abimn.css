@@ -1,0 +1,138 @@
+@charset "utf-8";
+body {
+	font: 100%/1.4 Verdana, Arial, Helvetica, sans-serif;
+	background:url(background.png) repeat-y;
+	background-position: top center;
+	background-color:#543d76;
+	padding: 0;
+	color: #2F2341;
+}
+
+/* ~~ Sélecteurs d'éléments/balises ~~ */
+ul, ol, dl { /* En raison des variations entre les navigateurs, il est conseillé d'attribuer une valeur de zéro aux marges intérieures et aux marges des listes. A des fins de cohérence, vous pouvez définir les valeurs désirées dans cette zone ou dans les éléments de liste (LI, DT, DD) qu'elle contient. N'oubliez pas que les paramètres que vous définissez ici se répercuteront sur la liste .nav, sauf si vous rédigez un sélecteur plus spécifique. */
+	padding: 0;
+	margin: 0;
+}
+h1, h2, h3, h4, h5, h6, p {
+	margin-top: 0;	 /* la suppression de la marge supérieure résout un problème où les marges sortent de leur div conteneur. La marge inférieure restante l'éloignera de tout élément qui suit. */
+	padding-right: 15px;
+	padding-left: 15px; /* l'ajout de la marge intérieure aux côtés des éléments à l'intérieur des divs, et non aux divs proprement dit, évite le recours à des calculs de modèle de boîte. Une autre méthode consiste à employer une div imbriquée avec marge intérieure latérale. */
+}
+a img { /* ce sélecteur élimine la bordure bleue par défaut affichée dans certains navigateurs autour d'une image lorsque celle-ci est entourée d'un lien. */
+	border: none;
+}
+
+/* ~~ La définition du style des liens de votre site doit respecter cet ordre, y compris le groupe de sélecteurs qui créent l'effet de survol. ~~ */
+a:link {
+	color: #42413C;
+	text-decoration: underline; /* à moins que vous ne définissiez un style particulièrement exclusif pour vos liens, mieux vaut prévoir un soulignement, qui garantit une identification visuelle rapide. */
+}
+a:visited {
+	color: #6E6C64;
+	text-decoration: underline;
+}
+a:hover, a:active, a:focus { /* ce groupe de sélecteurs offrira à un navigateur au clavier la même expérience de survol que celle d'une personne employant la souris. */
+	text-decoration: none;
+}
+
+/* ~~ ce conteneur à largeur fixe entoure les autres divs ~~ */
+.container {
+	width: 690px;
+	margin: 0 auto;
+	text-align:justify;
+}
+
+.sidebar1 {
+	padding:10px;
+	margin-left:10px;
+	height:20px;
+}
+
+.content {
+	padding: 10px 30px;
+	margin: 0 auto;
+	color:#DBE1FF;
+	border-radius:20px;
+}
+
+.content h1 {
+	color:#F3F1DA;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+.content h1:hover {
+	text-shadow: 1px 1px 5px white; transform: all;-moz-transform: all;-o-transform: all;
+-htm-transform: all;-webkit-transform: all;transition: 1s;-moz-transition: 1s;-o-transition: 1s;
+-htm-transition: 1s;-webkit-transition: 1s;
+margin-left:20px;
+}
+
+.content h1:before {content:"ϟ "; }
+
+/* ~~ Ce sélecteur groupé donne de l'espace aux listes dans la zone .content ~~ */
+.content ul, .content ol { 
+	padding: 0; /* cette marge intérieure reflète la marge intérieure droite dans les en-têtes et la règle de paragraphe ci-dessus. Une marge intérieure a été placée en bas, afin d'assurer un espace entre les autres éléments des listes, et à gauche pour créer le retrait. Vous pouvez les régler comme bon vous semble. */
+}
+
+/* ~~ Styles de liste de navigation (peuvent être supprimés si vous optez pour un menu de survol prédéfini tel que Spry) ~~ */
+ul.nav {
+	list-style: none; /* entraîne la suppression du marqueur de liste */
+}
+ul.nav li {
+	display:inline;
+}
+
+ul.nav a, ul.nav a:visited { /* le regroupement de ces sélecteurs garantit que vos liens conservent leur apparence de bouton, même après avoir été activés */
+	padding: 5px;
+	color:#F3F1DA;
+	font-weight:400;
+	margin-left:40px;
+	padding-bottom:10px;
+	width: 110px;  /*cette largeur permet de cliquer sur le bouton entier dans IE6. Si la compatibilité avec IE6 n'est pas nécessaire, vous pouvez la supprimer. Pour calculer la largeur approprié, soustrayez la marge intérieure de ce lien de la largeur du conteneur de barre latérale. */
+	display:inline-block;
+	text-decoration: none;
+	text-shadow: 0 0 2px #F3F1DA;
+	-webkit-transition:width 2s, height 2s, background-color 2s, -webkit-transform 2s;
+    transition:width 2s, height 2s, background-color 2s, transform 2s;
+	-moz-transition:width 2s, height 2s, background-color 2s, -webkit-transform 2s;
+	 -webkit-transition: all 1.5s ease-out; -moz-transition: all 1.5s ease-out; transition: all 1.5s ease-out;
+}
+ul.nav a:hover, ul.nav a:active, ul.nav a:focus, ul.nav li:hover { /* modifie la couleur de l'arrière-plan et du texte pour les navigateurs à la souris et au clavier. */
+ letter-spacing:5px; transform: all;-moz-transform: all;-o-transform: all;
+-htm-transform: all;-webkit-transform: all;transition: 1s;-moz-transition: 1s;-o-transition: 1s;
+-htm-transition: 1s;-webkit-transition: 1s;
+text-shadow: 0.2em 0.5em 0.1em #2F2341,
+      -0.3em 0.1em 0.1em #FFD25B,
+      0.4em -0.3em 0.1em #DBE1FF;
+}
+
+ul.nav a:hover {
+	transform: all;-moz-transform: all;-o-transform: all;
+-htm-transform: all;-webkit-transform: all;transition: 1s;-moz-transition: 1s;-o-transition: 1s;
+-htm-transition: 1s;-webkit-transition: 1s;
+}
+
+/* ~~ Pied de page ~~ */
+.footer {
+	margin-left:50px;
+	padding: 10px 0;
+	color:#615574;
+	position: relative;/* donne hasLayout à IE6 de façon à permettre un effacement correct */
+	clear: both; /* cette propriété d'effacement force le .container à comprendre où se terminent les colonnes et à les contenir */
+}
+
+/* ~~ classes flottant/effacement diverses ~~ */
+.fltrt {  /* cette classe peut servir à faire flotter un élément depuis la droite sur votre page. L'élément flottant doit précéder l'élément à côté duquel il doit apparaître sur la page. */
+	float: right;
+	margin-left: 8px;
+}
+.fltlft { /* cette classe peut servir à faire flotter un élément depuis la gauche sur votre page. L'élément flottant doit précéder l'élément à côté duquel il doit apparaître sur la page. */
+	float: left;
+	margin-right: 8px;
+}
+.clearfloat { /* cette classe peut être placée sur une div <br /> ou vide, en tant qu'élément final suivant la dernière div flottante (dans le #container) si le paramètre #footer est supprimé ou retiré du #container */
+	clear:both;
+	height:0;
+	font-size: 1px;
+	line-height: 0px;
+}
