@@ -42,6 +42,5 @@ namespace Abimn
         public static Pos operator *(Pos p, int m) { return new Pos((int)(p.X * m), (int)(p.Y * m)); }
         public static Pos operator /(Pos p, int d) { return new Pos((int)(p.X / d), (int)(p.Y / d)); }
         public static Pos operator %(Pos p, int m) { return new Pos((int)(p.X % m), (int)(p.Y % m)); }
-
     }
 }
