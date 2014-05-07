@@ -17,7 +17,8 @@ namespace Abimn
         Hero,
         Recap,
         Button,
-        Button2
+        Button2,
+		CharEdit
     }
 
     public class TileProperty
@@ -44,7 +45,7 @@ namespace Abimn
                     ret.Tag = "f";
                     break;
                 case Tiles.PauseMenu:
-                    ret.Size = 10;
+                    ret.Size = 7;
                     ret.Tag = "pause_menu";
                     break;
                 case Tiles.Inventory:
@@ -67,6 +68,10 @@ namespace Abimn
                     ret.Size = 10;
                     ret.Tag = "menus";
                     break;
+				case Tiles.CharEdit:
+					ret.Size = 33;
+					ret.Tag = "editC";
+					break;
             }
 
             return ret;

@@ -124,11 +124,15 @@ namespace Abimn
         /// </summary>
         public virtual bool mouseOver(Pos strict = null)
         {
-            if (strict == null) strict = new Pos();
-            return E.GetMousePosX() >= _pos.X + strict.X
-                && E.GetMousePosX() <= _pos.X + _rect.Width - strict.X
-                && E.GetMousePosY() >= _pos.Y + strict.Y
-                && E.GetMousePosY() <= _pos.Y + _rect.Height - strict.Y;
+			if (Visible)
+			{
+				if (strict == null) strict = new Pos();
+				return E.GetMousePosX() >= _pos.X + strict.X
+					&& E.GetMousePosX() <= _pos.X + _rect.Width - strict.X
+					&& E.GetMousePosY() >= _pos.Y + strict.Y
+					&& E.GetMousePosY() <= _pos.Y + _rect.Height - strict.Y;
+			}
+			return false;
         }
 
         public virtual bool IntersectsWith(Entity entity)

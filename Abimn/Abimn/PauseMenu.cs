@@ -32,17 +32,17 @@ namespace Abimn
             option = new Button();
 
             fond_menu = new Entity();
-            fond_menu.Initialize(new Pos(255, 105));
+            fond_menu.Initialize(new Pos(fond_menu.Pos.X+112,fond_menu.Pos.Y+ 94));
             fond_menu.LoadContent(1, Tiles.PauseMenu);
+			/*Peut-etre que un joli cadre pause serait bienvenue non obligatoire*/
+            resume.Initialize(new Pos(fond_menu.Pos.X + 250, fond_menu.Pos.Y + 195));
+            resume.LoadContent(2, 6, 2, Tiles.PauseMenu);
 
-            resume.Initialize(new Pos(fond_menu.Pos.X + 60, fond_menu.Pos.Y + 145));
-            resume.LoadContent(2, 6, 8, Tiles.PauseMenu);
+            option.Initialize(new Pos(fond_menu.Pos.X + 250, fond_menu.Pos.Y + 275));
+            option.LoadContent(3, 5, 3, Tiles.PauseMenu);
 
-            option.Initialize(new Pos(fond_menu.Pos.X + 60, fond_menu.Pos.Y + 195));
-            option.LoadContent(3, 5, 9, Tiles.PauseMenu);
-
-            exit.Initialize(new Pos(fond_menu.Pos.X + 60, fond_menu.Pos.Y + 245));
-            exit.LoadContent(4, 7, 10, Tiles.PauseMenu);
+            exit.Initialize(new Pos(fond_menu.Pos.X + 250, fond_menu.Pos.Y + 355));
+            exit.LoadContent(4, 7, 4, Tiles.PauseMenu);
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace Abimn
                     G.currentGame.Push(new OptionsMenu());
             }
             if (E.IsPushed(Keys.Escape))
-                G.currentGame.Pop();
+                G.currentGame.Push(new Main());
         }
 
         /// <summary>
