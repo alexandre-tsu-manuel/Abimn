@@ -32,8 +32,8 @@ namespace Abimn
         public Fight() : base(true)
         {
             Cursor.SetVisibility(false);
-            _hero = new Entity(new Pos(50, 450));
-            _ennemy = new Ennemy(new Pos(550, 450), new Vector2(-1, 0), 0.02F);
+            _hero = new Entity(new Pos(C.Screen.Width/2 - 25, 420));
+            _ennemy = new Ennemy(new Pos(550, 420), new Vector2(-1, 0), 0.02F);
 
             _map = new FightMap();
             _hero.LoadContent(1, Tiles.Fight);

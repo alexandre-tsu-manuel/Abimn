@@ -36,9 +36,7 @@ namespace Abimn
             Cell ciel = new Cell(false, 9, 0);
            
             ciel.Draw(new Pos(0, 0), Center.None, true);
-            for (pos.X = 0; pos.X < C.Screen.Width; pos.X+=32)
-                for (pos.Y = 480; pos.Y < C.Screen.Height; pos.Y+=32 )
-                    cells.Draw(pos, Center.None, true);
+            cells.Draw(new Pos(0, 450), Center.None, true);
             
         }
     }
