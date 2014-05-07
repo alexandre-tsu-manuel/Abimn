@@ -264,13 +264,13 @@ namespace Abimn
 
         public void Draw(Pos posHero, Pos shift = null)
         {
+            shift = shift != null ? shift : new Pos(0);
             Pos cPosIni = new Pos(posHero.X - C.nbCellsHorizontalOnScreen / 2, posHero.Y - C.nbCellsVerticalOnScreen / 2);
             Pos sPos = new Pos();
             Pos cPos = new Pos();
-            shift = shift != null ? shift : new Pos(0);
 
-            for (sPos.X = -shift.X, cPos.X = cPosIni.X; sPos.X < C.Screen.Width; sPos.X += 50, cPos.X++)
-                for (sPos.Y = -shift.Y, cPos.Y = cPosIni.Y; sPos.Y < C.Screen.Height; sPos.Y += 50, cPos.Y++)
+            for (sPos.X = -shift.X - C.sizeCell, cPos.X = cPosIni.X - 1; sPos.X < C.Screen.Width; sPos.X += C.sizeCell, cPos.X++)
+                for (sPos.Y = -shift.Y - C.sizeCell, cPos.Y = cPosIni.Y - 1; sPos.Y < C.Screen.Height; sPos.Y += C.sizeCell, cPos.Y++)
                     DrawCell(cPos, sPos);
         }
     }

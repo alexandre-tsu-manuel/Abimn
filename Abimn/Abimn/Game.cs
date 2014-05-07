@@ -36,7 +36,8 @@ namespace Abimn
             Rand.Init();
             G.currentGame = new Stack<GameType>();
 
-            this.IsMouseVisible = true;
+            Cursor.setCursor(Tiles.Cursor, 1, 2, new Pos(15, 5));
+            //this.IsMouseVisible = true;
             this.graphics.IsFullScreen = false;
             this.graphics.PreferredBackBufferWidth = C.Screen.Width;
             this.graphics.PreferredBackBufferHeight = C.Screen.Height;
@@ -112,6 +113,7 @@ namespace Abimn
                 buffer.Peek().Draw();
                 G.currentGame.Push(buffer.Pop());
             }
+            Cursor.Draw();
             G.spriteBatch.End();
 
             base.Draw(gameTime);

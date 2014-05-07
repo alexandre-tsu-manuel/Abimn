@@ -31,6 +31,7 @@ namespace Abimn
         {
             Hero.LifeMax = 10000;
             Hero.Life = 10000;
+            Cursor.SetVisibility(true);
 
             jouer = new Button(new Pos((int)(C.Screen.Width * 0.15), (int)(C.Screen.Height * 0.30)));
             jouer.LoadContent(1, 2, 1, Tiles.Button);

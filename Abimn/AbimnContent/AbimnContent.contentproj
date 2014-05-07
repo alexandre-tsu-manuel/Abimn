@@ -416,7 +416,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Compile Include="editC1.png">
       <Name>editC1</Name>
       <Importer>TextureImporter</Importer>
@@ -509,28 +508,28 @@
     </Compile>
     <Compile Include="editC9.png">
       <Name>editC9</Name>
-=======
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+	</Compile>
     <Compile Include="f8.png">
       <Name>f8</Name>
->>>>>>> 983a1e4462f20b8a65af153184c2c427d4568544
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Compile Include="editC19.png">
       <Name>editC19</Name>
-=======
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
     <Compile Include="f5.png">
       <Name>f5</Name>
->>>>>>> 983a1e4462f20b8a65af153184c2c427d4568544
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Compile Include="editC21.png">
       <Name>editC21</Name>
       <Importer>TextureImporter</Importer>
@@ -538,16 +537,16 @@
     </Compile>
     <Compile Include="editC22.png">
       <Name>editC22</Name>
-=======
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
     <Compile Include="f9.png">
       <Name>f9</Name>
->>>>>>> 983a1e4462f20b8a65af153184c2c427d4568544
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Compile Include="editC23.png">
       <Name>editC23</Name>
       <Importer>TextureImporter</Importer>
@@ -600,10 +599,23 @@
     </Compile>
     <Compile Include="editC33.png">
       <Name>editC33</Name>
-=======
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
     <Compile Include="f10.png">
       <Name>f10</Name>
->>>>>>> 983a1e4462f20b8a65af153184c2c427d4568544
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="cursor1.png">
+      <Name>cursor1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="cursor2.png">
+      <Name>cursor2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

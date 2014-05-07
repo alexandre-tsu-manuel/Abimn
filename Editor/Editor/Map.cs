@@ -20,7 +20,7 @@ namespace Abimn
 
         public static Map Generate(Pos dimensions = null)
         {
-            dimensions = dimensions != null ? dimensions : new Pos(25);
+            dimensions = dimensions != null ? dimensions : new Pos(50);
             Map ret = new Map();
             ret.dimensions = dimensions;
             ret.cells = new Cell[dimensions.Y][];
