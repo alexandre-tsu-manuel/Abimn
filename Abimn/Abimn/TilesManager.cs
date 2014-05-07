@@ -19,7 +19,8 @@ namespace Abimn
         Button,
         Button2,
         Cursor,
-        CharEdit
+        CharEdit,
+        NewHero
     }
 
     public class TileProperty
@@ -76,6 +77,10 @@ namespace Abimn
                 case Tiles.CharEdit:
                     ret.Size = 33;
                     ret.Tag = "editC";
+                    break;
+                case Tiles.NewHero:
+                    ret.Size = 10;
+                    ret.Tag = "newHero";
                     break;
             }
 

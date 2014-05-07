@@ -17,11 +17,17 @@ namespace Abimn
     public class Fight : GameType
     {
         private Entity _hero;
+        private int movinTill = 0;
+        private int heroAttack = 20;
+        private int ennemyAttack = 100;
         private Ennemy _ennemy;
          
         private FightMap _map;
         private bool _fightContact;
         private bool _jumping;
+        private bool movinRight;
+
+        private Pos renardDelta;
 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
@@ -33,7 +39,7 @@ namespace Abimn
         {
             Cursor.SetVisibility(false);
             _hero = new Entity(new Pos(C.Screen.Width/2 - 25, 420));
-            _ennemy = new Ennemy(new Pos(550, 420), new Vector2(-1, 0), 0.02F);
+            _ennemy = new Ennemy(new Pos(550, 412), new Vector2(-1, 0), 0.02F);
 
             _map = new FightMap();
             _hero.LoadContent(1, Tiles.Fight);
@@ -61,21 +67,67 @@ namespace Abimn
         {
             if (E.IsDown(Keys.Right))
             {
-                _hero.LoadContent(1, Tiles.Fight);
+                movinTill++;
+                movinRight = true;
                 _hero.Pos += new Vector2(2, 0);
             }
             else if (E.IsDown(Keys.Left))
             {
-                _hero.LoadContent(2, Tiles.Fight);
+                movinTill++;
+                movinRight = false;
                 _hero.Pos += new Vector2(-2, 0);
+            }
+            else
+                movinTill = 0;
+            if (E.IsPushed(Keys.Space) && heroAttack == 20)
+                heroAttack--;
+            if (heroAttack < 20)
+            {
+                int movStep = heroAttack;
+                if (movStep > 16)
+                    movStep = 7;
+                else
+                    movStep = 8;
+                if (!movinRight)
+                    movStep += 2;
+                _hero.LoadContent(movStep, Tiles.NewHero);
+            }
+            else
+            {
+                if (movinTill == 0)
+                    _hero.LoadContent(movinRight ? 1 : 4, Tiles.NewHero);
+                else
+                {
+                    int movStep = movinTill / 3 % 4;
+                    if (movStep == 3)
+                        movStep -= 2;
+                    _hero.LoadContent((movinRight ? 1 : 4) + movStep, Tiles.NewHero);
+                }
             }
         }
 
         public override void Update(GameTime gameTime)
         {
-            _ennemy.Pos = _ennemy.Pos + getDirection(_ennemy, _hero);
+            _ennemy.Pos = _ennemy.Pos + getDirection(_ennemy, _hero, Math.Abs(_ennemy.Pos.X - _hero.Pos.X) > 30);
             moveHero();
-            
+
+            if (Math.Abs(_ennemy.Pos.X - _hero.Pos.X) <= 30 && ennemyAttack == 100)
+                ennemyAttack--;
+            if (ennemyAttack < 100)
+                ennemyAttack--;
+            if (ennemyAttack == 0)
+                ennemyAttack = 100;
+            if (ennemyAttack == 90)
+                Hero.Life -= 1000;
+
+            if (heroAttack < 20)
+                heroAttack--;
+            if (heroAttack == 0)
+                heroAttack = 20;
+
+            if (heroAttack == 10 && Math.Abs(_ennemy.Pos.X - _hero.Pos.X) < 40)
+                _ennemy.Life -= 10000 / 14;
+
             if (Hero.Life <= 0)
             {
                 Hero.Life = 0;
@@ -88,7 +140,7 @@ namespace Abimn
                 Cursor.SetVisibility(true);
                 G.currentGame.Push(new FightRecap());
             }
-/*
+            /*
             _ennemy.Update(gameTime);
             if (_ennemy.Pos.X < _hero.Pos.X + 50)
             {
@@ -124,19 +176,24 @@ namespace Abimn
 
         }
 
-        public Vector2 getDirection(Entity needMove, Entity e2)
+        public Vector2 getDirection(Entity needMove, Entity e2, bool move)
         {
             Vector2 left = new Vector2(-1, 0f);
             Vector2 right = new Vector2(1, 0f);
-            if (needMove.Pos.X < e2.Pos.X)
+            if (move)
             {
-                needMove.LoadContent(10, Tiles.Fight);
-                return right;
-            }
-            else if (needMove.Pos.X > e2.Pos.X)
-            {
-                needMove.LoadContent(3, Tiles.Fight);
-                return left;
+                if (needMove.Pos.X < e2.Pos.X)
+                {
+                    needMove.LoadContent(10, Tiles.Fight);
+                    return right;
+                }
+                else if (needMove.Pos.X > e2.Pos.X)
+                {
+                    needMove.LoadContent(3, Tiles.Fight);
+                    return left;
+                }
+                else
+                    return new Vector2(0, 0);
             }
             else
                 return new Vector2(0, 0);

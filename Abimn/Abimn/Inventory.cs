@@ -27,6 +27,7 @@ namespace Abimn
         /// </summary>
         public Inventory() : base(false)
         {
+            Cursor.SetVisibility(true);
             armor = new Button(new Pos(230, 14));
             armor.LoadContent(2, 3, 3, Tiles.Inventory);
 

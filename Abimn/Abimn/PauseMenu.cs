@@ -27,6 +27,7 @@ namespace Abimn
         /// </summary>
         public PauseMenu() : base(false)
         {
+            Cursor.SetVisibility(true);
             resume = new Button();
             exit = new Button();
             option = new Button();

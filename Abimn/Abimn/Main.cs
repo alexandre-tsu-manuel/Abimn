@@ -296,6 +296,7 @@ namespace Abimn
             _timeSinceStart += (float)gameTime.TotalGameTime.TotalSeconds;
             EntityHero = new Entity(new Pos((9 * 50), (7 * 50)));
 
+            Cursor.SetVisibility(false);
             //Change CurrentGame
             if (E.IsPushed(Keys.Escape))
                 G.currentGame.Push(new PauseMenu());
