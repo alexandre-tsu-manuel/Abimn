@@ -36,14 +36,13 @@ namespace Abimn
             Rand.Init();
             G.currentGame = new Stack<GameType>();
 
-            this.IsMouseVisible = false;
+            //this.IsMouseVisible = false;
             this.graphics.IsFullScreen = false;
             this.graphics.PreferredBackBufferWidth = C.Screen.Width;
             this.graphics.PreferredBackBufferHeight = C.Screen.Height;
             this.graphics.ApplyChanges();
-            this.Window.Title = "Abimn";
+            this.Window.Title = "Abimn - Editeur";
             this.Window.AllowUserResizing = true;
-            Cursor.setCursor(Tiles.Main, 1, 1, Center.All);
 
             base.Initialize();
 

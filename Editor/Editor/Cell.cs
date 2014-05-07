@@ -44,7 +44,7 @@ namespace Abimn
             byte[] clone = _id.ToArray();
             _id.Clear();
             _id.Enqueue(back);
-            for (byte i = 0; i < clone.Length; i++)
+            for (byte i = 1; i < clone.Length; i++)
                 _id.Enqueue(clone[i]);
         }
 
@@ -53,7 +53,7 @@ namespace Abimn
             _id.Enqueue(deco);
         }
 
-        public void clearDecoration()
+        public void ClearDecoration()
         {
             byte buff = _id.Dequeue();
 
@@ -61,12 +61,18 @@ namespace Abimn
             _id.Enqueue(buff);
         }
 
+        public byte[] GetArray()
+        {
+            return _id.ToArray();
+        }
+
         public void Draw(Pos pos, Center center = Center.None)
         {
             byte[] clone = _id.ToArray();
 
-            for (byte i = 0; i < clone.Length; i++)
-                G.tiles[(int)Tiles.Main][clone[i] - 1].Draw(pos, center);
+            G.tiles[(int)Tiles.Main][clone[0] - 1].Draw(pos, center);
+            for (byte i = 1; i < clone.Length; i++)
+                G.tiles[(int)Tiles.MainDeco][clone[i] - 1].Draw(pos, center);
         }
 
         public string Save()

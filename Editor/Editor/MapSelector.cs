@@ -17,6 +17,7 @@ namespace Abimn
     public class MapSelector : GameType
     {
         private Button[] slots = new Button[C.nbSlots];
+        private Button back;
         private bool[] slotIsEmpty = new bool[C.nbSlots];
         private string[] maps;
         private bool creating;
@@ -29,12 +30,14 @@ namespace Abimn
             
             while (i < C.nbSlots)
                 slotIsEmpty[i] = maps[i++] == "";
-
             for (i = 0; i < slots.Length; i++)
             {
                 slots[i] = new Button(new Pos(C.Screen.Width / 2 + (i < slots.Length / 2 ? -200 : 200), C.Screen.Height / 2 - 150 + (i%(slots.Length/2)) * 100));
                 slots[i].LoadContent(slotIsEmpty[i] ? 9 : i + 1, Tiles.Slot, Center.All);
             }
+            back = new Button();
+            back.LoadContent(10, Tiles.Slot);
+            back.Pos = new Pos(C.Screen.Width - back.Rect.Width, C.Screen.Height - back.Rect.Height);
 
             //id = id >= maps.Length ? maps.Length - 1 : id;
             //this.load(maps[id]);
@@ -47,13 +50,15 @@ namespace Abimn
                     G.currentGame.Push(new MapEditor(Map.Generate(), i));
                 else if (!creating && !slotIsEmpty[i] && slots[i].IsClicked())
                     G.currentGame.Push(new MapEditor(new Map().Load(maps[i]), i));
-            //G.currentGame.Pop();
+            if (back.IsClicked())
+                G.currentGame.Pop();
         }
 
         public override void Draw()
         {
             for (int i = 0; i < slots.Length; i++)
                 slots[i].Draw();
+            back.Draw();
         }
     }
 }

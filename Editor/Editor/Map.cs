@@ -72,12 +72,16 @@ namespace Abimn
 
         public void SetCell(Pos pos, Cell cell)
         {
-            cells[pos.X][pos.Y] = cell;
+            if (pos.X >= 0 && pos.Y >= 0 && pos.X < Dimensions.X && pos.Y < Dimensions.Y)
+                cells[pos.X][pos.Y] = cell;
         }
 
         public Cell GetCell(Pos pos)
         {
-            return cells[pos.X][pos.Y];
+            if (pos.X >= 0 && pos.Y >= 0 && pos.X < Dimensions.X && pos.Y < Dimensions.Y)
+                return cells[pos.X][pos.Y];
+            else
+                return new Cell("n:1");
         }
 
         public bool IsBlocking(Pos pos)

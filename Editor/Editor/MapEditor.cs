@@ -62,15 +62,32 @@ namespace Abimn
                 currBlock++;
             }
 
-            if (E.LeftIsReleased())
+            Pos under = new Pos((camera.X - C.Screen.Width/2 + E.GetMousePosX() + C.sizeCell/2) / 50, (camera.Y - C.Screen.Height/2 + E.GetMousePosY() + C.sizeCell/2) / 50);
+            Cell buff = map.GetCell(under);
+            if (E.LeftIsDown())
             {
-                Pos under = new Pos(camera.Y / 50, camera.X / 50);
-                Cell buff = map.GetCell(under);
-                buff.setBackground((byte) currBlock);
+                if (decorating)
+                    buff.addDecoration((byte)currBlock);
+                else
+                    buff.setBackground((byte)currBlock);
                 map.SetCell(under, buff);
             }
+            else if (E.Button1IsDown() || E.Button2IsDown() || E.IsDown(Keys.Back))
+            {
+                buff.ClearDecoration();
+                map.SetCell(under, buff);
+            }
+            else if (E.MiddleIsReleased())
+                currBlock = buff.GetArray()[0];
+
+            Cursor.setCursor(decorating ? Tiles.MainDeco : Tiles.Main, currBlock, currBlock, new Pos (C.sizeCell/2));
+
+            if (E.IsReleased(Keys.Escape))
+            {
+                G.currentGame.Clear();
+                G.currentGame.Push(new Menu());
+            }
             
-            Cursor.setCursor(decorating ? Tiles.MainDeco : Tiles.Main, currBlock, currBlock);
         }
 
         public override void Draw()

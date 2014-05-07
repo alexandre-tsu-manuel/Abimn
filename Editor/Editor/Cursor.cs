@@ -11,23 +11,23 @@ namespace Abimn
         private static Tiles dim1;
         private static int dim2;
         private static int dim2Pushed;
-        private static Center center;
+        private static Pos delta;
 
-        public static void setCursor(Tiles dim1, int dim2, int dim2Pushed, Center center = Abimn.Center.None)
+        public static void setCursor(Tiles dim1, int dim2, int dim2Pushed, Pos delta)
         {
             Cursor.dim1 = dim1;
             Cursor.dim2 = dim2;
             Cursor.dim2Pushed = dim2Pushed;
-            Cursor.center = center;
+            Cursor.delta = delta;
         }
 
         public static void Draw()
         {
-            that = new Entity(new Pos(E.GetMousePosX(), E.GetMousePosY()));
+            that = new Entity(new Pos(E.GetMousePosX(), E.GetMousePosY()) - delta);
             if (E.LeftIsDown())
-                that.LoadContent(Cursor.dim2Pushed, dim1, center);
+                that.LoadContent(Cursor.dim2Pushed, dim1);
             else
-                that.LoadContent(Cursor.dim2, dim1, center);
+                that.LoadContent(Cursor.dim2, dim1);
             that.Draw();
         }
     }
