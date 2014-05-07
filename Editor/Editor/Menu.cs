@@ -17,23 +17,23 @@ namespace Abimn
     public class Menu : GameType
     {
         private Button create, load, quit;
-        //private Entity background;
+        private Entity background;
 
         public Menu() : base(true)
         {
             Cursor.setCursor(Tiles.Cursor, 1, 2, new Pos(15, 5));
 
             create = new Button(new Pos((int)(C.Screen.Width * 0.15), (int)(C.Screen.Height * 0.30)));
-            create.LoadContent(1, Tiles.Button);
+            create.LoadContent(1, 4, 4, Tiles.Button);
 
             load = new Button(new Pos((int)(C.Screen.Width * 0.15), (int)(C.Screen.Height * 0.45)));
-            load.LoadContent(2, Tiles.Button);
+            load.LoadContent(2, 5, 5, Tiles.Button);
 
             quit = new Button(new Pos((int)(C.Screen.Width * 0.15), (int)(C.Screen.Height * 0.60)));
-            quit.LoadContent(3, Tiles.Button);
+            quit.LoadContent(3, 6, 6, Tiles.Button);
 
-            //background = new Entity();
-            //background.LoadContent(4, Tiles.Button);
+            background = new Entity();
+            background.LoadContent(1, Tiles.Menu);
         }
 
         public override void Update(GameTime gameTime)
@@ -48,7 +48,7 @@ namespace Abimn
 
         public override void Draw()
         {
-            //background.Draw();
+            background.Draw();
             create.Draw();
             load.Draw();
             quit.Draw();

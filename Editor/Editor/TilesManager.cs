@@ -13,7 +13,8 @@ namespace Abimn
         MainDeco,
         Button,
         Slot,
-        Cursor
+        Cursor,
+		Menu
     }
 
     public class TileProperty
@@ -36,17 +37,21 @@ namespace Abimn
                     ret.Tag = "md";
                     break;
                 case Tiles.Button:
-                    ret.Size = 3;
+                    ret.Size = 6;
                     ret.Tag = "button";
                     break;
                 case Tiles.Slot:
-                    ret.Size = 10;
+                    ret.Size = 22;
                     ret.Tag = "slot";
-                    break;
-                case Tiles.Cursor:
-                    ret.Size = 2;
-                    ret.Tag = "cursor";
-                    break;
+					break;
+				case Tiles.Cursor:
+					ret.Size = 2;
+					ret.Tag = "cursor";
+					break;
+				case Tiles.Menu:
+					ret.Size = 1;
+					ret.Tag = "menu";
+					break;
             }
 
             return ret;
