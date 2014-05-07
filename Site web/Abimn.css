@@ -138,3 +138,8 @@ ul.nav a:hover {
 }
 
 .team { border:dotted 1px black;  height:150px;}
+
+.screens { height:200px; }
+.screens:hover { width:650px; height:auto; transform: all;-moz-transform: all;-o-transform: all;
+-htm-transform: all;-webkit-transform: all;transition: 1s;-moz-transition: 1s;-o-transition: 1s;
+-htm-transition: 1s;-webkit-transition: 1s; }
