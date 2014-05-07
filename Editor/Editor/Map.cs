@@ -11,11 +11,16 @@ namespace Abimn
     public class Map
     {
         private Cell[][] cells;
+
+        public Pos Dimensions
+        {
+            get { return dimensions; }
+        }
         private Pos dimensions;
 
         public static Map Generate(Pos dimensions = null)
         {
-            dimensions = dimensions != null ? dimensions : new Pos(5);
+            dimensions = dimensions != null ? dimensions : new Pos(25);
             Map ret = new Map();
             ret.dimensions = dimensions;
             ret.cells = new Cell[dimensions.Y][];
@@ -60,14 +65,23 @@ namespace Abimn
             string ret = dimensions.X.ToString();
 
             for (int i = 0; i < dimensions.X * dimensions.Y; i++)
-                ret += ";" + cells[i / dimensions.X][i % dimensions.X].ToString();
+                ret += ";" + cells[i / dimensions.X][i % dimensions.X].Save();
 
             return ret;
         }
 
         public void SetCell(Pos pos, Cell cell)
         {
-            cells[pos.X][pos.Y] = cell;
+            if (pos.X >= 0 && pos.Y >= 0 && pos.X < Dimensions.X && pos.Y < Dimensions.Y)
+                cells[pos.X][pos.Y] = cell;
+        }
+
+        public Cell GetCell(Pos pos)
+        {
+            if (pos.X >= 0 && pos.Y >= 0 && pos.X < Dimensions.X && pos.Y < Dimensions.Y)
+                return cells[pos.X][pos.Y];
+            else
+                return new Cell("n:1");
         }
 
         public bool IsBlocking(Pos pos)

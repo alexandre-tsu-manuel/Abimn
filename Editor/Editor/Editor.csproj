@@ -110,6 +110,7 @@
     <Compile Include="Button.cs" />
     <Compile Include="C.cs" />
     <Compile Include="Cell.cs" />
+    <Compile Include="Cursor.cs" />
     <Compile Include="E.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="G.cs" />

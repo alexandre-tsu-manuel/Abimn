@@ -132,6 +132,7 @@
     <Compile Include="Game.cs" />
     <Compile Include="Rand.cs" />
     <Compile Include="Entity.cs" />
+    <Compile Include="Shop.cs" />
     <Compile Include="Tile.cs" />
     <Compile Include="TilesManager.cs" />
     <Compile Include="Weapon.cs" />

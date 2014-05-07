@@ -143,11 +143,15 @@ namespace Abimn
                     }
                 }
             }
+
         }
 
 
 
-
+        /// <summary>
+        /// Ajustement de changement de case
+        /// Necessaire pour des colisions nettes (plus ou moins)
+        /// </summary>
         public void MoveTile()
         {
             if (_shift.X <= -25)
@@ -177,6 +181,109 @@ namespace Abimn
         }
 
 
+        /// <summary>
+        /// Regarde les trois cqse en fqce du personnage
+        /// Retourne vrai si elles sont occupees par un Marchant
+        /// </summary>
+        public bool Interact()
+        {
+            Pos FrontTile = new Pos();
+
+
+
+
+            if (FrontTile.X == 0 && FrontTile.X == 49)
+            {
+                if (_idhero == 1)
+                    FrontTile = new Pos(_poshero.X - 1, _poshero.Y);
+
+                if (_idhero == 2)
+                    FrontTile = new Pos(_poshero.X + 1, _poshero.Y);
+
+                if (_idhero == 3)
+                    FrontTile = new Pos(_poshero.X, _poshero.Y + 1);
+
+
+                if (_idhero == 4)
+                    FrontTile = new Pos(_poshero.X, _poshero.Y - 1);
+
+                if (FrontTile.X == 0 && FrontTile.X == 49 && _backmap.Decoration(FrontTile) == 4)
+                    return true;
+            }
+
+            else
+            {
+                Pos FrontTileLeft = new Pos();
+                Pos FrontTileRight = new Pos();
+                Pos FrontTileFront = new Pos();
+
+
+                if (_idhero == 1)
+                    FrontTile = new Pos(_poshero.X - 1, _poshero.Y);
+                FrontTileLeft = new Pos(FrontTile.X, FrontTile.Y - 1);
+                FrontTileRight = new Pos(FrontTile.X, FrontTile.Y + 1);
+                FrontTileFront = new Pos(FrontTile.X - 1, FrontTile.Y);
+                if (_idhero == 2)
+                    FrontTile = new Pos(_poshero.X + 1, _poshero.Y);
+                FrontTileLeft = new Pos(FrontTile.X, FrontTile.Y - 1);
+                FrontTileRight = new Pos(FrontTile.X, FrontTile.Y + 1);
+                FrontTileFront = new Pos(FrontTile.X + 1, FrontTile.Y);
+
+                if (_idhero == 4)
+                    FrontTile = new Pos(_poshero.X, _poshero.Y + 1);
+                FrontTileLeft = new Pos(FrontTile.X - 1, FrontTile.Y);
+                FrontTileRight = new Pos(FrontTile.X + 1, FrontTile.Y);
+                FrontTileFront = new Pos(FrontTile.X, FrontTile.Y + 1);
+
+
+                if (_idhero == 3)
+                    FrontTile = new Pos(_poshero.X, _poshero.Y - 1);
+                FrontTileLeft = new Pos(FrontTile.X - 1, FrontTile.Y);
+                FrontTileRight = new Pos(FrontTile.X + 1, FrontTile.Y);
+                FrontTileFront = new Pos(FrontTile.X, FrontTile.Y - 1);
+
+
+                if (_backmap.Decoration(FrontTile) == 4 || _backmap.Decoration(FrontTileLeft) == 4 || _backmap.Decoration(FrontTileRight) == 4 || _backmap.Decoration(FrontTileFront) == 4) //id du marchant pour la Soutenance2
+                    return true;
+
+            }
+            return false;
+
+        }
+
+
+
+        /*  /// <summary>
+          /// Appelle une nouvelle map
+          /// </summary>
+          public void Travel()
+          {
+              Pos HighTile = new Pos(_poshero.X, _poshero.Y + 1);
+              if (_backmap.CanChangeMap(HighTile) && ( E.IsPushed(Keys.Up) || E.IsDown(Keys.Up)))
+              {
+                  if (_idmap == 1)
+                  {
+                      _idmap = 2;
+                      _poshero = _backmap.StartPos;
+                  }
+
+                  else
+                  {
+                      _idmap = 1;
+                      _poshero = new Pos(1, 7);
+                  }
+
+                  _idmap = 2;
+                  _poshero = _backmap.StartPos;
+                  _backmap = new Map(_idmap);
+                  _idhero = _backmap.IdStartHero;
+                  _shift = new Pos(0, 0);
+
+
+                  //TODO: ajouter un freeze de quelques milisecondes pour recentrer le perso
+              }
+          }*/
+
 
         /// <summary>
         /// Allows the game to run logic such as updating the world,
@@ -193,16 +300,6 @@ namespace Abimn
             if (E.IsPushed(Keys.Escape))
                 G.currentGame.Push(new PauseMenu());
 
-            if (_backmap.Decoration(_poshero) == 3 && _idmap == 1)
-            {
-                _idmap = 2;
-                _backmap = new Map(_idmap);
-                _poshero = _backmap.StartPos;
-                _idhero = _backmap.IdStartHero;
-                _shift = new Pos (0,0);
-                //TODO: ajouter un freeze de quelques milisecondes pour recentrer le perso
-            }
-
             if (E.IsPushed(Keys.I))
                 G.currentGame.Push(new Inventory());
 
@@ -212,7 +309,32 @@ namespace Abimn
                 _backmap.SetCell(_poshero, new Cell(false, 1, 0));
             }
 
+            if (Interact() == true && E.IsPushed(Keys.Space))
+                G.currentGame.Push(new Shop());
 
+
+
+            //Change de map
+            if (_backmap.Decoration(_poshero) == 2)
+            {
+                _idmap = 2;
+                _backmap = new Map(_idmap);
+                _poshero = _backmap.StartPos;
+                _idhero = _backmap.IdStartHero;
+                _shift = new Pos(0, 0);
+            }
+
+            if (_backmap.Decoration(_poshero) == 3)
+            {
+                _idmap = 1;
+                _backmap = new Map(_idmap);
+                _poshero = _backmap.StartPos;
+                _idhero = _backmap.IdStartHero;
+                _shift = new Pos(0, 0);
+            }
+
+
+            //Deplacement
             if (E.IsDown(Keys.B)) //courrir
             {
                 if (_timeSinceMove > 0.002f)//règle la vitesse de défilement
@@ -235,12 +357,8 @@ namespace Abimn
 
             //mouv ennemys
 
-            //check 4 cases autour du Heros + press espace = interaction
-
             //check présence ennemys pour lancer Fight: dans la classe ennemy en fonction de l'ennemy? post figth: unload?
 
-            /* G.currentGame.Pop();
-             Main.UnloadContent();*/
         }
 
 

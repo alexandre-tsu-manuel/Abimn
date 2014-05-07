@@ -39,29 +39,49 @@ namespace Abimn
                 _id.Enqueue(item);
         }
 
-        public void Draw(Pos pos, Center center = Center.None)
+        public void setBackground(byte back)
         {
-            Queue<byte> clone = new Queue<byte>(_id);
-
-            try
-            {
-                while (true)
-                    G.tiles[(int)Tiles.Main][clone.Dequeue() - 1].Draw(pos, center);
-            }
-            catch (InvalidOperationException) { }
+            byte[] clone = _id.ToArray();
+            _id.Clear();
+            _id.Enqueue(back);
+            for (byte i = 1; i < clone.Length; i++)
+                _id.Enqueue(clone[i]);
         }
 
-        public string ToString()
+        public void addDecoration(byte deco)
         {
-            Queue<byte> clone = new Queue<byte>(_id);
+            _id.Enqueue(deco);
+        }
+
+        public void ClearDecoration()
+        {
+            byte buff = _id.Dequeue();
+
+            _id.Clear();
+            _id.Enqueue(buff);
+        }
+
+        public byte[] GetArray()
+        {
+            return _id.ToArray();
+        }
+
+        public void Draw(Pos pos, Center center = Center.None)
+        {
+            byte[] clone = _id.ToArray();
+
+            G.tiles[(int)Tiles.Main][clone[0] - 1].Draw(pos, center);
+            for (byte i = 1; i < clone.Length; i++)
+                G.tiles[(int)Tiles.MainDeco][clone[i] - 1].Draw(pos, center);
+        }
+
+        public string Save()
+        {
+            byte[] clone = _id.ToArray();
             string ret = Blocking ? "y" : "n";
 
-            try
-            {
-                while (true)
-                    ret += ":" + clone.Dequeue().ToString();
-            }
-            catch (InvalidOperationException) { }
+            for (byte i = 0; i < clone.Length; i++)
+                ret += ":" + clone[i].ToString();
 
             return ret;
         }

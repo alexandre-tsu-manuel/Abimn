@@ -1,0 +1,67 @@
+// Site web
+
+1 - Généralités
+Le site a été réalisé en XHTML et en CSS. C'est donc un site statique, qui se présente actuellement sous 4 pages :
+- "Abimn.htm", l'accueil du site web. Elle présente l'univers du jeu.
+- "telechargement.htm", la page proposant différents moyens de télécharger le jeu.
+- "credits.htm", une page de présentation de la "Team" f0rm4g3, les développeurs !
+- "screenshots.htm", la page de présentation de différents aperçus graphiques du jeu.
+
+2 - La structure HTML
+Chaque corps des pages du site est guidé sous la même structure :
+- Une en-tête
+- Une barre de navigation (ou "menu")
+- Un contenu
+- Un pied de page
+Ces éléments correspondent tous à des conteneurs en HTML. L'en-tête contient une image, ainsi utilisée comme logo du site. Et, en réalité, la barre de navigation est une liste de liens qui a mangé du CSS. De même, les titres et paragraphes du contenu y ont goûté.
+
+3 - La beauté du CSS
+Son travail essentiel a été de donner une taille fixe au contenu, de permettre au menu d'être horizontal, et de rendre plus agréable la lecture du site.
+Il permet d'éditer énormément d'attributs : couleurs, ombres, bordures, marges, ... Ce qui permet aux codeurs d'être de bons graphistes ! On peut même en profiter pour réaliser de petites animations (ici utilisées sur les liens et les titres) bien qu'il existe de meilleurs outils dans ce domaine.
+ 
+4 - La partie graphisme
+Tous les rendus graphiques en CSS sont refaisables sous Photoshop, alors que l'inverse n'est pas vrai. C'est pourquoi j'aime réaliser mes sites à base de jolies images.
+En CSS, mon background est de couleur fixe - j'ai choisi du violet, c'est ma charte graphique qui me l'oblige, d'ailleurs là-voilà (partiellement) :
+                       .-'"""`---.___.----._
+                     ,'  _       __,--  __  `.
+                    '---' `----.'      /_9>   `--.
+                          __.-'_.--             `/ __
+             _..-"""---..',---' _.'          :_.'-'--i-._
+          .''          <""__..-' ` .         7-`-._.-.`. `.
+         /              ``           ` `-..-<       (  .-. \
+        /  INSERE ICI L'IMAGE DE LA CHARTE `'   `'
+        !        _.--.   GRAPHIQUE (va voir ;
+        :      ,'     `.  github)          .'       /
+     ;"`!               \        !        /
+    ;`  \                ;       !       /
+    ';   `.              |       _`.  \-'
+      `..~'`-..          ;_   .-+.  `. `._.-.
+               `-._   "-'  `""   .`.  `.____\\
+                   "------------`-`'    
+C'est pourquoi j'ai réalisé un fond d'écran à moitié en transparence dans une tentative de fondu. On peut y voir, délimitant presque le contenu, ce qui a été des éclats de glace mais qui sont désormais des "pics du Néant" (? ...) ainsi que des particules stellaires et plein d'effets de lumière à la Abimn. 
+Le logo, bien centré avec le fond d'écran (et en transparence, évidemment), se place au-dessus de ce qui est vu comme le cadre du conteneur (qui contient le menu et le contenu, et oui, c'est un divception !) Petite anecdote pour réchauffer les coeurs : ce fameux cadre est un calque quasi-identique à celui utilisé dans le menu du jeu pour présenter les actualités (on reconnait aussi la spirale en son centre).
+
+// Menu
+
+Par rapport à la soutenance 1, le menu a changé de design (respectant la charte graphique !) et a désormais un menu option. 
+Le menu option et ses boutons sont automatiquement centrés par rapport à l'écran. Il permet de désactiver ou d'activer la musique (deux boutons surperposés dont l'affichage se fait intelligement), ainsi que de régler le volume ou la luminosité à l'aide d'un curseur qui suit le mouvement de la souris durant le clic sur le curseur.
+
+// Sprites
+
+Nouveau sprite pour un PNJ : le marchand du jeu !
+                       .-'"""`---.___.----._
+                     ,'  _       __,--  __  `.
+                    '---' `----.'      /_9>   `--.
+                          __.-'_.--             `/ __
+             _..-"""---..',---' _.'          :_.'-'--i-._
+          .''          <""__..-' ` .         7-`-._.-.`. `.
+         /              ``           ` `-..-<       (  .-. \
+        /  INSERE ICI L'IMAGE DU MARCHAND2 `'   `'
+        !        _.--.   (va voir github)   ;
+        :      ,'     `.                   .'       /
+     ;"`!               \        !        /
+    ;`  \                ;       !       /
+    ';   `.              |       _`.  \-'
+      `..~'`-..          ;_   .-+.  `. `._.-.
+               `-._   "-'  `""   .`.  `.____\\
+                   "------------`-`'    

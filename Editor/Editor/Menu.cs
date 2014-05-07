@@ -21,6 +21,8 @@ namespace Abimn
 
         public Menu() : base(true)
         {
+            Cursor.setCursor(Tiles.Cursor, 1, 2, new Pos(15, 5));
+
             create = new Button(new Pos((int)(C.Screen.Width * 0.15), (int)(C.Screen.Height * 0.30)));
             create.LoadContent(1, Tiles.Button);
 

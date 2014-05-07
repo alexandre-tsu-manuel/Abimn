@@ -36,12 +36,12 @@ namespace Abimn
             Rand.Init();
             G.currentGame = new Stack<GameType>();
 
-            this.IsMouseVisible = true;
+            //this.IsMouseVisible = false;
             this.graphics.IsFullScreen = false;
             this.graphics.PreferredBackBufferWidth = C.Screen.Width;
             this.graphics.PreferredBackBufferHeight = C.Screen.Height;
             this.graphics.ApplyChanges();
-            this.Window.Title = "Abimn";
+            this.Window.Title = "Abimn - Editeur";
             this.Window.AllowUserResizing = true;
 
             base.Initialize();
@@ -112,9 +112,12 @@ namespace Abimn
                 buffer.Peek().Draw();
                 G.currentGame.Push(buffer.Pop());
             }
+            Cursor.Draw();
             G.spriteBatch.End();
 
             base.Draw(gameTime);
         }
+
+        // BOUH!
     }
 }
