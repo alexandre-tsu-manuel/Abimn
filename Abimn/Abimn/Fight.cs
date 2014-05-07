@@ -31,6 +31,7 @@ namespace Abimn
         /// </summary>
         public Fight() : base(true)
         {
+            Cursor.SetVisibility(false);
             _hero = new Entity(new Pos(50, 450));
             _ennemy = new Ennemy(new Pos(550, 450), new Vector2(-1, 0), 0.02F);
 
@@ -74,23 +75,20 @@ namespace Abimn
         {
             _ennemy.Pos = _ennemy.Pos + getDirection(_ennemy, _hero);
             moveHero();
-            /*
-            if (_fightContact)
-            {
-                _ennemy.Life -= 30;
-                Hero.Life -= 20;
-            }
+            
             if (Hero.Life <= 0)
             {
                 Hero.Life = 0;
+                Cursor.SetVisibility(true);
                 G.currentGame.Push(new GameOver());
             }
             if (_ennemy.Life <= 0)
             {
                 _ennemy.Life = 0;
+                Cursor.SetVisibility(true);
                 G.currentGame.Push(new FightRecap());
             }
-
+/*
             _ennemy.Update(gameTime);
             if (_ennemy.Pos.X < _hero.Pos.X + 50)
             {

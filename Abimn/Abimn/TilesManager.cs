@@ -17,7 +17,8 @@ namespace Abimn
         Hero,
         Recap,
         Button,
-        Button2
+        Button2,
+        Cursor
     }
 
     public class TileProperty
@@ -66,6 +67,10 @@ namespace Abimn
                 case Tiles.Button2:
                     ret.Size = 10;
                     ret.Tag = "menus";
+                    break;
+                case Tiles.Cursor:
+                    ret.Size = 2;
+                    ret.Tag = "cursor";
                     break;
             }
 
