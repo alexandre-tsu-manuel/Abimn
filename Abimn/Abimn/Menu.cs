@@ -29,6 +29,7 @@ namespace Abimn
         /// </summary>
         public Menu() : base(true)
         {
+            MediaPlayer.Play(G.one);
             Hero.LifeMax = 10000;
             Hero.Life = 10000;
             Cursor.SetVisibility(true);

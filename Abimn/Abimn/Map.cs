@@ -124,6 +124,7 @@ namespace Abimn
                 cells[15][10].Travel = true;
                 cells[01][06].Travel = true;
                 cells[21][10].IdDeco = 1;
+                cells[25][10].IdDeco = 1;
                // cells[01][06].IdDeco = 2;
                 cells[15][10].IdDeco = 2;
                 cells[15][20].IdDeco = 4;

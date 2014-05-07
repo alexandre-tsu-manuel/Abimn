@@ -156,10 +156,11 @@ namespace Abimn
         /// </summary>
         /// <param name="spriteBatch">Le spritebatch avec lequel dessiner</param>
         /// <param name="gameTime">Le GameTime de la frame</param>
-        public virtual void Draw()
+        public virtual void Draw(Pos delta = null)
         {
+            delta = delta == null ? new Pos() : delta;
             if (this.Visible)
-                G.tiles[_tilesRef][_id].Draw(_pos);
+                G.tiles[_tilesRef][_id].Draw(_pos + delta);
         }
     }
 }

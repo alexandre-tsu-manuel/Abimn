@@ -36,6 +36,7 @@ namespace Abimn
         public Main()
             : base(true)
         {
+            MediaPlayer.Play(G.one);
             this._idmap = 1;
             this._backmap = new Map(_idmap);
             this._poshero = _backmap.StartPos;

@@ -37,6 +37,7 @@ namespace Abimn
         /// </summary>
         public Fight() : base(true)
         {
+            MediaPlayer.Play(G.two);
             Cursor.SetVisibility(false);
             _hero = new Entity(new Pos(C.Screen.Width/2 - 25, 420));
             _ennemy = new Ennemy(new Pos(550, 412), new Vector2(-1, 0), 0.02F);
@@ -108,10 +109,10 @@ namespace Abimn
 
         public override void Update(GameTime gameTime)
         {
-            _ennemy.Pos = _ennemy.Pos + getDirection(_ennemy, _hero, Math.Abs(_ennemy.Pos.X - _hero.Pos.X) > 30);
+            _ennemy.Pos = _ennemy.Pos + getDirection(_ennemy, _hero, Math.Abs(_ennemy.Pos.X - _hero.Pos.X) > 40);
             moveHero();
 
-            if (Math.Abs(_ennemy.Pos.X - _hero.Pos.X) <= 30 && ennemyAttack == 100)
+            if (Math.Abs(_ennemy.Pos.X - _hero.Pos.X) <= 40 && ennemyAttack == 100)
                 ennemyAttack--;
             if (ennemyAttack < 100)
                 ennemyAttack--;
@@ -119,13 +120,25 @@ namespace Abimn
                 ennemyAttack = 100;
             if (ennemyAttack == 90)
                 Hero.Life -= 1000;
+            if (ennemyAttack == 100)
+                renardDelta = new Pos(0);
+            else if (ennemyAttack >= 90)
+                renardDelta = new Pos(ennemyAttack - 100, -ennemyAttack % 10);
+            /*else if (ennemyAttack > 80)
+                renardDelta = new Pos(ennemyAttack - 100, -10 + (10 - ennemyAttack % 10));
+            /*else if (ennemyAttack > 70)
+                renardDelta = new Pos(100 - ennemyAttack - 30, 0);
+            else if (ennemyAttack > 60)
+                renardDelta = new Pos(-70 + ennemyAttack, 0);*/
+            else
+                renardDelta = new Pos();
 
             if (heroAttack < 20)
                 heroAttack--;
             if (heroAttack == 0)
                 heroAttack = 20;
 
-            if (heroAttack == 10 && Math.Abs(_ennemy.Pos.X - _hero.Pos.X) < 40)
+            if (heroAttack == 10 && Math.Abs(_ennemy.Pos.X - _hero.Pos.X) < 50)
                 _ennemy.Life -= 10000 / 14;
 
             if (Hero.Life <= 0)
@@ -205,7 +218,7 @@ namespace Abimn
         public override void Draw()
         {
             _map.Draw();
-            _ennemy.Draw();
+            _ennemy.Draw(renardDelta);
             _hero.Draw();
             G.spriteBatch.DrawString(G.vie, (Hero.Life / 100).ToString() + "/100", new Vector2(10, 10), Color.Red);
             G.spriteBatch.DrawString(G.vie, (_ennemy.Life / 100).ToString() + "/100", new Vector2(750, 10), Color.Red);

@@ -44,6 +44,9 @@ namespace Abimn
             this.graphics.ApplyChanges();
             this.Window.Title = "Abimn";
             this.Window.AllowUserResizing = true;
+            G.one = Content.Load<Song>("1");
+            G.two = Content.Load<Song>("2");
+            G.three = Content.Load<Song>("3");
 
             base.Initialize();
 
