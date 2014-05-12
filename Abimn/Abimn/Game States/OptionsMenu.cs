@@ -28,7 +28,9 @@ namespace Abimn
 
         bool son; // vrai si l'utilisateur veux entendre de la musique.
 
-        public OptionsMenu() : base(false)
+        public OptionsMenu() : base(false) { }
+
+        public override void Initialize()
         {
             background = new Entity(new Pos(C.Screen.Width/2, C.Screen.Height/2));
             background.LoadContent(Tiles.Button2, 1, 1, 1, Center.All);
@@ -37,7 +39,7 @@ namespace Abimn
             sonEnabled.LoadContent(Tiles.Button2, 2, 3, 2, Center.All);
 
             sonDisabled = new Entity(sonEnabled.Pos, false);
-            sonDisabled.LoadContent(Tiles.Button, 24, 5, 4);
+            sonDisabled.LoadContent(Tiles.Button2, 4, 5, 4);
 
             volume = new Entity(new Pos(background.Pos.X + background.Rect.Width / 2 - 130, background.Pos.Y + background.Rect.Height / 2 - 100));
             volume.LoadContent(Tiles.Button2, 6, 6, 6, Center.All);
@@ -76,18 +78,18 @@ namespace Abimn
                 son = true;
             }
 
-            if (volume.IsClicked(new Pos(30, 0)) && E.LeftIsDown())
+            if (volume.MouseIsOver(new Pos(30, 0)) && E.LeftIsDown())
             {
-                cannaVol.Pos.X = E.GetMousePosX() - 10;
+                cannaVol.Pos.I = E.GetMousePosX() - 10;
             }
 
-            if (luminosite.IsClicked(new Pos(30, 0)) && E.LeftIsDown())
+            if (luminosite.MouseIsOver(new Pos(30, 0)) && E.LeftIsDown())
             {
-                cannaLum.Pos.X = E.GetMousePosX() - 10;
+                cannaLum.Pos.I = E.GetMousePosX() - 10;
             }
 
             if (retour.IsClicked() && E.LeftIsReleased())
-                G.currentGame.Pop();
+                this.State = State.Exit;
         }
 
         public override void Draw()

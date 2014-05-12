@@ -27,7 +27,9 @@ namespace Abimn
         private bool _jumping;
         private bool movinRight;
 
-        public Fight() : base(true)
+        public Fight() : base(true) { }
+
+        public override void Initialize()
         {
             MediaPlayer.Play(G.two);
             Cursor.SetVisibility(false);
@@ -120,17 +122,18 @@ namespace Abimn
             if (heroAttack == 10 && Math.Abs(_ennemy.Pos.X - _hero.Pos.X) < 50)
                 _ennemy.Life -= 10000 / 14;
 
-            if (Hero.Life <= 0)
+            if (Hero.Life < 100)
             {
                 Hero.Life = 0;
                 Cursor.SetVisibility(true);
                 G.currentGame.Push(new GameOver());
             }
-            if (_ennemy.Life <= 0)
+            if (_ennemy.Life < 100)
             {
                 _ennemy.Life = 0;
                 Cursor.SetVisibility(true);
                 G.currentGame.Push(new FightRecap());
+                this.State = State.Exit;
             }
             /*
             _ennemy.Update(gameTime);
@@ -198,6 +201,7 @@ namespace Abimn
         {
             _map.Draw();
             _hero.Draw();
+            _ennemy.Draw();
             G.spriteBatch.DrawString(G.vie, (Hero.Life / 100).ToString() + "/100", new Vector2(10, 10), Color.Red);
             G.spriteBatch.DrawString(G.vie, (_ennemy.Life / 100).ToString() + "/100", new Vector2(750, 10), Color.Red);
         }

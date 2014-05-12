@@ -16,15 +16,16 @@ namespace Abimn
     /// </summary>
     public class Shop : GameType
     {
-        public Shop() : base(true)
+        public Shop() : base(true) { }
+
+        public override void Initialize()
         {
-            
         }
 
         public override void Update(GameTime gameTime)
         {
             if (E.IsPushed(Keys.Escape))
-                G.currentGame.Pop();
+                this.State = State.Exit;
         }
 
         public override void Draw()

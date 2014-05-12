@@ -19,7 +19,9 @@ namespace Abimn
         private Entity fond;
         private Entity exit;
 
-        public FightRecap() : base(false)
+        public FightRecap() : base(false) { }
+
+        public override void Initialize()
         {
             fond = new Entity(new Pos(C.Screen.Width / 2, C.Screen.Height / 2));
             fond.LoadContent(Tiles.Recap, 1, 1, 1, Center.All);
@@ -31,10 +33,7 @@ namespace Abimn
         public override void Update(GameTime gameTime)
         {
             if (exit.IsClicked())
-            {
-                G.currentGame.Pop();
-                G.currentGame.Pop();
-            }
+                this.State = State.Exit;
         }
 
         public override void Draw()

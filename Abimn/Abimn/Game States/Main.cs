@@ -25,8 +25,9 @@ namespace Abimn
         private Pos _shift;
         private Entity EntityHero;
 
-        public Main()
-            : base(true)
+        public Main() : base(true) { }
+
+        public override void Initialize()
         {
             MediaPlayer.Play(G.one);
             this._idmap = 1;
@@ -209,10 +210,10 @@ namespace Abimn
                     FrontTileFront = new Pos(FrontTile.X, FrontTile.Y - 1);
                 }
 
-                if (_backmap.Decoration(FrontTile) == 4 ||
-                    _backmap.Decoration(FrontTileLeft) == 4 ||
-                    _backmap.Decoration(FrontTileRight) == 4 ||
-                    _backmap.Decoration(FrontTileFront) == 4) //id du marchand pour la Soutenance2
+                if (_backmap.Decoration(FrontTile) == 5 ||
+                    _backmap.Decoration(FrontTileLeft) == 5 ||
+                    _backmap.Decoration(FrontTileRight) == 5 ||
+                    _backmap.Decoration(FrontTileFront) == 5) //id du marchand pour la Soutenance2
                     return true;
             }
             return false;
@@ -265,7 +266,7 @@ namespace Abimn
             if (E.IsPushed(Keys.I))
                 G.currentGame.Push(new Inventory());
 
-            if (_backmap.Decoration(_poshero) == 1)
+            if (_backmap.Decoration(_poshero) == 2)
             {
                 G.currentGame.Push(new Fight());
                 _backmap.SetCell(_poshero, new Cell(false, 1, 0));
@@ -275,7 +276,7 @@ namespace Abimn
                 G.currentGame.Push(new Shop());
 
             //Change de map
-            if (_backmap.Decoration(_poshero) == 2)
+            if (_backmap.Decoration(_poshero) == 3)
             {
                 _idmap = 2;
                 _backmap = new Map(_idmap);
@@ -284,7 +285,7 @@ namespace Abimn
                 _shift = new Pos(0, 0);
             }
 
-            if (_backmap.Decoration(_poshero) == 3)
+            if (_backmap.Decoration(_poshero) == 4)
             {
                 _idmap = 1;
                 _backmap = new Map(_idmap);

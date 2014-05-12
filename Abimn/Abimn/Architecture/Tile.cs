@@ -38,16 +38,16 @@ namespace Abimn
         /// Dessine la tile 
         /// </summary>
         /// <param name="pos">Position à laquelle dessiner la tile</param>
-        public static void Draw(Tiles reference, int id, Pos pos, float rotation = 0, float scale = 0)
+        public static void Draw(Tiles reference, int id, Pos pos, float rotation = 0, float scale = 1)
         {
-            G.tiles[(int)reference][id].Draw(pos, rotation, scale);
+            G.tiles[(int)reference][id-1].Draw(pos, rotation, scale);
         }
 
         /// <summary>
         /// Dessine la tile en utilisant ses attributs et le spritebatch donné
         /// </summary>
         /// <param name="pos">Position à laquelle dessiner la tile</param>
-        public virtual void Draw(Pos pos, float rotation = 0, float scale = 0)
+        public virtual void Draw(Pos pos, float rotation = 0, float scale = 1)
         {
             G.spriteBatch.Draw(_texture, pos.ToVector2(), null, Color.White, rotation, new Vector2(), scale, SpriteEffects.None, 0);
         }

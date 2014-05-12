@@ -118,11 +118,11 @@ namespace Abimn
                 dimensions = new Pos(C.nbCellsHorizontal, C.nbCellsVertical);
                 cells[15][10].Travel = true;
                 cells[01][06].Travel = true;
-                cells[21][10].IdDeco = 1;
-                cells[25][10].IdDeco = 1;
+                cells[21][10].IdDeco = 2;
+                cells[25][10].IdDeco = 2;
                // cells[01][06].IdDeco = 2;
-                cells[15][10].IdDeco = 2;
-                cells[15][20].IdDeco = 4;
+                cells[15][10].IdDeco = 3;
+                cells[15][20].IdDeco = 5;
 
                 IdStartHero = 4;
                 StartPos = new Pos(11, 7);
@@ -199,7 +199,7 @@ namespace Abimn
                     }
                     sizeCell = C.sizeCell;
                     dimensions = new Pos(C.nbCellsHorizontal, C.nbCellsVertical);
-                    cells[18][18].IdDeco = 3;
+                    cells[18][18].IdDeco = 4;
 
                     IdStartHero = 3;
                     StartPos = new Pos(8, 24);
@@ -229,11 +229,15 @@ namespace Abimn
 
         public int Decoration(Pos pos)
         {
+            if (pos.I < 0 || pos.J < 0 || pos.I >= C.nbCellsHorizontal || pos.J >= C.nbCellsVertical)
+                return 0;
             return cells[pos.I][pos.J].IdDeco;
         }
 
         public void SetCell(Pos pos, Cell cell)
         {
+            if (pos.I < 0 || pos.J < 0 || pos.I >= C.nbCellsHorizontal || pos.J >= C.nbCellsVertical)
+                return;
             cells[pos.I][pos.J] = cell;
         }
 

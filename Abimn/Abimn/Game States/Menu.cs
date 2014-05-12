@@ -21,7 +21,9 @@ namespace Abimn
         private Entity quit;
         private Entity background;
 
-        public Menu() : base(true)
+        public Menu() : base(true) { }
+
+        public override void Initialize()
         {
             MediaPlayer.Play(G.one);
             Hero.LifeMax = 10000;
@@ -43,13 +45,15 @@ namespace Abimn
 
         public override void Update(GameTime gameTime)
         {
-            if (quit.MouseIsOver() && E.LeftIsReleased())
-                G.currentGame.Clear();
-
-            if (options.MouseIsOver() && E.LeftIsReleased())
-                G.currentGame.Push(new OptionsMenu());
-            if (play.MouseIsOver() && E.LeftIsReleased())
+            if (play.IsClicked())
                 G.currentGame.Push(new HeroCreator());
+            else if (options.IsClicked())
+                G.currentGame.Push(new OptionsMenu());
+            else if (quit.IsClicked())
+                G.currentGame.Clear();
+            Pos mousePosition = E.GetMousePos();
+            if (Rand.Int(100) == 1)
+                Rand.Int(1);
         }
 
         public override void Draw()

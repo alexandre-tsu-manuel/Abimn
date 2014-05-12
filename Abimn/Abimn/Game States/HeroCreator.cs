@@ -31,7 +31,9 @@ namespace Abimn
         /// related content.  Calling base.Initialize will enumerate through any components
         /// and initialize them as well.
         /// </summary>
-        public HeroCreator() : base(true)
+        public HeroCreator() : base(true) { }
+
+        public override void Initialize()
         {
 			/* le edit background devra etre en plein ecran*/
 			EditBackground = new Entity(new Pos(C.Screen.Width / 2, C.Screen.Height / 2));
@@ -211,7 +213,7 @@ namespace Abimn
 			}
 
             if (quit.IsClicked()) //sortie de l'édition
-				G.currentGame.Pop();
+                this.State = State.Exit;
             else if (next.IsClicked())
 			{
 				EditBackground2.Visible = true;

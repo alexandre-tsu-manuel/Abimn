@@ -191,8 +191,9 @@ namespace Abimn
             Pos = position;
             Movement = movement;
             Visible = visible;
+            Delta = new Pos();
             Rotation = 0;
-            Scale = 0;
+            Scale = 1;
         }
 
         /// <summary>
@@ -203,14 +204,14 @@ namespace Abimn
         /// <param name="center">Permet de centrer l'image par rapport à se position</param>
         public virtual void LoadContent(Tiles tilesRef, int idNormal, int idOver = 0, int idPushed = 0, Center center = Center.None)
         {
-            _tilesRef = (int)tilesRef;
-            IdTextureNormal = --idNormal;
-            IdTextureOver = idOver > 0 ? --idOver : idNormal;
-            IdTexturePushed = idOver > 0 ? --idPushed : idNormal;
+            TilesRef = tilesRef;
+            IdTextureNormal = idNormal;
+            IdTextureOver = idOver > 0 ? idOver : idNormal;
+            IdTexturePushed = idOver > 0 ? idPushed : idNormal;
+            Rect = new Rectangle(0, 0, G.tiles[_tilesRef][_idTextureNormal].Texture.Width, G.tiles[_tilesRef][_idTextureNormal].Texture.Height);
             if (center != Center.None)
                 Pos = new Pos(center == Center.All ? Pos.X - Rect.Width / 2 : Pos.X,
                               center == Center.All ? Pos.Y - Rect.Height / 2 : Pos.Y);
-            Rect = new Rectangle(0, 0, G.tiles[_tilesRef][IdTextureNormal].Texture.Width, G.tiles[_tilesRef][IdTextureNormal].Texture.Height);
         }
 
         /// <summary>
@@ -235,10 +236,10 @@ namespace Abimn
             if (Visible)
             {
                 if (strict == null) strict = new Pos();
-                return E.GetMousePosX() >= Pos.X + strict.X
-                    && E.GetMousePosX() <= Pos.X + _rect.Width - strict.X
-                    && E.GetMousePosY() >= Pos.Y + strict.Y
-                    && E.GetMousePosY() <= Pos.X + _rect.Height - strict.Y;
+                return E.GetMousePosX() >= Pos.I + strict.X
+                    && E.GetMousePosX() <= Pos.I + _rect.Width - strict.X
+                    && E.GetMousePosY() >= Pos.J + strict.Y
+                    && E.GetMousePosY() <= Pos.J + _rect.Height - strict.Y;
             }
             return false;
         }

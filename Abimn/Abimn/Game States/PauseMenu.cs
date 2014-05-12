@@ -12,20 +12,16 @@ using Microsoft.Xna.Framework.Media;
 namespace Abimn
 {
     /// <summary>
-    /// Combat instancié
+    /// Menu de pause
     /// </summary>
     public class PauseMenu : GameType
     {
         private Entity resume, exit, option;
         private Entity fond_menu;
 
-        /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
-        /// </summary>
-        public PauseMenu() : base(false)
+        public PauseMenu() : base(false) { }
+
+        public override void Initialize()
         {
             Cursor.SetVisibility(true);
 
@@ -44,7 +40,7 @@ namespace Abimn
         public override void Update(GameTime gameTime)
         {
             if (resume.IsClicked())
-                G.currentGame.Pop();
+                this.State = State.Exit;
             else if (option.IsClicked())
                 G.currentGame.Push(new OptionsMenu());
             else if (exit.IsClicked())

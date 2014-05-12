@@ -19,7 +19,9 @@ namespace Abimn
         private Entity armor, weapons, div, quest, cons;
         private Entity _inv, shit, overshit;
 
-        public Inventory() : base(false)
+        public Inventory() : base(false) { }
+
+        public override void Initialize()
         {
             Cursor.SetVisibility(true);
             armor = new Entity(new Pos(230, 14));
@@ -58,7 +60,7 @@ namespace Abimn
                 overshit.Visible = false;
 
             if (E.IsPushed(Keys.Escape) || E.IsPushed(Keys.I))
-                G.currentGame.Pop();
+                this.State = State.Exit;
         }
 
         public override void Draw()

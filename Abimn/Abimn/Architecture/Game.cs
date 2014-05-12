@@ -31,7 +31,6 @@ namespace Abimn
             Rand.Init();
             G.currentGame = new Stack<GameType>();
 
-            Cursor.SetCursor(Tiles.Cursor, 1, 2, new Pos(15, 5));
             //this.IsMouseVisible = true;
             this.graphics.IsFullScreen = false;
             this.graphics.PreferredBackBufferWidth = C.Screen.Width;
@@ -45,6 +44,8 @@ namespace Abimn
 
             base.Initialize();
 
+            Cursor.Initialize();
+            Cursor.SetCursor(Tiles.Cursor, 1, 2, new Pos(-15, -5));
             G.currentGame.Push(new Menu());
         }
 
@@ -69,6 +70,15 @@ namespace Abimn
             E.Update();
 
             G.currentGame.Peek().Update(gameTime);
+
+            while (G.currentGame.Count != 0 && G.currentGame.Peek().State == State.Exit)
+                G.currentGame.Pop();
+            if (G.currentGame.Count == 0)
+                return;
+            if (G.currentGame.Peek().State == State.Reload)
+                G.currentGame.Peek().Initialize();
+
+            Cursor.Update();
 
             base.Update(gameTime);
         }

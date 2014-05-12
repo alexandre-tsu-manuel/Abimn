@@ -9,6 +9,11 @@ namespace Abimn
     {
         private static Entity that;
 
+        public static void Initialize()
+        {
+            that = new Entity();
+        }
+
         public static void SetCursor(Tiles reference, int IdNormal, int IdPushed, Pos delta)
         {
             that.LoadContent(reference, IdNormal, IdNormal, IdPushed);
@@ -23,6 +28,11 @@ namespace Abimn
         public static void SetScale(float scale)
         {
             that.Scale = scale;
+        }
+
+        public static void Update()
+        {
+            that.Pos = E.GetMousePos();
         }
 
         public static void Draw()

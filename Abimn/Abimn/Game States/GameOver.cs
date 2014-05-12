@@ -19,7 +19,9 @@ namespace Abimn
         private Entity background;
         private Entity exit;
 
-        public GameOver() : base(true)
+        public GameOver() : base(true) { }
+
+        public override void Initialize()
         {
             background = new Entity();
             background.LoadContent(Tiles.Fight, 7);

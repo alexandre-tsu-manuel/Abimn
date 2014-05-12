@@ -17,7 +17,8 @@
     <XnaCrossPlatformGroupID>06ff9e6e-cd1e-4bf5-8c03-2c81b1e83da3</XnaCrossPlatformGroupID>
     <XnaOutputType>Game</XnaOutputType>
     <ApplicationIcon>Game.ico</ApplicationIcon>
-    <Thumbnail>GameThumbnail.png</Thumbnail>
+    <Thumbnail>
+    </Thumbnail>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -107,39 +108,38 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="C.cs" />
-    <Compile Include="Cell.cs" />
-    <Compile Include="Cursor.cs" />
-    <Compile Include="E.cs" />
+    <Compile Include="Architecture\C.cs" />
+    <Compile Include="Architecture\Cursor.cs" />
+    <Compile Include="Architecture\E.cs" />
+    <Compile Include="Architecture\Entity.cs" />
+    <Compile Include="Architecture\G.cs" />
+    <Compile Include="Architecture\Game.cs" />
+    <Compile Include="Architecture\GameType.cs" />
+    <Compile Include="Architecture\Pos.cs" />
+    <Compile Include="Architecture\Program.cs" />
+    <Compile Include="Architecture\Rand.cs" />
+    <Compile Include="Architecture\Tile.cs" />
+    <Compile Include="Architecture\TilesManager.cs" />
     <Compile Include="Ennemy.cs" />
-    <Compile Include="Fight.cs" />
-    <Compile Include="FightMap.cs" />
-    <Compile Include="FightRecap.cs" />
-    <Compile Include="G.cs" />
-    <Compile Include="GameOver.cs" />
-    <Compile Include="GameType.cs" />
+    <Compile Include="Game States\Fight.cs" />
+    <Compile Include="Game States\FightRecap.cs" />
+    <Compile Include="Game States\GameOver.cs" />
+    <Compile Include="Game States\HeroCreator.cs" />
+    <Compile Include="Game States\Inventory.cs" />
+    <Compile Include="Game States\Main.cs" />
+    <Compile Include="Game States\Menu.cs" />
+    <Compile Include="Game States\OptionsMenu.cs" />
+    <Compile Include="Game States\PauseMenu.cs" />
+    <Compile Include="Game States\Shop.cs" />
     <Compile Include="Hero.cs" />
-    <Compile Include="HeroCreator.cs" />
-    <Compile Include="Inventory.cs" />
-    <Compile Include="Main.cs" />
-    <Compile Include="Map.cs" />
-    <Compile Include="Menu.cs" />
-    <Compile Include="OptionsMenu.cs" />
-    <Compile Include="PauseMenu.cs" />
-    <Compile Include="Pos.cs" />
+    <Compile Include="Maps\Cell.cs" />
+    <Compile Include="Maps\FightMap.cs" />
+    <Compile Include="Maps\Map.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="Game.cs" />
-    <Compile Include="Rand.cs" />
-    <Compile Include="Entity.cs" />
-    <Compile Include="Shop.cs" />
-    <Compile Include="Tile.cs" />
-    <Compile Include="TilesManager.cs" />
     <Compile Include="Weapon.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
-    <Content Include="GameThumbnail.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AbimnContent\AbimnContent.contentproj">
