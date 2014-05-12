@@ -7,7 +7,6 @@ namespace Abimn
 {
     /// <summary>
     /// Constants Manager
-    /// Write : Nobody
     /// </summary>
     public static class C
     {

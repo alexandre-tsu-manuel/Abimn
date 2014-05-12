@@ -27,42 +27,21 @@ namespace Abimn
         private bool _jumping;
         private bool movinRight;
 
-        private Pos renardDelta;
-
-        /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
-        /// </summary>
         public Fight() : base(true)
         {
             MediaPlayer.Play(G.two);
             Cursor.SetVisibility(false);
             _hero = new Entity(new Pos(C.Screen.Width/2 - 25, 420));
-            _ennemy = new Ennemy(new Pos(550, 412), new Vector2(-1, 0), 0.02F);
+            _ennemy = new Ennemy(new Pos(550, 412));
 
             _map = new FightMap();
-            _hero.LoadContent(1, Tiles.Fight);
-            _ennemy.LoadContent(3, Tiles.Fight);
+            _hero.LoadContent(Tiles.Fight, 1);
+            _ennemy.LoadContent(Tiles.Fight, 3);
             _ennemy.Life = 10000;
 
             _fightContact = false;
             _jumping = false;
-            /*
-            G.currentGame.Push(CurrentGame.FightRecap);
-            FightRecap.Initialize(spriteBatch);/**/
         }
-
-        /// <summary>
-        /// Allows the game to run logic such as updating the world,
-        /// checking for collisions, gathering input, and playing audio.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        /// +
-        /// 
-        
-
 
         public void moveHero()
         {
@@ -91,18 +70,18 @@ namespace Abimn
                     movStep = 8;
                 if (!movinRight)
                     movStep += 2;
-                _hero.LoadContent(movStep, Tiles.NewHero);
+                _hero.LoadContent(Tiles.NewHero, movStep);
             }
             else
             {
                 if (movinTill == 0)
-                    _hero.LoadContent(movinRight ? 1 : 4, Tiles.NewHero);
+                    _hero.LoadContent(Tiles.NewHero, movinRight ? 1 : 4);
                 else
                 {
                     int movStep = movinTill / 3 % 4;
                     if (movStep == 3)
                         movStep -= 2;
-                    _hero.LoadContent((movinRight ? 1 : 4) + movStep, Tiles.NewHero);
+                    _hero.LoadContent(Tiles.NewHero, (movinRight ? 1 : 4) + movStep);
                 }
             }
         }
@@ -121,9 +100,9 @@ namespace Abimn
             if (ennemyAttack == 90)
                 Hero.Life -= 1000;
             if (ennemyAttack == 100)
-                renardDelta = new Pos(0);
+                _ennemy.Delta = new Pos(0);
             else if (ennemyAttack >= 90)
-                renardDelta = new Pos(ennemyAttack - 100, -ennemyAttack % 10);
+                _ennemy.Delta = new Pos(ennemyAttack - 100, -ennemyAttack % 10);
             /*else if (ennemyAttack > 80)
                 renardDelta = new Pos(ennemyAttack - 100, -10 + (10 - ennemyAttack % 10));
             /*else if (ennemyAttack > 70)
@@ -131,7 +110,7 @@ namespace Abimn
             else if (ennemyAttack > 60)
                 renardDelta = new Pos(-70 + ennemyAttack, 0);*/
             else
-                renardDelta = new Pos();
+                _ennemy.Delta = new Pos();
 
             if (heroAttack < 20)
                 heroAttack--;
@@ -197,12 +176,12 @@ namespace Abimn
             {
                 if (needMove.Pos.X < e2.Pos.X)
                 {
-                    needMove.LoadContent(10, Tiles.Fight);
+                    needMove.LoadContent(Tiles.Fight, 10);
                     return right;
                 }
                 else if (needMove.Pos.X > e2.Pos.X)
                 {
-                    needMove.LoadContent(3, Tiles.Fight);
+                    needMove.LoadContent(Tiles.Fight, 3);
                     return left;
                 }
                 else
@@ -218,7 +197,6 @@ namespace Abimn
         public override void Draw()
         {
             _map.Draw();
-            _ennemy.Draw(renardDelta);
             _hero.Draw();
             G.spriteBatch.DrawString(G.vie, (Hero.Life / 100).ToString() + "/100", new Vector2(10, 10), Color.Red);
             G.spriteBatch.DrawString(G.vie, (_ennemy.Life / 100).ToString() + "/100", new Vector2(750, 10), Color.Red);

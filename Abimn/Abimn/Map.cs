@@ -34,11 +34,9 @@ namespace Abimn
             set { _idHeroStart = value; }
         }
         private int _idHeroStart;
-         
-
 
         /// <summary>
-        /// Récupère ou définit la position de depar du perso
+        /// Récupère ou définit la position de depart du perso
         /// </summary>
         public Pos StartPos
         {
@@ -46,9 +44,6 @@ namespace Abimn
             set { _startpos = value; }
         }
         private Pos _startpos;
-
-
-
 
         public Map(int idMap)
         {
@@ -216,13 +211,13 @@ namespace Abimn
 
         public Map(Pos dimensions, int sizeCell)
         {
-            cells = new Cell[dimensions.Y][];
+            cells = new Cell[dimensions.J][];
             this.dimensions = dimensions;
             this.sizeCell = sizeCell;
 
-            for (int i = 0; i < dimensions.Y; i++)
+            for (int i = 0; i < dimensions.J; i++)
             {
-                cells[i] = new Cell[dimensions.X];
+                cells[i] = new Cell[dimensions.I];
                 for (int j = 0; j < C.nbCellsHorizontal; j++)
                 {
                     cells[i][j] = new Cell(false, 1, 0);
@@ -234,44 +229,44 @@ namespace Abimn
 
         public int Decoration(Pos pos)
         {
-            return cells[pos.X][pos.Y].IdDeco;
+            return cells[pos.I][pos.J].IdDeco;
         }
 
         public void SetCell(Pos pos, Cell cell)
         {
-            cells[pos.X][pos.Y] = cell;
+            cells[pos.I][pos.J] = cell;
         }
 
         public bool CanMoveOn(Pos pos)
         {
             if (pos.X < 0 || pos.Y < 0 || pos.X >= C.nbCellsHorizontal || pos.Y >= C.nbCellsVertical)
                 return false;
-            return !cells[pos.X][pos.Y].Blocking;
+            return !cells[pos.I][pos.J].Blocking;
         }
 
         public bool CanChangeMap(Pos pos)
         {
             if (pos.X < 0 || pos.Y < 0 || pos.X >= C.nbCellsHorizontal || pos.Y >= C.nbCellsVertical)
                 return false;
-            return !cells[pos.X][pos.Y].Travel;
+            return !cells[pos.I][pos.J].Travel;
         }
 
         public void DrawCell(Pos cPos, Pos pos)
         {
-            if (cPos.X < 0 || cPos.Y < 0 || cPos.X >= C.nbCellsHorizontal || cPos.Y >= C.nbCellsVertical)
+            if (cPos.I < 0 || cPos.J < 0 || cPos.I >= C.nbCellsHorizontal || cPos.J >= C.nbCellsVertical)
                 return;
-            cells[cPos.X][cPos.Y].Draw(pos);
+            cells[cPos.I][cPos.J].Draw(pos);
         }
 
         public void Draw(Pos posHero, Pos shift = null)
         {
             shift = shift != null ? shift : new Pos(0);
-            Pos cPosIni = new Pos(posHero.X - C.nbCellsHorizontalOnScreen / 2, posHero.Y - C.nbCellsVerticalOnScreen / 2);
+            Pos cPosIni = new Pos(posHero.I - C.nbCellsHorizontalOnScreen / 2, posHero.J - C.nbCellsVerticalOnScreen / 2);
             Pos sPos = new Pos();
             Pos cPos = new Pos();
 
-            for (sPos.X = -shift.X - C.sizeCell, cPos.X = cPosIni.X - 1; sPos.X < C.Screen.Width; sPos.X += C.sizeCell, cPos.X++)
-                for (sPos.Y = -shift.Y - C.sizeCell, cPos.Y = cPosIni.Y - 1; sPos.Y < C.Screen.Height; sPos.Y += C.sizeCell, cPos.Y++)
+            for (sPos.I = -shift.I - C.sizeCell, cPos.I = cPosIni.I - 1; sPos.I < C.Screen.Width; sPos.I += C.sizeCell, cPos.I++)
+                for (sPos.J = -shift.J - C.sizeCell, cPos.J = cPosIni.J - 1; sPos.J < C.Screen.Height; sPos.J += C.sizeCell, cPos.J++)
                     DrawCell(cPos, sPos);
         }
     }

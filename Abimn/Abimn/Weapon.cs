@@ -7,7 +7,6 @@ namespace Abimn
 {
     /// <summary>
     /// Classe représentant une arme
-    /// Write : tsu
     /// </summary>
     public class Weapon
     {

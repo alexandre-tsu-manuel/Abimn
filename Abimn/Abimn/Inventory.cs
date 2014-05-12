@@ -12,71 +12,55 @@ using Microsoft.Xna.Framework.Media;
 namespace Abimn
 {
     /// <summary>
-    /// Combat instancié
+    /// Inventaire
     /// </summary>
     public class Inventory : GameType
     {
-        private Button armor, weapons, div, quest, cons;
+        private Entity armor, weapons, div, quest, cons;
         private Entity _inv, shit, overshit;
 
-        /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
-        /// </summary>
         public Inventory() : base(false)
         {
             Cursor.SetVisibility(true);
-            armor = new Button(new Pos(230, 14));
-            armor.LoadContent(2, 3, 3, Tiles.Inventory);
+            armor = new Entity(new Pos(230, 14));
+            armor.LoadContent(Tiles.Inventory, 2, 3, 3);
 
-            weapons = new Button(new Pos(260, 15));
-            weapons.LoadContent(10, 11, 11, Tiles.Inventory);
+            weapons = new Entity(new Pos(260, 15));
+            weapons.LoadContent(Tiles.Inventory, 10, 11, 11);
 
-            div = new Button(new Pos(314, 13));
-            div.LoadContent(6, 7, 7, Tiles.Inventory);
+            div = new Entity(new Pos(314, 13));
+            div.LoadContent(Tiles.Inventory, 6, 7, 7);
 
-            quest = new Button(new Pos(340, 16));
-            quest.LoadContent(8, 9, 9, Tiles.Inventory);
+            quest = new Entity(new Pos(340, 16));
+            quest.LoadContent(Tiles.Inventory, 8, 9, 9);
 
-            cons = new Button(new Pos(287, 8));
+            cons = new Entity(new Pos(287, 8));
             cons.Initialize();
-            cons.LoadContent(4, 5, 5, Tiles.Inventory);
+            cons.LoadContent(Tiles.Inventory, 4, 5, 5);
 
             _inv = new Entity(new Pos(15, 10));
-            _inv.LoadContent(1, Tiles.Inventory);
+            _inv.LoadContent(Tiles.Inventory, 1);
 
             shit = new Entity(new Pos(225, 50), false);
-            shit.LoadContent(12, Tiles.Inventory);
+            shit.LoadContent(Tiles.Inventory, 12);
 
             overshit = new Ennemy(new Pos(225, 50), false);
-            overshit.LoadContent(13, Tiles.Inventory);
+            overshit.LoadContent(Tiles.Inventory, 13);
         }
 
-        /// <summary>
-        /// Allows the game to run logic such as updating the world,
-        /// checking for collisions, gathering input, and playing audio.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
-            if (E.LeftIsPushed() & armor.mouseOver())
+            if (armor.IsClicked())
                 shit.Visible = true;
-            if (E.LeftIsPushed() & weapons.mouseOver())
+            if (weapons.IsClicked())
                 overshit.Visible = true;
-            if (E.LeftIsPushed() & (cons.mouseOver() | armor.mouseOver()))
+            if (cons.IsClicked() || armor.IsClicked())
                 overshit.Visible = false;
 
-
-            // TODO: Add your update logic here
-            if (E.IsPushed(Keys.Escape) | E.IsPushed(Keys.I))
+            if (E.IsPushed(Keys.Escape) || E.IsPushed(Keys.I))
                 G.currentGame.Pop();
         }
 
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
         public override void Draw()
         {
             _inv.Draw();
@@ -88,8 +72,6 @@ namespace Abimn
             cons.Draw();
             div.Draw();
             quest.Draw();
-
-            // TODO: Add your drawing code here
         }
     }
 }

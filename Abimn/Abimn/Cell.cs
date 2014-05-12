@@ -53,12 +53,12 @@ namespace Abimn
         public void Draw(Pos pos, Center center = Center.None, bool fighting = false)
         {
             if (fighting)
-                G.tiles[(int)Tiles.Fight][IdFloor - 1].Draw(pos, center);
+                Tile.Draw(Tiles.Fight, IdFloor - 1, pos);
             else
             {
-                G.tiles[(int)Tiles.Main][IdFloor - 1].Draw(pos, center);
+                Tile.Draw(Tiles.Main, IdFloor - 1, pos);
                 if (IdDeco != 0)
-                    G.tiles[(int)Tiles.MainDeco][IdDeco].Draw(pos, center);
+                    Tile.Draw(Tiles.Main, IdDeco, pos);
             }
         }
     }

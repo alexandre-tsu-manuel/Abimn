@@ -9,7 +9,6 @@ namespace Abimn
 
     /// <summary>
     /// 
-    /// Write : Nobody
     /// </summary>
     public static class Hero
     {

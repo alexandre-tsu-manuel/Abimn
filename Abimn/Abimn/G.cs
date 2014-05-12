@@ -15,7 +15,6 @@ namespace Abimn
 {
     /// <summary>
     /// Globals Manager
-    /// Write : Nobody
     /// </summary>
     public static class G
     {

@@ -9,8 +9,6 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Abimn
 {
-    public enum Center { None, Horizontal, Vertical, All }
-
     public class Tile
     {
         /// <summary>
@@ -37,17 +35,21 @@ namespace Abimn
         }
 
         /// <summary>
-        /// Dessine le sprite en utilisant ses attributs et le spritebatch donné
+        /// Dessine la tile 
         /// </summary>
-        /// <param name="spriteBatch">Le spritebatch avec lequel dessiner</param>
-        /// <param name="gameTime">Le GameTime de la frame</param>
-        public virtual void Draw(Pos pos, Center center = Center.None)
+        /// <param name="pos">Position à laquelle dessiner la tile</param>
+        public static void Draw(Tiles reference, int id, Pos pos, float rotation = 0, float scale = 0)
         {
-            if (center == Center.Horizontal || center == Center.All)
-                pos.X = pos.X = pos.X - _texture.Width / 2;
-            if (center == Center.Vertical || center == Center.All)
-                pos.Y = pos.Y = pos.Y - _texture.Height / 2;
-            G.spriteBatch.Draw(_texture, pos.ToVector2(), Color.White);
+            G.tiles[(int)reference][id].Draw(pos, rotation, scale);
+        }
+
+        /// <summary>
+        /// Dessine la tile en utilisant ses attributs et le spritebatch donné
+        /// </summary>
+        /// <param name="pos">Position à laquelle dessiner la tile</param>
+        public virtual void Draw(Pos pos, float rotation = 0, float scale = 0)
+        {
+            G.spriteBatch.Draw(_texture, pos.ToVector2(), null, Color.White, rotation, new Vector2(), scale, SpriteEffects.None, 0);
         }
     }
 }

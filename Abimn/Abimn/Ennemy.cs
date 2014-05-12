@@ -27,6 +27,5 @@ namespace Abimn
 
         public Ennemy(bool visible = true) : base(visible) { }
         public Ennemy(Pos position, bool visible = true) : base(position, visible) { }
-        public Ennemy(Pos position, Vector2 direction, float speed, bool visible = true) : base(position, direction, speed, visible) { }
     }
 }

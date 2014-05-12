@@ -12,21 +12,15 @@ using Microsoft.Xna.Framework.Media;
 namespace Abimn
 {
     /// <summary>
-    /// Combat instancié
+    /// Menu principal
     /// </summary>
     public class Menu : GameType
     {
-        private Button jouer;
-        private Button options;
-        private Button quitter;
+        private Entity play;
+        private Entity options;
+        private Entity quit;
         private Entity background;
 
-        /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
-        /// </summary>
         public Menu() : base(true)
         {
             MediaPlayer.Play(G.one);
@@ -34,51 +28,36 @@ namespace Abimn
             Hero.Life = 10000;
             Cursor.SetVisibility(true);
 
-            jouer = new Button(new Pos((int)(C.Screen.Width * 0.15), (int)(C.Screen.Height * 0.30)));
-            jouer.LoadContent(1, 2, 1, Tiles.Button);
+            play = new Entity(new Pos(C.Screen.Width * 0.15, C.Screen.Height * 0.30));
+            play.LoadContent(Tiles.Button, 1, 2, 1);
 
-            options = new Button(new Pos((int)(C.Screen.Width * 0.15), (int)(C.Screen.Height * 0.45)));
-            options.LoadContent(3, 4, 3, Tiles.Button);
+            options = new Entity(new Pos(C.Screen.Width * 0.15, C.Screen.Height * 0.45));
+            options.LoadContent(Tiles.Button, 3, 4, 3);
 
-            quitter = new Button(new Pos((int)(C.Screen.Width * 0.15), (int)(C.Screen.Height * 0.60)));
-            quitter.LoadContent(5, 6, 5, Tiles.Button);
+            quit = new Entity(new Pos(C.Screen.Width * 0.15, C.Screen.Height * 0.60));
+            quit.LoadContent(Tiles.Button, 5, 6, 5);
 
             background = new Entity();
-            background.LoadContent(7, Tiles.Button);
-
-
-            // TODO: Add your initialization logic here
-            // G.currentGame.Push(CurrentGame.HeroCreator);
-            // HeroCreator.Initialize(spriteBatch);
+            background.LoadContent(Tiles.Button, 7);
         }
 
-        /// <summary>
-        /// Allows the game to run logic such as updating the world,
-        /// checking for collisions, gathering input, and playing audio.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
-            if (quitter.mouseOver() && E.LeftIsReleased())
+            if (quit.MouseIsOver() && E.LeftIsReleased())
                 G.currentGame.Clear();
 
-            if (options.mouseOver() && E.LeftIsReleased())
+            if (options.MouseIsOver() && E.LeftIsReleased())
                 G.currentGame.Push(new OptionsMenu());
-            if (jouer.mouseOver() && E.LeftIsReleased())
+            if (play.MouseIsOver() && E.LeftIsReleased())
                 G.currentGame.Push(new HeroCreator());
-
-            // G.currentGame.Pop();
         }
 
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
         public override void Draw()
         {
             background.Draw();
-            jouer.Draw();
+            play.Draw();
             options.Draw();
-            quitter.Draw();
+            quit.Draw();
         }
     }
 }

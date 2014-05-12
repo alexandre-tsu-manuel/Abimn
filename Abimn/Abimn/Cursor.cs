@@ -8,37 +8,26 @@ namespace Abimn
     public static class Cursor
     {
         private static Entity that;
-        private static Tiles dim1;
-        private static int dim2;
-        private static int dim2Pushed;
-        private static Pos delta;
-        private static bool visible;
 
-        public static void setCursor(Tiles dim1, int dim2, int dim2Pushed, Pos delta)
+        public static void SetCursor(Tiles reference, int IdNormal, int IdPushed, Pos delta)
         {
-            Cursor.dim1 = dim1;
-            Cursor.dim2 = dim2;
-            Cursor.dim2Pushed = dim2Pushed;
-            Cursor.delta = delta;
-            visible = true;
+            that.LoadContent(reference, IdNormal, IdNormal, IdPushed);
+            that.Delta = delta;
         }
 
         public static void SetVisibility(bool visible)
         {
-            Cursor.visible = visible;
+            that.Visible = visible;
+        }
+
+        public static void SetScale(float scale)
+        {
+            that.Scale = scale;
         }
 
         public static void Draw()
         {
-            if (visible)
-            {
-                that = new Entity(new Pos(E.GetMousePosX(), E.GetMousePosY()) - delta);
-                if (E.LeftIsDown())
-                    that.LoadContent(Cursor.dim2Pushed, dim1);
-                else
-                    that.LoadContent(Cursor.dim2, dim1);
-                that.Draw();
-            }
+            that.Draw();
         }
     }
 }

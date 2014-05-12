@@ -12,53 +12,46 @@ using Microsoft.Xna.Framework.Media;
 namespace Abimn
 {
     /// <summary>
-    /// Combat instancié
+    /// Menu des options
     /// </summary>
     public class OptionsMenu : GameType
     {
-
-        private Button sonEnabled;
-        private Button sonDisabled;
-        private Button retour;
-        private Button volume;
-        private Button luminosite;
-        private Button cannaVol;
-        private Button cannaLum;
-
         private Entity background;
+
+        private Entity sonEnabled;
+        private Entity sonDisabled;
+        private Entity retour;
+        private Entity volume;
+        private Entity luminosite;
+        private Entity cannaVol;
+        private Entity cannaLum;
 
         bool son; // vrai si l'utilisateur veux entendre de la musique.
 
-        /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
-        /// </summary>
         public OptionsMenu() : base(false)
         {
             background = new Entity(new Pos(C.Screen.Width/2, C.Screen.Height/2));
-            background.LoadContent(1, Tiles.Button2, Center.All);
+            background.LoadContent(Tiles.Button2, 1, 1, 1, Center.All);
 
-            sonEnabled = new Button(new Pos(background.Pos.X + background.Rect.Width / 2, background.Pos.Y + background.Rect.Height / 2));
-            sonEnabled.LoadContent(2, 3, 2, Tiles.Button2, Center.All);
+            sonEnabled = new Entity(new Pos(background.Pos.X + background.Rect.Width / 2, background.Pos.Y + background.Rect.Height / 2));
+            sonEnabled.LoadContent(Tiles.Button2, 2, 3, 2, Center.All);
 
-            sonDisabled = new Button(sonEnabled.Pos, false);
-            sonDisabled.LoadContent(4, 5, 4, Tiles.Button2);
+            sonDisabled = new Entity(sonEnabled.Pos, false);
+            sonDisabled.LoadContent(Tiles.Button, 24, 5, 4);
 
-            volume = new Button(new Pos(background.Pos.X + background.Rect.Width / 2 - 130, background.Pos.Y + background.Rect.Height / 2 - 100));
-            volume.LoadContent(6, Tiles.Button2, Center.All);
+            volume = new Entity(new Pos(background.Pos.X + background.Rect.Width / 2 - 130, background.Pos.Y + background.Rect.Height / 2 - 100));
+            volume.LoadContent(Tiles.Button2, 6, 6, 6, Center.All);
 
-            luminosite = new Button(new Pos(background.Pos.X + background.Rect.Width / 2 + 130, background.Pos.Y + background.Rect.Height / 2 - 100));
-            luminosite.LoadContent(7, Tiles.Button2, Center.All);
+            luminosite = new Entity(new Pos(background.Pos.X + background.Rect.Width / 2 + 130, background.Pos.Y + background.Rect.Height / 2 - 100));
+            luminosite.LoadContent(Tiles.Button2, 7, 7, 7, Center.All);
 
-            retour = new Button(new Pos(background.Pos.X + background.Rect.Width / 2, background.Pos.Y + background.Rect.Height / 2 + 100));
-            retour.LoadContent(2, 6, 2, Tiles.PauseMenu, Center.All);
+            retour = new Entity(new Pos(background.Pos.X + background.Rect.Width / 2, background.Pos.Y + background.Rect.Height / 2 + 100));
+            retour.LoadContent(Tiles.PauseMenu, 2, 6, 2, Center.All);
 
-            cannaVol = new Button(new Pos(volume.Pos.X + 46, volume.Pos.Y + 38));
-            cannaLum = new Button(new Pos(luminosite.Pos.X + 46, luminosite.Pos.Y + 38));
-            cannaVol.LoadContent(8, 9, 10, Tiles.Button2);
-            cannaLum.LoadContent(8, 9, 10, Tiles.Button2);
+            cannaVol = new Entity(new Pos(volume.Pos.X + 46, volume.Pos.Y + 38));
+            cannaLum = new Entity(new Pos(luminosite.Pos.X + 46, luminosite.Pos.Y + 38));
+            cannaVol.LoadContent(Tiles.Button2, 8, 9, 10);
+            cannaLum.LoadContent(Tiles.Button2, 8, 9, 10);
 
             son = true; // de base, la musique est activee
         }
@@ -70,36 +63,33 @@ namespace Abimn
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
-            if (sonEnabled.mouseOver() && E.LeftIsReleased() && sonEnabled.Visible)
+            if (sonEnabled.IsClicked())
             {
                 sonEnabled.Visible = false;
                 sonDisabled.Visible = true;
                 son = false;
             }
-            else if (sonDisabled.mouseOver() && E.LeftIsReleased() && sonDisabled.Visible)
+            else if (sonDisabled.IsClicked())
             {
                 sonEnabled.Visible = true;
                 sonDisabled.Visible = false;
                 son = true;
             }
 
-            if (volume.mouseOver(new Pos(30, 0)) && E.LeftIsDown())
+            if (volume.IsClicked(new Pos(30, 0)) && E.LeftIsDown())
             {
                 cannaVol.Pos.X = E.GetMousePosX() - 10;
             }
 
-            if (luminosite.mouseOver(new Pos(30, 0)) && E.LeftIsDown())
+            if (luminosite.IsClicked(new Pos(30, 0)) && E.LeftIsDown())
             {
                 cannaLum.Pos.X = E.GetMousePosX() - 10;
             }
 
-            if (retour.mouseOver() && E.LeftIsReleased())
+            if (retour.IsClicked() && E.LeftIsReleased())
                 G.currentGame.Pop();
         }
 
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
         public override void Draw()
         {
             background.Draw();
@@ -110,7 +100,6 @@ namespace Abimn
             luminosite.Draw();
             cannaLum.Draw();
             cannaVol.Draw();
-            
         }
     }
 }

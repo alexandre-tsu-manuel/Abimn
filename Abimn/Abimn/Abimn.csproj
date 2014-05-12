@@ -107,7 +107,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Button.cs" />
     <Compile Include="C.cs" />
     <Compile Include="Cell.cs" />
     <Compile Include="Cursor.cs" />
@@ -141,7 +140,6 @@
   <ItemGroup>
     <Content Include="Game.ico" />
     <Content Include="GameThumbnail.png" />
-    <Content Include="menus10.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AbimnContent\AbimnContent.contentproj">

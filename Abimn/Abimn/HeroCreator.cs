@@ -12,13 +12,13 @@ using Microsoft.Xna.Framework.Media;
 namespace Abimn
 {
     /// <summary>
-    /// Combat instancié
+    /// Editeur de personnage
     /// </summary>
     public class HeroCreator : GameType
     {
-		private Button arrowL, arrowR, arrowL1, arrowR1;
-		private Button back, next, next2, back2, quit, play;
-		private Button role1,role2;
+		private Entity arrowL, arrowR, arrowL1, arrowR1;
+        private Entity back, next, next2, back2, quit, play;
+        private Entity role1, role2;
 		private Entity EditBackground, EditBackground2, EditBackground3;
 		private Entity head1, head2, head3, head4, head5, head6;
 		private Entity body1, body2, body3, body4, body5;
@@ -35,107 +35,100 @@ namespace Abimn
         {
 			/* le edit background devra etre en plein ecran*/
 			EditBackground = new Entity(new Pos(C.Screen.Width / 2, C.Screen.Height / 2));
-			EditBackground.LoadContent(1, Tiles.CharEdit, Center.All);
+			EditBackground.LoadContent(Tiles.CharEdit, 1, 1, 1, Center.All);
 
 			EditBackground2 = new Entity(new Pos(C.Screen.Width / 2, C.Screen.Height / 2),false);
-			EditBackground2.LoadContent(21, Tiles.CharEdit, Center.All);
+			EditBackground2.LoadContent(Tiles.CharEdit, 21, 21, 21, Center.All);
 
 			EditBackground3 = new Entity(new Pos(C.Screen.Width / 2, C.Screen.Height / 2),false);
-			EditBackground3.LoadContent(22, Tiles.CharEdit, Center.All);
+			EditBackground3.LoadContent(Tiles.CharEdit, 22, 22, 22, Center.All);
+
+            quit = new Entity(new Pos(C.Screen.Width - 245, C.Screen.Height - 95));
+            quit.LoadContent(Tiles.CharEdit, 9, 10, 9);
+
+            next = new Entity(new Pos(C.Screen.Width - 455, C.Screen.Height - 95));
+            next.LoadContent(Tiles.CharEdit, 7, 8, 7);
+
+			next2 = new Entity(new Pos(C.Screen.Width-455, C.Screen.Height-95 ),false);
+            next2.LoadContent(Tiles.CharEdit, 7, 8, 7);
+
+			back = new Entity(new Pos(C.Screen.Width - 245, C.Screen.Height - 95),false);
+            back.LoadContent(Tiles.CharEdit, 11, 12, 11);
 			
-			quit = new Button(new Pos(C.Screen.Width-245, C.Screen.Height - 95));
-			quit.LoadContent(9, 10, 9, Tiles.CharEdit);
+			back2 = new Entity(new Pos(C.Screen.Width - 245, C.Screen.Height - 95), false);
+            back2.LoadContent(Tiles.CharEdit, 11, 12, 11);
 
-			next = new Button(new Pos(C.Screen.Width-455, C.Screen.Height-95 ));
-			next.LoadContent(7, 8, 7, Tiles.CharEdit);
-
-			next2 = new Button(new Pos(C.Screen.Width-455, C.Screen.Height-95 ),false);
-			next2.LoadContent(7, 8, 7, Tiles.CharEdit);
-
-			back = new Button(new Pos(C.Screen.Width - 245, C.Screen.Height - 95),false);
-			back.LoadContent(11, 12, 11, Tiles.CharEdit);
-			
-			back2 = new Button(new Pos(C.Screen.Width - 245, C.Screen.Height - 95), false);
-			back2.LoadContent(11, 12, 11, Tiles.CharEdit);
-
-			play = new Button(new Pos(C.Screen.Width - 455, C.Screen.Height - 95), false);
-			play.LoadContent(19, 20, 19, Tiles.CharEdit);
+			play = new Entity(new Pos(C.Screen.Width - 455, C.Screen.Height - 95), false);
+            play.LoadContent(Tiles.CharEdit, 19, 20, 19);
 
 			head1 = new Entity(new Pos(C.Screen.Width - 750, C.Screen.Height - 400),false);
-			head1.LoadContent(23,Tiles.CharEdit);
+            head1.LoadContent(Tiles.CharEdit, 23);
 
 			head2 = new Entity(new Pos(C.Screen.Width - 750, C.Screen.Height - 400),false);
-			head2.LoadContent(24, Tiles.CharEdit);
+            head2.LoadContent(Tiles.CharEdit, 24);
 
 			head3 = new Entity(new Pos(C.Screen.Width - 750, C.Screen.Height - 400), false);
-			head3.LoadContent(25,Tiles.CharEdit);
+            head3.LoadContent(Tiles.CharEdit, 25);
 
 			head4 = new Entity(new Pos(C.Screen.Width - 750, C.Screen.Height - 400), false);
-			head4.LoadContent(26, Tiles.CharEdit);
+            head4.LoadContent(Tiles.CharEdit, 26);
 
 			head5 = new Entity(new Pos(C.Screen.Width - 750, C.Screen.Height - 400), false);
-			head5.LoadContent(27, Tiles.CharEdit);
+            head5.LoadContent(Tiles.CharEdit, 27);
 
 			head6 = new Entity(new Pos(C.Screen.Width - 750, C.Screen.Height - 400), false);
-			head6.LoadContent(28,Tiles.CharEdit);
+            head6.LoadContent(Tiles.CharEdit, 28);
 
 			body1 = new Entity(new Pos(C.Screen.Width - 750, C.Screen.Height - 390), false);
-			body1.LoadContent(29, Tiles.CharEdit);
+            body1.LoadContent(Tiles.CharEdit, 29);
 			
 			body2 = new Entity(new Pos(C.Screen.Width - 750, C.Screen.Height - 390), false);
-			body2.LoadContent(30, Tiles.CharEdit);
+            body2.LoadContent(Tiles.CharEdit, 30);
 			
 			body3 = new Entity(new Pos(C.Screen.Width - 750, C.Screen.Height - 390), false);
-			body3.LoadContent(31, Tiles.CharEdit);
+            body3.LoadContent(Tiles.CharEdit, 31);
 			
 			body4 = new Entity(new Pos(C.Screen.Width - 750, C.Screen.Height - 390), false);
-			body4.LoadContent(32, Tiles.CharEdit);
+            body4.LoadContent(Tiles.CharEdit, 32);
 			
 			body5 = new Entity(new Pos(C.Screen.Width - 750, C.Screen.Height - 390), false);
-			body5.LoadContent(33, Tiles.CharEdit);
+            body5.LoadContent(Tiles.CharEdit, 33);
 
-			arrowL1 = new Button(new Pos(C.Screen.Width - 550, C.Screen.Height - 350), true);
-			arrowL1.LoadContent(6, 6, 6, Tiles.CharEdit);
+			arrowL1 = new Entity(new Pos(C.Screen.Width - 550, C.Screen.Height - 350), true);
+            arrowL1.LoadContent(Tiles.CharEdit, 6);
 			
-			arrowR1 = new Button(new Pos(C.Screen.Width - 590, C.Screen.Height - 350), true);
-			arrowR1.LoadContent(5, 5, 5, Tiles.CharEdit);
+			arrowR1 = new Entity(new Pos(C.Screen.Width - 590, C.Screen.Height - 350), true);
+            arrowR1.LoadContent(Tiles.CharEdit, 5);
 
-			arrowL =new Button(new Pos(C.Screen.Width-550, C.Screen.Height -400),true);
-			arrowL.LoadContent(6,6,6, Tiles.CharEdit);
+			arrowL =new Entity(new Pos(C.Screen.Width-550, C.Screen.Height -400),true);
+            arrowL.LoadContent(Tiles.CharEdit, 6);
 
-			arrowR = new Button(new Pos(C.Screen.Width - 590, C.Screen.Height - 400),true);
-			arrowR.LoadContent(5, 5, 5, Tiles.CharEdit);
+			arrowR = new Entity(new Pos(C.Screen.Width - 590, C.Screen.Height - 400),true);
+            arrowR.LoadContent(Tiles.CharEdit, 5);
 
-			role1 = new Button(new Pos(C.Screen.Width - 550, C.Screen.Height - 400),false);
-			role1.LoadContent(13,14,14, Tiles.CharEdit);
-				role2 = new Button(new Pos(C.Screen.Width - 550, C.Screen.Height - 300),false);
-				role2.LoadContent(15, 16, 16, Tiles.CharEdit);
-		
-		
-            
+			role1 = new Entity(new Pos(C.Screen.Width - 550, C.Screen.Height - 400),false);
+			role1.LoadContent(Tiles.CharEdit, 13,14,14);
+
+			role2 = new Entity(new Pos(C.Screen.Width - 550, C.Screen.Height - 300),false);
+            role2.LoadContent(Tiles.CharEdit, 15, 16, 16);
         }
 
-        /// <summary>
-        /// Allows the game to run logic such as updating the world,
-        /// checking for collisions, gathering input, and playing audio.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
             // TODO: Add your update logic here
 			//ecran de base
-			if (arrowR.mouseOver() && E.LeftIsReleased())
-				{
-					i--;
-					if (i < 2 )
-						i = 6;
-				}
-				else if (arrowL.mouseOver() && E.LeftIsReleased())
-					{
-						i++;
-						if (i > 6)
-							i = 1;
-					}
+			if (arrowR.IsClicked())
+			{
+				i--;
+				if (i < 2)
+					i = 6;
+			}
+            else if (arrowL.IsClicked())
+			{
+				i++;
+				if (i > 6)
+					i = 1;
+			}
 			if (i == 1) //supprimer l'image qui suit et celle qui la precede pour eviter la surcharge d'image sur l'ecran
 			{
 				head6.Visible = false;
@@ -173,60 +166,53 @@ namespace Abimn
 				head1.Visible = false;
 			}
 
+            if (arrowR1.IsClicked())
+			{
+				j--;
+				if (j < 2)
+					j = 6;
+			}
+            else if (arrowL1.IsClicked())
+			{
+				j++;
+				if (j > 6)
+					j = 1;
+			}
 
-				if (arrowR1.mouseOver() && E.LeftIsReleased())
-				{
-					j--;
-					if (j < 2)
-						j = 6;
-				}
-				else if (arrowL1.mouseOver() && E.LeftIsReleased())
-				{
-					j++;
-					if (j > 6)
-						j = 1;
-				}
-				
-			
-				if (j == 1)
-				{
-					body5.Visible = false;
-					body1.Visible = true;
-					body2.Visible = false;
-				}
-				else if (j == 2)
-				{
-					body1.Visible = false;
-					body2.Visible = true;
-					body3.Visible = false;
-				}
-				else if (j == 3)
-				{
-					body2.Visible = false;
-					body3.Visible = true;
-					body4.Visible = false;
-				}
-				else if (j == 4)
-				{
-					body3.Visible = false;
-					body4.Visible = true;
-					body5.Visible = false;
-				}
-				else if (j == 5)
-				{
-					body4.Visible = false;
-					body5.Visible = true;
-					//body1.Visible = false;
-				}
-				
-			
-					
-			
-			 
-			if (quit.mouseOver() && E.LeftIsReleased()) //sortie de l'eddition
+			if (j == 1)
+			{
+				body5.Visible = false;
+				body1.Visible = true;
+				body2.Visible = false;
+			}
+			else if (j == 2)
+			{
+				body1.Visible = false;
+				body2.Visible = true;
+				body3.Visible = false;
+			}
+			else if (j == 3)
+			{
+				body2.Visible = false;
+				body3.Visible = true;
+				body4.Visible = false;
+			}
+			else if (j == 4)
+			{
+				body3.Visible = false;
+				body4.Visible = true;
+				body5.Visible = false;
+			}
+			else if (j == 5)
+			{
+				body4.Visible = false;
+				body5.Visible = true;
+				//body1.Visible = false;
+			}
+
+            if (quit.IsClicked()) //sortie de l'édition
 				G.currentGame.Pop();
-
-			else if (next.mouseOver() && E.LeftIsReleased()) //ecran 2 
+            else if (next.IsClicked())
 			{
 				EditBackground2.Visible = true;
 				
@@ -240,9 +226,9 @@ namespace Abimn
 				arrowR.Visible = false;
 				arrowL1.Visible = false;
 				arrowR1.Visible = false;
-				if (role1.mouseOver() && E.RightIsReleased())
+                if (role1.IsClicked())
 					role2.Visible = false;
-				else if (role2.mouseOver() && E.RightIsReleased())
+                else if (role2.IsClicked())
 					role1.Visible = false;
 				/*body1.Visible = false;
 				body2.Visible = false;
@@ -256,28 +242,22 @@ namespace Abimn
 				head5.Visible = false;
 				head6.Visible = false;*/ //ne fait rien images toujours visibles
 			}
-			else if (back.mouseOver() && E.LeftIsReleased()) //gestion du retour
+            else if (back.IsClicked() && EditBackground2.Visible) //gestion du retour
 			{
-				if (EditBackground2.Visible == true)
-				{
-					EditBackground2.Visible = false;
-					EditBackground.Visible = true;
-					arrowL.Visible = true;
-					arrowL1.Visible = true;
-					arrowR.Visible = true;
-					arrowR1.Visible = true;
-					role1.Visible = false;
-					role2.Visible = false;
-					back.Visible = false;
-					quit.Visible = true;
-					next2.Visible = false;
-					next.Visible = true;
-					
-				}
-				
-			
+				EditBackground2.Visible = false;
+				EditBackground.Visible = true;
+				arrowL.Visible = true;
+				arrowL1.Visible = true;
+				arrowR.Visible = true;
+				arrowR1.Visible = true;
+				role1.Visible = false;
+				role2.Visible = false;
+				back.Visible = false;
+				quit.Visible = true;
+				next2.Visible = false;
+				next.Visible = true;
 			}
-			else if (next2.mouseOver() && E.LeftIsReleased()) // troisieme ecran
+            else if (next2.IsClicked()) // troisieme ecran
 			{
 				EditBackground3.Visible = true;
 				back.Visible = false;
@@ -289,35 +269,21 @@ namespace Abimn
 				play.Visible = true;
 				
 			}
-			else if (back2.mouseOver() && E.LeftIsReleased()) // retour sur 2nd ecran
+            else if (back2.IsClicked() && EditBackground3.Visible) // retour sur 2nd ecran
 			{
-				if (EditBackground3.Visible == true)
-				{
-					EditBackground3.Visible = false;
-					EditBackground2.Visible = true;
-					back2.Visible = false;
-					back.Visible = true;
-					next2.Visible = true;
-					play.Visible = false;
-					role1.Visible = true;
-					role2.Visible = true;
-
-				}
+				EditBackground3.Visible = false;
+				EditBackground2.Visible = true;
+				back2.Visible = false;
+				back.Visible = true;
+				next2.Visible = true;
+				play.Visible = false;
+				role1.Visible = true;
+				role2.Visible = true;
 			}
-			else if (play.mouseOver() && E.LeftIsReleased()) //lance;ent du jeu
-					G.currentGame.Push(new Main()); 
-
-			
-		
-			
-			
-					
-			
+            else if (play.IsClicked()) //lancement du jeu
+				G.currentGame.Push(new Main());
         }
 
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
         public override void Draw()
         {
 			EditBackground.Draw(); 
@@ -346,8 +312,6 @@ namespace Abimn
 			arrowR1.Draw();
 			role1.Draw();
 			role2.Draw();
-
-            // TODO: Add your drawing code here
         }
     }
 }

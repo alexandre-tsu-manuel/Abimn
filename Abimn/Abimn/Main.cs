@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Media;
 namespace Abimn
 {
     /// <summary>
-    /// Combat instancié
+    /// Ecran de vue sur map
     /// </summary>
     public class Main : GameType
     {
@@ -25,14 +25,6 @@ namespace Abimn
         private Pos _shift;
         private Entity EntityHero;
 
-
-
-        /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
-        /// </summary>
         public Main()
             : base(true)
         {
@@ -44,8 +36,6 @@ namespace Abimn
             this._shift = new Pos();
             EntityHero = new Entity(new Pos((9 * 50), (7 * 50)));
         }
-
-
 
         /// <summary>
         /// permet de bouger le HERO d'une case à l'autre en fonction de la touche
@@ -61,7 +51,6 @@ namespace Abimn
                 Pos NextStep = new Pos(_poshero.X - 1, _poshero.Y);
                 if (_backmap.CanMoveOn(NextStep))
                     _shift.X -= 3;
-
                 else
                 {
                     if (_shift.X <= 4)
@@ -69,15 +58,10 @@ namespace Abimn
                         _shift.X = 0;
                         EntityHero.Pos.X -= 5;
                     }
-
                     else
                         _shift.X -= 3;
-
                 }
-
-
             }
-
             else
             {
                 if (E.IsPushed(Keys.D) || E.IsPushed(Keys.Right) || E.IsDown(Keys.D) || E.IsDown(Keys.Right))
@@ -94,7 +78,6 @@ namespace Abimn
                             _shift.X = 0;
                             EntityHero.Pos.X += 5;
                         }
-
                         else
                             _shift.X += 3;
                     }
@@ -106,8 +89,7 @@ namespace Abimn
                         _idhero = 3;
                         Pos NextStep = new Pos(_poshero.X, _poshero.Y - 1);
                         if (_backmap.CanMoveOn(NextStep))
-                        { _shift.Y -= 3; }
-
+                            _shift.Y -= 3;
                         else
                         {
                             if (_shift.Y <= 4)
@@ -115,7 +97,6 @@ namespace Abimn
                                 _shift.Y = 0;
                                 EntityHero.Pos.Y -= 5;
                             }
-
                             else
                                 _shift.Y -= 3;
                         }
@@ -127,8 +108,7 @@ namespace Abimn
                             _idhero = 4;
                             Pos NextStep = new Pos(_poshero.X, _poshero.Y + 1);
                             if (_backmap.CanMoveOn(NextStep))
-                            { _shift.Y += 3; }
-
+                                _shift.Y += 3;
                             else
                             {
                                 if (_shift.Y >= -4)
@@ -136,7 +116,6 @@ namespace Abimn
                                     _shift.Y = 0;
                                     EntityHero.Pos.Y += 5;
                                 }
-
                                 else
                                     _shift.Y += 3;
                             }
@@ -144,10 +123,7 @@ namespace Abimn
                     }
                 }
             }
-
         }
-
-
 
         /// <summary>
         /// Ajustement de changement de case
@@ -160,96 +136,86 @@ namespace Abimn
                 _shift.X = 25;
                 _poshero.X--;
             }
-
             if (_shift.X >= 27)
             {
                 _shift.X = -23;
                 _poshero.X++;
             }
-
             if (_shift.Y <= -40)
             {
                 _shift.Y = 10;
                 _poshero.Y--;
             }
-
             if (_shift.Y >= 15)
             {
                 _shift.Y = -35;
                 _poshero.Y++;
             }
-
         }
 
-
         /// <summary>
-        /// Regarde les trois cqse en fqce du personnage
-        /// Retourne vrai si elles sont occupees par un Marchant
+        /// Regarde les trois cases en face du personnage
+        /// Retourne vrai si elles sont occupées par un marchand
         /// </summary>
         public bool Interact()
         {
             Pos FrontTile = new Pos();
 
-
-
-
             if (FrontTile.X == 0 && FrontTile.X == 49)
             {
                 if (_idhero == 1)
                     FrontTile = new Pos(_poshero.X - 1, _poshero.Y);
-
                 if (_idhero == 2)
                     FrontTile = new Pos(_poshero.X + 1, _poshero.Y);
-
                 if (_idhero == 3)
                     FrontTile = new Pos(_poshero.X, _poshero.Y + 1);
-
-
                 if (_idhero == 4)
                     FrontTile = new Pos(_poshero.X, _poshero.Y - 1);
-
                 if (FrontTile.X == 0 && FrontTile.X == 49 && _backmap.Decoration(FrontTile) == 4)
                     return true;
             }
-
             else
             {
                 Pos FrontTileLeft = new Pos();
                 Pos FrontTileRight = new Pos();
                 Pos FrontTileFront = new Pos();
 
-
                 if (_idhero == 1)
+                {
                     FrontTile = new Pos(_poshero.X - 1, _poshero.Y);
-                FrontTileLeft = new Pos(FrontTile.X, FrontTile.Y - 1);
-                FrontTileRight = new Pos(FrontTile.X, FrontTile.Y + 1);
-                FrontTileFront = new Pos(FrontTile.X - 1, FrontTile.Y);
+                    FrontTileLeft = new Pos(FrontTile.X, FrontTile.Y - 1);
+                    FrontTileRight = new Pos(FrontTile.X, FrontTile.Y + 1);
+                    FrontTileFront = new Pos(FrontTile.X - 1, FrontTile.Y);
+                }
                 if (_idhero == 2)
+                {
                     FrontTile = new Pos(_poshero.X + 1, _poshero.Y);
-                FrontTileLeft = new Pos(FrontTile.X, FrontTile.Y - 1);
-                FrontTileRight = new Pos(FrontTile.X, FrontTile.Y + 1);
-                FrontTileFront = new Pos(FrontTile.X + 1, FrontTile.Y);
-
+                    FrontTileLeft = new Pos(FrontTile.X, FrontTile.Y - 1);
+                    FrontTileRight = new Pos(FrontTile.X, FrontTile.Y + 1);
+                    FrontTileFront = new Pos(FrontTile.X + 1, FrontTile.Y);
+                }
                 if (_idhero == 4)
+                {
                     FrontTile = new Pos(_poshero.X, _poshero.Y + 1);
-                FrontTileLeft = new Pos(FrontTile.X - 1, FrontTile.Y);
-                FrontTileRight = new Pos(FrontTile.X + 1, FrontTile.Y);
-                FrontTileFront = new Pos(FrontTile.X, FrontTile.Y + 1);
-
-
+                    FrontTileLeft = new Pos(FrontTile.X - 1, FrontTile.Y);
+                    FrontTileRight = new Pos(FrontTile.X + 1, FrontTile.Y);
+                    FrontTileFront = new Pos(FrontTile.X, FrontTile.Y + 1);
+                }
                 if (_idhero == 3)
+                {
                     FrontTile = new Pos(_poshero.X, _poshero.Y - 1);
-                FrontTileLeft = new Pos(FrontTile.X - 1, FrontTile.Y);
-                FrontTileRight = new Pos(FrontTile.X + 1, FrontTile.Y);
-                FrontTileFront = new Pos(FrontTile.X, FrontTile.Y - 1);
+                    FrontTileLeft = new Pos(FrontTile.X - 1, FrontTile.Y);
+                    FrontTileRight = new Pos(FrontTile.X + 1, FrontTile.Y);
+                    FrontTileFront = new Pos(FrontTile.X, FrontTile.Y - 1);
+                }
 
-
-                if (_backmap.Decoration(FrontTile) == 4 || _backmap.Decoration(FrontTileLeft) == 4 || _backmap.Decoration(FrontTileRight) == 4 || _backmap.Decoration(FrontTileFront) == 4) //id du marchant pour la Soutenance2
+                if (_backmap.Decoration(FrontTile) == 4 ||
+                    _backmap.Decoration(FrontTileLeft) == 4 ||
+                    _backmap.Decoration(FrontTileRight) == 4 ||
+                    _backmap.Decoration(FrontTileFront) == 4) //id du marchand pour la Soutenance2
                     return true;
-
             }
             return false;
-
         }
 
 
@@ -285,12 +251,6 @@ namespace Abimn
               }
           }*/
 
-
-        /// <summary>
-        /// Allows the game to run logic such as updating the world,
-        /// checking for collisions, gathering input, and playing audio.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
             _timeSinceMove += (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -313,8 +273,6 @@ namespace Abimn
 
             if (Interact() == true && E.IsPushed(Keys.Space))
                 G.currentGame.Push(new Shop());
-
-
 
             //Change de map
             if (_backmap.Decoration(_poshero) == 2)
@@ -351,7 +309,7 @@ namespace Abimn
                 if (_timeSinceMove > 0.01f)//règle la vitesse de défilement
                     MoveHeros(); //Vérifie les touches de mouvements
             }
-            EntityHero.LoadContent(_idhero, Tiles.Hero);
+            EntityHero.LoadContent(Tiles.Hero, _idhero);
             MoveTile();
 
 
@@ -360,13 +318,7 @@ namespace Abimn
             //mouv ennemys
 
             //check présence ennemys pour lancer Fight: dans la classe ennemy en fonction de l'ennemy? post figth: unload?
-
         }
-
-
-
-
-
 
         /// <summary>
         /// This is called when the game should draw itself.
@@ -374,7 +326,6 @@ namespace Abimn
         public override void Draw()
         {
             _backmap.Draw(_poshero, _shift);
-
             EntityHero.Draw();
             base.Draw();
         }
