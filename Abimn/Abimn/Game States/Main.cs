@@ -280,9 +280,13 @@ namespace Abimn
             {
                 _idmap = 2;
                 _backmap = new Map(_idmap);
-                _poshero = _backmap.StartPos;
-                _idhero = _backmap.IdStartHero;
-                _shift = new Pos(0, 0);
+
+                while (_timeSinceMove < 0.3f)
+                {
+                    _poshero = _backmap.StartPos;
+                    _idhero = _backmap.IdStartHero;
+                    _shift = new Pos(0, 0);
+                }
             }
 
             if (_backmap.Decoration(_poshero) == 4)
