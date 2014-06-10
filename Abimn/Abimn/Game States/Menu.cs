@@ -31,16 +31,16 @@ namespace Abimn
             Cursor.SetVisibility(true);
 
             play = new Entity(new Pos(C.Screen.Width * 0.15, C.Screen.Height * 0.30));
-            play.LoadContent(Tiles.Button, 1, 2, 1);
+            play.LoadContent("menu principal", "1", "2", "1");
 
             options = new Entity(new Pos(C.Screen.Width * 0.15, C.Screen.Height * 0.45));
-            options.LoadContent(Tiles.Button, 3, 4, 3);
+            options.LoadContent("menu principal", "3", "4", "3");
 
             quit = new Entity(new Pos(C.Screen.Width * 0.15, C.Screen.Height * 0.60));
-            quit.LoadContent(Tiles.Button, 5, 6, 5);
+            quit.LoadContent("menu principal", "5", "6", "5");
 
             background = new Entity();
-            background.LoadContent(Tiles.Button, 7);
+            background.LoadContent("menu principal", "7");
         }
 
         public override void Update(GameTime gameTime)

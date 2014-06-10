@@ -37,82 +37,82 @@ namespace Abimn
         {
 			/* le edit background devra etre en plein ecran*/
 			EditBackground = new Entity(new Pos(C.Screen.Width / 2, C.Screen.Height / 2));
-			EditBackground.LoadContent(Tiles.CharEdit, 1, 1, 1, Center.All);
+            EditBackground.LoadContent("char edit", "background", Center.All);
 
 			EditBackground2 = new Entity(new Pos(C.Screen.Width / 2, C.Screen.Height / 2),false);
-			EditBackground2.LoadContent(Tiles.CharEdit, 21, 21, 21, Center.All);
+            EditBackground2.LoadContent("char edit", "21", Center.All);
 
 			EditBackground3 = new Entity(new Pos(C.Screen.Width / 2, C.Screen.Height / 2),false);
-			EditBackground3.LoadContent(Tiles.CharEdit, 22, 22, 22, Center.All);
+            EditBackground3.LoadContent("char edit", "22", Center.All);
 
             quit = new Entity(new Pos(C.Screen.Width - 245, C.Screen.Height - 95));
-            quit.LoadContent(Tiles.CharEdit, 9, 10, 9);
+            quit.LoadContent("char edit", "9", "10", "9");
 
             next = new Entity(new Pos(C.Screen.Width - 455, C.Screen.Height - 95));
-            next.LoadContent(Tiles.CharEdit, 7, 8, 7);
+            next.LoadContent("char edit", "7", "8", "7");
 
 			next2 = new Entity(new Pos(C.Screen.Width-455, C.Screen.Height-95 ),false);
-            next2.LoadContent(Tiles.CharEdit, 7, 8, 7);
+            next2.LoadContent("char edit", "7", "8", "7");
 
 			back = new Entity(new Pos(C.Screen.Width - 245, C.Screen.Height - 95),false);
-            back.LoadContent(Tiles.CharEdit, 11, 12, 11);
+            back.LoadContent("char edit", "11", "12", "11");
 			
 			back2 = new Entity(new Pos(C.Screen.Width - 245, C.Screen.Height - 95), false);
-            back2.LoadContent(Tiles.CharEdit, 11, 12, 11);
+            back2.LoadContent("char edit", "11", "12", "11");
 
 			play = new Entity(new Pos(C.Screen.Width - 455, C.Screen.Height - 95), false);
-            play.LoadContent(Tiles.CharEdit, 19, 20, 19);
+            play.LoadContent("char edit", "19", "20", "19");
 
 			head1 = new Entity(new Pos(C.Screen.Width - 750, C.Screen.Height - 400),false);
-            head1.LoadContent(Tiles.CharEdit, 23);
+            head1.LoadContent("char edit", "23");
 
 			head2 = new Entity(new Pos(C.Screen.Width - 750, C.Screen.Height - 400),false);
-            head2.LoadContent(Tiles.CharEdit, 24);
+            head2.LoadContent("char edit", "24");
 
 			head3 = new Entity(new Pos(C.Screen.Width - 750, C.Screen.Height - 400), false);
-            head3.LoadContent(Tiles.CharEdit, 25);
+            head3.LoadContent("char edit", "25");
 
 			head4 = new Entity(new Pos(C.Screen.Width - 750, C.Screen.Height - 400), false);
-            head4.LoadContent(Tiles.CharEdit, 26);
+            head4.LoadContent("char edit", "26");
 
 			head5 = new Entity(new Pos(C.Screen.Width - 750, C.Screen.Height - 400), false);
-            head5.LoadContent(Tiles.CharEdit, 27);
+            head5.LoadContent("char edit", "27");
 
 			head6 = new Entity(new Pos(C.Screen.Width - 750, C.Screen.Height - 400), false);
-            head6.LoadContent(Tiles.CharEdit, 28);
+            head6.LoadContent("char edit", "28");
 
 			body1 = new Entity(new Pos(C.Screen.Width - 750, C.Screen.Height - 390), false);
-            body1.LoadContent(Tiles.CharEdit, 29);
+            body1.LoadContent("char edit", "29");
 			
 			body2 = new Entity(new Pos(C.Screen.Width - 750, C.Screen.Height - 390), false);
-            body2.LoadContent(Tiles.CharEdit, 30);
+            body2.LoadContent("char edit", "30");
 			
 			body3 = new Entity(new Pos(C.Screen.Width - 750, C.Screen.Height - 390), false);
-            body3.LoadContent(Tiles.CharEdit, 31);
+            body3.LoadContent("char edit", "31");
 			
 			body4 = new Entity(new Pos(C.Screen.Width - 750, C.Screen.Height - 390), false);
-            body4.LoadContent(Tiles.CharEdit, 32);
+            body4.LoadContent("char edit", "32");
 			
 			body5 = new Entity(new Pos(C.Screen.Width - 750, C.Screen.Height - 390), false);
-            body5.LoadContent(Tiles.CharEdit, 33);
+            body5.LoadContent("char edit", "33");
 
 			arrowL1 = new Entity(new Pos(C.Screen.Width - 550, C.Screen.Height - 350), true);
-            arrowL1.LoadContent(Tiles.CharEdit, 6);
+            arrowL1.LoadContent("char edit", "6");
 			
 			arrowR1 = new Entity(new Pos(C.Screen.Width - 590, C.Screen.Height - 350), true);
-            arrowR1.LoadContent(Tiles.CharEdit, 5);
+            arrowR1.LoadContent("char edit", "5");
 
 			arrowL =new Entity(new Pos(C.Screen.Width-550, C.Screen.Height -400),true);
-            arrowL.LoadContent(Tiles.CharEdit, 6);
+            arrowL.LoadContent("char edit", "6");
 
 			arrowR = new Entity(new Pos(C.Screen.Width - 590, C.Screen.Height - 400),true);
-            arrowR.LoadContent(Tiles.CharEdit, 5);
+            arrowR.LoadContent("char edit", "5");
 
 			role1 = new Entity(new Pos(C.Screen.Width - 550, C.Screen.Height - 400),false);
-			role1.LoadContent(Tiles.CharEdit, 13,14,14);
+            role1.LoadContent("char edit", "13", "14", "14");
 
 			role2 = new Entity(new Pos(C.Screen.Width - 550, C.Screen.Height - 300),false);
-            role2.LoadContent(Tiles.CharEdit, 15, 16, 16);
+            role2.LoadContent("char edit", "15", "16", "16");
         }
 
         public override void Update(GameTime gameTime)

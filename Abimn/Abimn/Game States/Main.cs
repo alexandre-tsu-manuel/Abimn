@@ -314,7 +314,7 @@ namespace Abimn
                 if (_timeSinceMove > 0.01f)//règle la vitesse de défilement
                     MoveHeros(); //Vérifie les touches de mouvements
             }
-            EntityHero.LoadContent(Tiles.Hero, _idhero);
+            EntityHero.LoadContent("hero", _idhero.ToString());
             MoveTile();
 
 

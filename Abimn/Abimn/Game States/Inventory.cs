@@ -25,29 +25,29 @@ namespace Abimn
         {
             Cursor.SetVisibility(true);
             armor = new Entity(new Pos(230, 14));
-            armor.LoadContent(Tiles.Inventory, 2, 3, 3);
+            armor.LoadContent("inventory", "2", "3", "3");
 
             weapons = new Entity(new Pos(260, 15));
-            weapons.LoadContent(Tiles.Inventory, 10, 11, 11);
+            weapons.LoadContent("inventory", "10", "11", "11");
 
             div = new Entity(new Pos(314, 13));
-            div.LoadContent(Tiles.Inventory, 6, 7, 7);
+            div.LoadContent("inventory", "6", "7", "7");
 
             quest = new Entity(new Pos(340, 16));
-            quest.LoadContent(Tiles.Inventory, 8, 9, 9);
+            quest.LoadContent("inventory", "8", "9", "9");
 
             cons = new Entity(new Pos(287, 8));
             cons.Initialize();
-            cons.LoadContent(Tiles.Inventory, 4, 5, 5);
+            cons.LoadContent("inventory", "4", "5", "5");
 
             _inv = new Entity(new Pos(15, 10));
-            _inv.LoadContent(Tiles.Inventory, 1);
+            _inv.LoadContent("inventory", "1");
 
             shit = new Entity(new Pos(225, 50), false);
-            shit.LoadContent(Tiles.Inventory, 12);
+            shit.LoadContent("inventory", "12");
 
             overshit = new Ennemy(new Pos(225, 50), false);
-            overshit.LoadContent(Tiles.Inventory, 13);
+            overshit.LoadContent("inventory", "13");
         }
 
         public override void Update(GameTime gameTime)

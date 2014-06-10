@@ -24,10 +24,10 @@ namespace Abimn
         public override void Initialize()
         {
             fond = new Entity(new Pos(C.Screen.Width / 2, C.Screen.Height / 2));
-            fond.LoadContent(Tiles.Recap, 1, 1, 1, Center.All);
+            fond.LoadContent("fight recap", "1", Center.All);
 
             exit = new Entity(new Pos(fond.Pos.X + 70, fond.Pos.Y + 370));
-            exit.LoadContent(Tiles.Recap, 2);
+            exit.LoadContent("fight recap", "2");
         }
 
         public override void Update(GameTime gameTime)

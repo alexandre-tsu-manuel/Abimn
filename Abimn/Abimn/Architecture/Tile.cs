@@ -37,16 +37,25 @@ namespace Abimn
         /// <summary>
         /// Dessine la tile 
         /// </summary>
+        /// <param name="key">Clé de l'image déclarée dans le TilesManager</param>
         /// <param name="pos">Position à laquelle dessiner la tile</param>
-        public static void Draw(Tiles reference, int id, Pos pos, float rotation = 0, float scale = 1)
+        /// <param name="rotation">Rotation à appliquer à la Tile en radians</param>
+        /// <param name="scale">Zoom à effectuer sur la Tile. 1 Par défaut.</param>
+        public static void Draw(string key, Pos pos, float rotation = 0, float scale = 1)
         {
-            G.tiles[(int)reference][id-1].Draw(pos, rotation, scale);
+            if (key != "" && key != null)
+            {
+                if (G.tiles.ContainsKey(key))
+                    ((Tile)G.tiles[key]).Draw(pos, rotation, scale);
+            }
         }
 
         /// <summary>
         /// Dessine la tile en utilisant ses attributs et le spritebatch donné
         /// </summary>
         /// <param name="pos">Position à laquelle dessiner la tile</param>
+        /// <param name="rotation">Rotation à appliquer à la Tile en radians</param>
+        /// <param name="scale">Zoom à effectuer sur la Tile. 1 Par défaut.</param>
         public virtual void Draw(Pos pos, float rotation = 0, float scale = 1)
         {
             G.spriteBatch.Draw(_texture, pos.ToVector2(), null, Color.White, rotation, new Vector2(), scale, SpriteEffects.None, 0);

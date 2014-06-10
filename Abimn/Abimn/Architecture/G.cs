@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,7 +21,8 @@ namespace Abimn
     {
         public static Stack<GameType> currentGame;
         public static SpriteBatch spriteBatch;
-        public static Tile[][] tiles;
+        //public static Tile[][] tiles;
+        public static Hashtable tiles;
         public static SpriteFont vie;
         public static Song one, two, three;
     }

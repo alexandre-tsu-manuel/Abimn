@@ -27,14 +27,14 @@ namespace Abimn
 
             fond_menu = new Entity();
             fond_menu.Initialize(new Pos(fond_menu.Pos.X+112,fond_menu.Pos.Y+ 94));
-            fond_menu.LoadContent(Tiles.PauseMenu, 1);
+            fond_menu.LoadContent("pause menu", "1");
 
             resume = new Entity(new Pos(fond_menu.Pos.X + 250, fond_menu.Pos.Y + 195));
-            resume.LoadContent(Tiles.PauseMenu, 2, 6, 2);
+            resume.LoadContent("pause menu", "2", "6", "2");
             exit = new Entity(new Pos(fond_menu.Pos.X + 250, fond_menu.Pos.Y + 355));
-            exit.LoadContent(Tiles.PauseMenu, 4, 7, 4);
+            exit.LoadContent("pause menu", "4", "7", "4");
             option = new Entity(new Pos(fond_menu.Pos.X + 250, fond_menu.Pos.Y + 275));
-            option.LoadContent(Tiles.PauseMenu, 3, 5, 3);
+            option.LoadContent("pause menu", "3", "5", "3");
         }
 
         public override void Update(GameTime gameTime)

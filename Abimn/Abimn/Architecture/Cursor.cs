@@ -14,9 +14,15 @@ namespace Abimn
             that = new Entity();
         }
 
-        public static void SetCursor(Tiles reference, int IdNormal, int IdPushed, Pos delta)
+        public static void SetCursor(string folder, string keyNormal, string keyPushed, Pos delta)
         {
-            that.LoadContent(reference, IdNormal, IdNormal, IdPushed);
+            that.LoadContent(folder + "/" + keyNormal, "", folder + "/" + keyPushed);
+            that.Delta = delta;
+        }
+
+        public static void SetCursor(string keyNormal, string keyPushed, Pos delta)
+        {
+            that.LoadContent(keyNormal, "", keyPushed);
             that.Delta = delta;
         }
 

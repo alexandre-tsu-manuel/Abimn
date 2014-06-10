@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,104 +8,180 @@ using Microsoft.Xna.Framework.Content;
 
 namespace Abimn
 {
-    public enum Tiles
-    {
-        Main,
-        MainDeco,
-        Fight,
-        PauseMenu,
-        Inventory,
-        Hero,
-        Recap,
-        Button,
-        Button2,
-        Cursor,
-        CharEdit,
-        NewHero
-    }
-
-    public class TileProperty
-    {
-        public int Size;
-        public string Tag;
-
-        public static TileProperty getFrom(Tiles type)
-        {
-            TileProperty ret = new TileProperty();
-
-            switch (type)
-            {
-                case Tiles.Main:
-                    ret.Size = 10;
-                    ret.Tag = "m";
-                    break;
-                case Tiles.MainDeco:
-                    ret.Size = 10;
-                    ret.Tag = "md";
-                    break;
-                case Tiles.Fight:
-                    ret.Size = 10;
-                    ret.Tag = "f";
-                    break;
-                case Tiles.PauseMenu:
-                    ret.Size = 7;
-                    ret.Tag = "pause_menu";
-                    break;
-                case Tiles.Inventory:
-                    ret.Size = 13;
-                    ret.Tag = "inventory";
-                    break;
-                case Tiles.Hero:
-                    ret.Size = 4;
-                    ret.Tag = "hero";
-                    break;
-                case Tiles.Recap:
-                    ret.Size = 2;
-                    ret.Tag = "recap";
-                    break;
-                case Tiles.Button:
-                    ret.Size = 7;
-                    ret.Tag = "menup";
-                    break;
-                case Tiles.Button2:
-                    ret.Size = 10;
-                    ret.Tag = "menus";
-                    break;
-                case Tiles.Cursor:
-                    ret.Size = 2;
-                    ret.Tag = "cursor";
-                    break;
-                case Tiles.CharEdit:
-                    ret.Size = 33;
-                    ret.Tag = "editC";
-                    break;
-                case Tiles.NewHero:
-                    ret.Size = 10;
-                    ret.Tag = "newHero";
-                    break;
-            }
-
-            return ret;
-        }
-    }
-
     public static class TilesManager
     {
-        public static int nbArrays;
+        private static ContentManager _content;
+        private static string _currentFolder;
 
         public static void Initialize(ContentManager content)
         {
-            TilesManager.nbArrays = Enum.GetNames(typeof(Tiles)).Length;
+            _content = content;
 
-            G.tiles = new Tile[TilesManager.nbArrays][];
+            SetFolder("");
+            Add("void");
 
-            for (int id = 0; id < TilesManager.nbArrays; id++)
-            {
-                TileProperty properties = TileProperty.getFrom((Tiles)id);
-                G.tiles[id] = new Tile[properties.Size];
-                for (int i = 0; i < properties.Size; i++)
-                    G.tiles[id][i] = new Tile(content, properties.Tag + (i + 1).ToString());
-            }
+            SetFolder("char edit");
+            Add("background");
+            Add("2");
+            Add("3");
+            Add("4");
+            Add("5");
+            Add("6");
+            Add("7");
+            Add("8");
+            Add("9");
+            Add("10");
+            Add("11");
+            Add("12");
+            Add("13");
+            Add("14");
+            Add("15");
+            Add("16");
+            Add("17");
+            Add("18");
+            Add("19");
+            Add("20");
+            Add("21");
+            Add("22");
+            Add("23");
+            Add("24");
+            Add("25");
+            Add("26");
+            Add("27");
+            Add("28");
+            Add("29");
+            Add("30");
+            Add("31");
+            Add("32");
+            Add("33");
+
+            SetFolder("cursor");
+            Add("default");
+            Add("clicked");
+
+            SetFolder("fight");
+            Add("1");
+            Add("2");
+            Add("3");
+            Add("4");
+            Add("5");
+            Add("6");
+            Add("7");
+            Add("8");
+            Add("9");
+            Add("10");
+
+            SetFolder("fight recap");
+            Add("1");
+            Add("2");
+
+            SetFolder("hero");
+            Add("1");
+            Add("2");
+            Add("3");
+            Add("4");
+            Add("5");
+            Add("6");
+            Add("7");
+            Add("8");
+            Add("9");
+
+            SetFolder("inventory");
+            Add("1");
+            Add("2");
+            Add("3");
+            Add("4");
+            Add("5");
+            Add("6");
+            Add("7");
+            Add("8");
+            Add("9");
+            Add("10");
+            Add("11");
+            Add("12");
+            Add("13");
+
+            SetFolder("main");
+            Add("1");
+            Add("2");
+            Add("3");
+            Add("4");
+            Add("5");
+            Add("6");
+            Add("7");
+            Add("8");
+            Add("9");
+            Add("10");
+
+            SetFolder("main deco");
+            Add("1");
+            Add("2");
+            Add("3");
+            Add("4");
+            Add("5");
+            Add("6");
+            Add("7");
+            Add("8");
+            Add("9");
+            Add("10");
+
+            SetFolder("marchand");
+            Add("1");
+            Add("2");
+            Add("3");
+
+            SetFolder("menu principal");
+            Add("1");
+            Add("2");
+            Add("3");
+            Add("4");
+            Add("5");
+            Add("6");
+            Add("7");
+
+            SetFolder("new hero");
+            Add("1");
+            Add("2");
+            Add("3");
+            Add("4");
+            Add("5");
+            Add("6");
+            Add("7");
+            Add("8");
+            Add("9");
+            Add("10");
+
+            SetFolder("options menu");
+            Add("1");
+            Add("2");
+            Add("3");
+            Add("4");
+            Add("5");
+            Add("6");
+            Add("7");
+            Add("8");
+            Add("9");
+            Add("10");
+
+            SetFolder("pause menu");
+            Add("1");
+            Add("2");
+            Add("3");
+            Add("4");
+            Add("5");
+            Add("6");
+            Add("7");
+        }
+
+        private static void SetFolder(string folder)
+        {
+            _currentFolder = folder;
+        }
+
+        private static void Add(string name)
+        {
+            string path = _currentFolder == "" ? name : _currentFolder + "/" + name;
+            G.tiles.Add(path, new Tile(_content, path));
         }
     }
 }

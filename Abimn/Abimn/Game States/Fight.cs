@@ -37,8 +37,8 @@ namespace Abimn
             _ennemy = new Ennemy(new Pos(550, 412));
 
             _map = new FightMap();
-            _hero.LoadContent(Tiles.Fight, 1);
-            _ennemy.LoadContent(Tiles.Fight, 3);
+            _hero.LoadContent("fight", "1");
+            _ennemy.LoadContent("fight", "3");
             _ennemy.Life = 10000;
 
             _fightContact = false;
@@ -72,18 +72,18 @@ namespace Abimn
                     movStep = 8;
                 if (!movinRight)
                     movStep += 2;
-                _hero.LoadContent(Tiles.NewHero, movStep);
+                _hero.LoadContent("new hero", movStep.ToString());
             }
             else
             {
                 if (movinTill == 0)
-                    _hero.LoadContent(Tiles.NewHero, movinRight ? 1 : 4);
+                    _hero.LoadContent("new hero", movinRight ? "1" : "4");
                 else
                 {
                     int movStep = movinTill / 3 % 4;
                     if (movStep == 3)
                         movStep -= 2;
-                    _hero.LoadContent(Tiles.NewHero, (movinRight ? 1 : 4) + movStep);
+                    _hero.LoadContent("new hero", ((movinRight ? 1 : 4) + movStep).ToString());
                 }
             }
         }
@@ -179,12 +179,12 @@ namespace Abimn
             {
                 if (needMove.Pos.X < e2.Pos.X)
                 {
-                    needMove.LoadContent(Tiles.Fight, 10);
+                    needMove.LoadContent("fight", "10");
                     return right;
                 }
                 else if (needMove.Pos.X > e2.Pos.X)
                 {
-                    needMove.LoadContent(Tiles.Fight, 3);
+                    needMove.LoadContent("fight", "3");
                     return left;
                 }
                 else

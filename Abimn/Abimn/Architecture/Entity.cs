@@ -112,39 +112,32 @@ namespace Abimn
         /// <summary>
         /// ID de l'image du button normal
         /// </summary>
-        public int IdTextureNormal
+        public string KeyTextureNormal
         {
-            get { return _idTextureNormal + 1; }
-            set { _idTextureNormal = value - 1; }
+            get { return _keyTextureNormal; }
+            set { _keyTextureNormal = value; }
         }
-        private int _idTextureNormal;
+        private string _keyTextureNormal;
 
         /// <summary>
         /// ID de l'image du button survolé
         /// </summary>
-        public int IdTextureOver
+        public string KeyTextureOver
         {
-            get { return _idTextureOver + 1; }
-            set { _idTextureOver = value - 1; }
+            get { return _keyTextureOver == "" ? _keyTextureNormal : _keyTextureOver; }
+            set { _keyTextureOver = value; }
         }
-        private int _idTextureOver;
+        private string _keyTextureOver;
 
         /// <summary>
         /// ID de l'image du button appuyé
         /// </summary>
-        public int IdTexturePushed
+        public string KeyTexturePushed
         {
-            get { return _idTexturePushed + 1; }
-            set { _idTexturePushed = value - 1; }
+            get { return _keyTexturePushed == "" ? _keyTextureNormal : _keyTexturePushed; }
+            set { _keyTexturePushed = value; }
         }
-        private int _idTexturePushed;
-
-        public Tiles TilesRef
-        {
-            get { return (Tiles)_tilesRef; }
-            set { _tilesRef = (int)value; }
-        }
-        private int _tilesRef;
+        private string _keyTexturePushed;
 
         public Entity(bool visible = true) { this.Initialize(visible); }
         public Entity(Pos position, bool visible = true) { this.Initialize(position, visible); }
@@ -199,16 +192,53 @@ namespace Abimn
         /// <summary>
         /// Charge l'image voulue grâce au ContentManager donné en plaçant son centre sur sa position
         /// </summary>
-        /// <param name="id">Identifiant de l'image dans le tableau d'images</param>
-        /// <param name="tilesRef">Référence vers le tableau d'images qui contient la tile voulue</param>
+        /// <param name="keyNormal">Clé de l'image</param>
         /// <param name="center">Permet de centrer l'image par rapport à se position</param>
-        public virtual void LoadContent(Tiles tilesRef, int idNormal, int idOver = 0, int idPushed = 0, Center center = Center.None)
+        public virtual void LoadContent(string key, Center center = Center.None)
         {
-            TilesRef = tilesRef;
-            IdTextureNormal = idNormal;
-            IdTextureOver = idOver > 0 ? idOver : idNormal;
-            IdTexturePushed = idOver > 0 ? idPushed : idNormal;
-            Rect = new Rectangle(0, 0, G.tiles[_tilesRef][_idTextureNormal].Texture.Width, G.tiles[_tilesRef][_idTextureNormal].Texture.Height);
+            this.LoadContent(key, "", "", center);
+        }
+
+        /// <summary>
+        /// Charge l'image voulue grâce au ContentManager donné en plaçant son centre sur sa position
+        /// </summary>
+        /// <param name="folder">Dossier dans lequel se trouvent les trois images</param>
+        /// <param name="keyNormal">Clé de l'image</param>
+        /// <param name="center">Permet de centrer l'image par rapport à se position</param>
+        public virtual void LoadContent(string folder, string key, Center center = Center.None)
+        {
+            this.LoadContent(folder + "/" + key, "", "", center);
+        }
+
+        /// <summary>
+        /// Charge l'image voulue grâce au ContentManager donné en plaçant son centre sur sa position
+        /// </summary>
+        /// <param name="folder">Dossier dans lequel se trouvent les trois images</param>
+        /// <param name="keyNormal">Clé de l'image normale</param>
+        /// <param name="keyOver">Clé de l'image de l'entité survolée</param>
+        /// <param name="keyPushed">Clé de l'image de l'entité appuyée</param>
+        /// <param name="center">Permet de centrer l'image par rapport à se position</param>
+        public virtual void LoadContent(string folder, string keyNormal, string keyOver, string keyPushed, Center center = Center.None)
+        {
+            this.LoadContent(folder + "/" + keyNormal, folder + "/" + keyOver, folder + "/" + keyPushed, center);
+        }
+
+        /// <summary>
+        /// Charge l'image voulue grâce au ContentManager donné en plaçant son centre sur sa position
+        /// </summary>
+        /// <param name="keyNormal">Clé de l'image normale</param>
+        /// <param name="keyOver">Clé de l'image de l'entité survolée</param>
+        /// <param name="keyPushed">Clé de l'image de l'entité appuyée</param>
+        /// <param name="center">Permet de centrer l'image par rapport à se position</param>
+        public virtual void LoadContent(string keyNormal, string keyOver, string keyPushed, Center center = Center.None)
+        {
+            KeyTextureNormal = keyNormal;
+            KeyTextureOver = keyOver;
+            KeyTexturePushed = keyPushed;
+            Tile buff = ((Tile)G.tiles[KeyTextureNormal]);
+            if (buff == null)
+                buff = ((Tile)G.tiles["void"]);
+            Rect = new Rectangle(0, 0, buff.Texture.Width, buff.Texture.Height);
             if (center != Center.None)
                 Pos = new Pos(center == Center.All ? Pos.X - Rect.Width / 2 : Pos.X,
                               center == Center.All ? Pos.Y - Rect.Height / 2 : Pos.Y);
@@ -260,11 +290,11 @@ namespace Abimn
             if (this.Visible)
                 if (this.MouseIsOver())
                     if (E.LeftIsDown())
-                        Tile.Draw(TilesRef, IdTexturePushed, Pos + Delta, Rotation, Scale);
+                        Tile.Draw(KeyTexturePushed, Pos + Delta, Rotation, Scale);
                     else
-                        Tile.Draw(TilesRef, IdTextureOver, Pos + Delta, Rotation, Scale);
+                        Tile.Draw(KeyTextureOver, Pos + Delta, Rotation, Scale);
                 else
-                    Tile.Draw(TilesRef, IdTextureNormal, Pos + Delta, Rotation, Scale);
+                    Tile.Draw(KeyTextureNormal, Pos + Delta, Rotation, Scale);
         }
     }
 }

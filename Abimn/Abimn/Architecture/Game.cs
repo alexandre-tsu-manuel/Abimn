@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -30,6 +31,7 @@ namespace Abimn
         {
             Rand.Init();
             G.currentGame = new Stack<GameType>();
+            G.tiles = new Hashtable();
 
             //this.IsMouseVisible = true;
             this.graphics.IsFullScreen = false;
@@ -45,7 +47,7 @@ namespace Abimn
             base.Initialize();
 
             Cursor.Initialize();
-            Cursor.SetCursor(Tiles.Cursor, 1, 2, new Pos(-15, -5));
+            Cursor.SetCursor("cursor", "default", "clicked", new Pos(-15, -5));
             G.currentGame.Push(new Menu());
         }
 
