@@ -235,10 +235,8 @@ namespace Abimn
             KeyTextureNormal = keyNormal;
             KeyTextureOver = keyOver;
             KeyTexturePushed = keyPushed;
-            Tile buff = ((Tile)G.tiles[KeyTextureNormal]);
-            if (buff == null)
-                buff = ((Tile)G.tiles["void"]);
-            Rect = new Rectangle(0, 0, buff.Texture.Width, buff.Texture.Height);
+            Texture2D buff = Ressources.GetImage(KeyTextureNormal);
+            Rect = new Rectangle(0, 0, buff.Width, buff.Height);
             if (center != Center.None)
                 Pos = new Pos(center == Center.All ? Pos.X - Rect.Width / 2 : Pos.X,
                               center == Center.All ? Pos.Y - Rect.Height / 2 : Pos.Y);

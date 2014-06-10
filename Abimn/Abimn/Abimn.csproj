@@ -109,6 +109,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Architecture\C.cs" />
+    <Compile Include="Architecture\Ressources.cs" />
     <Compile Include="Architecture\Cursor.cs" />
     <Compile Include="Architecture\E.cs" />
     <Compile Include="Architecture\Entity.cs" />
@@ -119,7 +120,6 @@
     <Compile Include="Architecture\Program.cs" />
     <Compile Include="Architecture\Rand.cs" />
     <Compile Include="Architecture\Tile.cs" />
-    <Compile Include="Architecture\TilesManager.cs" />
     <Compile Include="Ennemy.cs" />
     <Compile Include="Game States\Fight.cs" />
     <Compile Include="Game States\FightRecap.cs" />

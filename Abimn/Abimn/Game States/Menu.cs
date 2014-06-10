@@ -40,7 +40,7 @@ namespace Abimn
             quit.LoadContent("menu principal", "5", "6", "5");
 
             background = new Entity();
-            background.LoadContent("menu principal", "7");
+            background.LoadContent("menu principal/7");
         }
 
         public override void Update(GameTime gameTime)

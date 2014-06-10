@@ -22,7 +22,7 @@ namespace Abimn
         public static Stack<GameType> currentGame;
         public static SpriteBatch spriteBatch;
         //public static Tile[][] tiles;
-        public static Hashtable tiles;
+        public static Hashtable content;
         public static SpriteFont vie;
         public static Song one, two, three;
     }

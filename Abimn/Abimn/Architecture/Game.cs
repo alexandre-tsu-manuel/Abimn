@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +32,7 @@ namespace Abimn
         {
             Rand.Init();
             G.currentGame = new Stack<GameType>();
-            G.tiles = new Hashtable();
+            G.content = new Hashtable();
 
             //this.IsMouseVisible = true;
             this.graphics.IsFullScreen = false;
@@ -40,9 +41,9 @@ namespace Abimn
             this.graphics.ApplyChanges();
             this.Window.Title = "Abimn";
             this.Window.AllowUserResizing = true;
-            G.one = Content.Load<Song>("1");
-            G.two = Content.Load<Song>("2");
-            G.three = Content.Load<Song>("3");
+            G.one = Content.Load<Song>("musics/1");
+            G.two = Content.Load<Song>("musics/2");
+            G.three = Content.Load<Song>("musics/3");
 
             base.Initialize();
 
@@ -54,8 +55,10 @@ namespace Abimn
         protected override void LoadContent()
         {
             G.spriteBatch = new SpriteBatch(GraphicsDevice);
-            TilesManager.Initialize(Content);
-            G.vie = Content.Load<SpriteFont>("vie");
+
+            Ressources.Load(Content);
+
+            G.vie = Content.Load<SpriteFont>("spritefonts/vie");
         }
 
         protected override void UnloadContent() {}
