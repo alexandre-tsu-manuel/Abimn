@@ -273,7 +273,7 @@ namespace Abimn
             }
 
             if (Interact() == true && E.IsPushed(Keys.Space))
-                G.currentGame.Push(new Shop());
+                G.currentGame.Push(new Inventory());
 
             //Change de map
             if (_backmap.Decoration(_poshero) == 3)
@@ -318,7 +318,6 @@ namespace Abimn
             MoveTile();
 
 
-            //mouv NPCs
 
             //mouv ennemys
 

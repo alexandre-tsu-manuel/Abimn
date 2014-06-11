@@ -49,7 +49,7 @@ namespace Abimn
                 G.currentGame.Push(new Menu());
             }
             if (E.IsPushed(Keys.Escape))
-                G.currentGame.Push(new Main());
+                this.State = State.Exit;
         }
 
         public override void Draw()
