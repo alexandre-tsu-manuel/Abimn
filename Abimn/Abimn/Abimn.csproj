@@ -109,6 +109,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Architecture\C.cs" />
+    <Compile Include="Architecture\Music.cs" />
     <Compile Include="Architecture\Ressources.cs" />
     <Compile Include="Architecture\Cursor.cs" />
     <Compile Include="Architecture\E.cs" />
@@ -119,6 +120,7 @@
     <Compile Include="Architecture\Pos.cs" />
     <Compile Include="Architecture\Program.cs" />
     <Compile Include="Architecture\Rand.cs" />
+    <Compile Include="Architecture\Text.cs" />
     <Compile Include="Architecture\Tile.cs" />
     <Compile Include="Ennemy.cs" />
     <Compile Include="Game States\Fight.cs" />

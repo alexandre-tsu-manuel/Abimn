@@ -1,11 +1,7 @@
-﻿using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework;
+﻿using System.IO;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 
 namespace Abimn
 {
@@ -17,6 +13,8 @@ namespace Abimn
         {
             _content = content;
             LoadDirectory<Texture2D>(content.RootDirectory + "/" + C.imagesFolder + "/");
+            LoadDirectory<Song>(content.RootDirectory + "/" + C.musicsFolder + "/");
+            LoadDirectory<SpriteFont>(content.RootDirectory + "/" + C.spriteFontsFolder + "/");
         }
 
         private static void LoadDirectory<T>(string path)

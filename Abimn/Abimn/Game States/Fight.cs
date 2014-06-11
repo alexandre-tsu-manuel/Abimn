@@ -31,7 +31,7 @@ namespace Abimn
 
         public override void Initialize()
         {
-            MediaPlayer.Play(G.two);
+            Music.Play("2");
             Cursor.SetVisibility(false);
             _hero = new Entity(new Pos(C.Screen.Width/2 - 25, 420));
             _ennemy = new Ennemy(new Pos(550, 412));
@@ -202,8 +202,8 @@ namespace Abimn
             _map.Draw();
             _hero.Draw();
             _ennemy.Draw();
-            G.spriteBatch.DrawString(G.vie, (Hero.Life / 100).ToString() + "/100", new Vector2(10, 10), Color.Red);
-            G.spriteBatch.DrawString(G.vie, (_ennemy.Life / 100).ToString() + "/100", new Vector2(750, 10), Color.Red);
+            Text.Write("vie", (Hero.Life / 100).ToString() + "/100", new Vector2(10, 10), Color.Red);
+            Text.Write("vie", (_ennemy.Life / 100).ToString() + "/100", new Vector2(750, 10), Color.Red);
         }
     }
 }

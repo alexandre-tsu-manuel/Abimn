@@ -41,9 +41,6 @@ namespace Abimn
             this.graphics.ApplyChanges();
             this.Window.Title = "Abimn";
             this.Window.AllowUserResizing = true;
-            G.one = Content.Load<Song>("musics/1");
-            G.two = Content.Load<Song>("musics/2");
-            G.three = Content.Load<Song>("musics/3");
 
             base.Initialize();
 
@@ -57,8 +54,6 @@ namespace Abimn
             G.spriteBatch = new SpriteBatch(GraphicsDevice);
 
             Ressources.Load(Content);
-
-            G.vie = Content.Load<SpriteFont>("spritefonts/vie");
         }
 
         protected override void UnloadContent() {}

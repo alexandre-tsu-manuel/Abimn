@@ -16,6 +16,8 @@ namespace Abimn
             public const int Height = 750;
         }
         public const string imagesFolder = "images";
+        public const string musicsFolder = "musics";
+        public const string spriteFontsFolder = "spritefonts";
         public const int sizeCell = 50;
         public const int nbCellsVertical = 50;
         public const int nbCellsHorizontal = 50;

@@ -29,7 +29,7 @@ namespace Abimn
 
         public override void Initialize()
         {
-            MediaPlayer.Play(G.one);
+            Music.Play("1");
             this._idmap = 1;
             this._backmap = new Map(_idmap);
             this._poshero = _backmap.StartPos;
