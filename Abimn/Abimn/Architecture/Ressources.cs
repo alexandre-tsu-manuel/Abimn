@@ -19,20 +19,24 @@ namespace Abimn
 
         private static void LoadDirectory<T>(string path)
         {
+            string[] folders = Directory.GetDirectories(path, "*", SearchOption.AllDirectories);
+            LoadFilesInDirectory<T>(path);
+            foreach (string folder in folders)
+                LoadFilesInDirectory<T>(folder + "/");
+        }
+
+        private static void LoadFilesInDirectory<T>(string path)
+        {
             DirectoryInfo dir = new DirectoryInfo(path);
             if (!dir.Exists)
                 throw new DirectoryNotFoundException();
 
-            string[] folders = Directory.GetDirectories(path, "*", SearchOption.TopDirectoryOnly);
-            foreach (string folder in folders)
-                LoadDirectory<T>(folder);
-
-            path = path.Remove(0, _content.RootDirectory.Length + 1);
             FileInfo[] files = dir.GetFiles("*.*");
             foreach (FileInfo file in files)
             {
-                string filePath = path + "/" + Path.GetFileNameWithoutExtension(file.Name);
-                G.content.Add(filePath, _content.Load<T>(filePath));
+                string filePath = path.Remove(0, _content.RootDirectory.Length + 1) + Path.GetFileNameWithoutExtension(file.Name);
+                if (!G.content.ContainsKey(filePath))
+                    G.content.Add(filePath, _content.Load<T>(filePath));
             }
         }
 

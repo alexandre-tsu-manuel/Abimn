@@ -25,7 +25,7 @@ namespace Abimn
 
         public override void Initialize()
         {
-            MediaPlayer.Play(G.one);
+            Music.Play("1");
             Hero.LifeMax = 10000;
             Hero.Life = 10000;
             Cursor.SetVisibility(true);

@@ -40,9 +40,9 @@ namespace Abimn
         {
             fond.Draw();
             exit.Draw();
-            G.spriteBatch.DrawString(G.vie, (Hero.Life/100).ToString() + "/100", new Vector2(fond.Pos.X + 120, fond.Pos.Y + 165), Color.Red);
-            G.spriteBatch.DrawString(G.vie, "37", new Vector2(fond.Pos.X + 162, fond.Pos.Y + 233), Color.Yellow);
-            G.spriteBatch.DrawString(G.vie, "75", new Vector2(fond.Pos.X + 162, fond.Pos.Y + 308), Color.Green);
+            Text.Write("vie", (Hero.Life/100).ToString() + "/100", new Vector2(fond.Pos.X + 120, fond.Pos.Y + 165), Color.Red);
+            Text.Write("vie", "37", new Vector2(fond.Pos.X + 162, fond.Pos.Y + 233), Color.Yellow);
+            Text.Write("vie", "75", new Vector2(fond.Pos.X + 162, fond.Pos.Y + 308), Color.Green);
         }
     }
 }
