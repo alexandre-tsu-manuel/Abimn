@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Abimn
+﻿namespace Abimn
 {
     public enum Sin { Orgueil, Luxure, Gourmandise, Colere, Paresse, Envie, Cupidite }
 
