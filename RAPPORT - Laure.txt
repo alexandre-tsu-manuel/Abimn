@@ -25,13 +25,13 @@ En CSS, mon background est de couleur fixe - j'ai choisi du violet, c'est ma cha
                        .-'"""`---.___.----._
                      ,'  _       __,--  __  `.
                     '---' `----.'      /_9>   `--.
-                          __.-'_.--             `/ __
-             _..-"""---..',---' _.'          :_.'-'--i-._
-          .''          <""__..-' ` .         7-`-._.-.`. `.
-         /              ``           ` `-..-<       (  .-. \
-        /  INSERE ICI L'IMAGE DE LA CHARTE `'   `'
+                          __.-'_.--             `/ 
+             _..-"""---..',---' _.'          :_.'
+          .''          <""__..-' ` .         7-`
+         /              ``           ` `-..-<
+        /  INSERE ICI L'IMAGE DE LA CHARTE `'   
         !        _.--.   GRAPHIQUE (va voir ;
-        :      ,'     `.  github)          .'       /
+        :      ,'     `.  github)          .'      
      ;"`!               \        !        /
     ;`  \                ;       !       /
     ';   `.              |       _`.  \-'
