@@ -38,13 +38,13 @@ namespace Abimn
             else if (E.IsPushed(Keys.Q))
                 G.currentGame.Pop();
 
-            if (E.GetMousePosX() < C.sizeCell && camera.X > -C.sizeCell)
+            if (E.GetMousePosX() < C.sizeCell && camera.X > 0)
                 camera.X -= 10 * (C.sizeCell - E.GetMousePosX()) / C.sizeCell;
-            if (E.GetMousePosX() > C.Screen.Width - C.sizeCell && camera.X < (map.Dimensions.X + 1) * C.sizeCell)
+            if (E.GetMousePosX() > C.Screen.Width - C.sizeCell && camera.X < map.Dimensions.X * C.sizeCell)
                 camera.X += 10 * (E.GetMousePosX() - C.Screen.Width + C.sizeCell) / C.sizeCell;
-            if (E.GetMousePosY() < C.sizeCell && camera.Y > -C.sizeCell)
+            if (E.GetMousePosY() < C.sizeCell && camera.Y > 0)
                 camera.Y -= 10 * (C.sizeCell - E.GetMousePosY()) / C.sizeCell;
-            if (E.GetMousePosY() > C.Screen.Height - C.sizeCell && camera.Y < (map.Dimensions.Y + 1) * C.sizeCell)
+            if (E.GetMousePosY() > C.Screen.Height - C.sizeCell && camera.Y < map.Dimensions.Y * C.sizeCell)
                 camera.Y += 10 * (E.GetMousePosY() - C.Screen.Height + C.sizeCell) / C.sizeCell;
 
             if (E.RightIsReleased())
