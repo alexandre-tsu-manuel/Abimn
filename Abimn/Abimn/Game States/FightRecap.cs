@@ -24,7 +24,10 @@ namespace Abimn
         public override void Update(GameTime gameTime)
         {
             if (exit.IsClicked())
+            {
+                Music.PlayOld();
                 this.State = State.Exit;
+            }
         }
 
         public override void Draw()
