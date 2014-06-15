@@ -268,20 +268,17 @@ namespace Abimn
                 G.currentGame.Push(new Inventory());
 
             //Change de map
-            if (_backmap.Decoration(_poshero) == 3)
+            if (_backmap.Decoration(_poshero) == 4 )
             {
                 _idmap = 2;
                 _backmap = new Map(_idmap);
-
-                while (_timeSinceMove < 0.3f)
-                {
-                    _poshero = _backmap.StartPos;
-                    _idhero = _backmap.IdStartHero;
-                    _shift = new Pos(0, 0);
-                }
+                _shift = new Pos(0, 0);
+                 _poshero = _backmap.StartPos;
+                 _idhero = _backmap.IdStartHero;
+                    
             }
 
-            if (_backmap.Decoration(_poshero) == 4)
+            if (_backmap.Decoration(_poshero) == 3)
             {
                 _idmap = 1;
                 _backmap = new Map(_idmap);

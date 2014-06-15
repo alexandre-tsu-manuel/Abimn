@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Abimn
 {
+
     /// <summary>
     /// Ecran de shop
     /// </summary>

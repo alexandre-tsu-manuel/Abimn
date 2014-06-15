@@ -95,29 +95,41 @@
                 tab[48] = new byte[C.nbCellsHorizontal] { 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
                 tab[49] = new byte[C.nbCellsHorizontal] { 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
 
+
+
                 for (int i = 0; i < C.nbCellsVertical; i++)
                 {
                     cells[i] = new Cell[C.nbCellsHorizontal];
                     for (int j = 0; j < C.nbCellsHorizontal; j++)
                     {
                         cells[i][j] = new Cell(false, tab[i][j], 0);
-                        if (cells[i][j].IdFloor == 2 || cells[i][j].IdFloor == 3 || cells[i][j].IdFloor == 5 || cells[i][j].IdDeco == 2)
+                                      }
+                }
+
+
+                sizeCell = C.sizeCell;
+                dimensions = new Pos(C.nbCellsHorizontal, C.nbCellsVertical);
+                //cells[15][10].Travel = true;
+                //cells[01][06].Travel = true;
+                cells[21][10].IdDeco = 2;
+                cells[25][10].IdDeco = 2;
+                cells[15][10].IdDeco = 4;
+                cells[15][20].IdDeco = 5;
+
+
+                for (int i = 0; i < C.nbCellsVertical; i++)
+                {
+                    for (int j = 0; j < C.nbCellsHorizontal; j++)
+                    {
+                        if (cells[i][j].IdFloor == 2 || cells[i][j].IdFloor == 3 || cells[i][j].IdDeco == 5)
                             cells[i][j].Blocking = true;
 
                     }
                 }
-                sizeCell = C.sizeCell;
-                dimensions = new Pos(C.nbCellsHorizontal, C.nbCellsVertical);
-                cells[15][10].Travel = true;
-                cells[01][06].Travel = true;
-                cells[21][10].IdDeco = 2;
-                cells[25][10].IdDeco = 2;
-               // cells[01][06].IdDeco = 2;
-                cells[15][10].IdDeco = 3;
-                cells[15][20].IdDeco = 5;
 
                 IdStartHero = 4;
                 StartPos = new Pos(11, 7);
+                
             }
 
             else
@@ -185,13 +197,23 @@
                         for (int j = 0; j < C.nbCellsHorizontal; j++)
                         {
                             cells[i][j] = new Cell(false, tab[i][j], 0);
-                            if (cells[i][j].IdFloor == 9 || cells[i][j].IdFloor == 8 )
-                                cells[i][j].Blocking = true;
                         }
                     }
+
                     sizeCell = C.sizeCell;
                     dimensions = new Pos(C.nbCellsHorizontal, C.nbCellsVertical);
                     cells[18][18].IdDeco = 4;
+                    cells[18][18].IdDeco = 3;
+
+                    for (int i = 0; i < C.nbCellsVertical; i++)
+                    {
+                        for (int j = 0; j < C.nbCellsHorizontal; j++)
+                        {
+                            if (cells[i][j].IdFloor == 2 || cells[i][j].IdFloor == 3 || cells[i][j].IdFloor == 8 || cells[i][j].IdFloor == 9)
+                                cells[i][j].Blocking = true;
+
+                        }
+                    }
 
                     IdStartHero = 3;
                     StartPos = new Pos(8, 24);
