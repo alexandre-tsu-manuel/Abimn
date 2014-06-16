@@ -133,6 +133,7 @@
     <Compile Include="Game States\OptionsMenu.cs" />
     <Compile Include="Game States\PauseMenu.cs" />
     <Compile Include="Game States\Shop.cs" />
+    <Compile Include="Game States\Transition.cs" />
     <Compile Include="Hero.cs" />
     <Compile Include="Maps\Cell.cs" />
     <Compile Include="Maps\FightMap.cs" />

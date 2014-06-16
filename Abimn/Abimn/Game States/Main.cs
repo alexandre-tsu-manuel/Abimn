@@ -22,10 +22,10 @@ namespace Abimn
         public override void Initialize()
         {
             Music.Play("1");
-            this._idmap = 1;
+            this._idmap = 3;
             this._backmap = new Map(_idmap);
             this._poshero = _backmap.StartPos;
-            this._idhero = 4;
+            this._idhero = 2;
             this._shift = new Pos();
             EntityHero = new Entity(new Pos((9 * 50), (7 * 50)));
         }
@@ -275,16 +275,31 @@ namespace Abimn
                 _shift = new Pos(0, 0);
                  _poshero = _backmap.StartPos;
                  _idhero = _backmap.IdStartHero;
+                 G.currentGame.Push(new Abimn.Game_States.Transition());
+
                     
             }
 
-            if (_backmap.Decoration(_poshero) == 3)
+            if (_backmap.Decoration(_poshero) == 3 && _idmap == 2)
             {
                 _idmap = 1;
+                _poshero = new Pos(15, 9);
                 _backmap = new Map(_idmap);
-                _poshero = _backmap.StartPos;
-                _idhero = _backmap.IdStartHero;
+                _idhero = 3;
                 _shift = new Pos(0, 0);
+                G.currentGame.Push(new Abimn.Game_States.Transition());
+
+            }
+
+            if (_backmap.Decoration(_poshero) == 3 && _idmap == 3)
+            {
+                _idmap = 1;
+                _poshero = new Pos(0, 25);
+                _backmap = new Map(_idmap);
+                _idhero = 2;
+                _shift = new Pos(0, 0);
+                G.currentGame.Push(new Abimn.Game_States.Transition());
+
             }
 
 
