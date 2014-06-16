@@ -127,12 +127,11 @@
     <Compile Include="Game States\FightRecap.cs" />
     <Compile Include="Game States\GameOver.cs" />
     <Compile Include="Game States\HeroCreator.cs" />
-    <Compile Include="Game States\Inventory.cs" />
+    <Compile Include="Game States\Interact.cs" />
     <Compile Include="Game States\Main.cs" />
     <Compile Include="Game States\Menu.cs" />
     <Compile Include="Game States\OptionsMenu.cs" />
     <Compile Include="Game States\PauseMenu.cs" />
-    <Compile Include="Game States\Shop.cs" />
     <Compile Include="Game States\Transition.cs" />
     <Compile Include="Hero.cs" />
     <Compile Include="Maps\Cell.cs" />

@@ -150,7 +150,7 @@ namespace Abimn
         /// Regarde les trois cases en face du personnage
         /// Retourne vrai si elles sont occupées par un marchand
         /// </summary>
-        public bool Interact()
+        public int Interact()
         {
             Pos FrontTile = new Pos();
 
@@ -164,8 +164,8 @@ namespace Abimn
                     FrontTile = new Pos(_poshero.X, _poshero.Y + 1);
                 if (_idhero == 4)
                     FrontTile = new Pos(_poshero.X, _poshero.Y - 1);
-                if (FrontTile.X == 0 && FrontTile.X == 49 && _backmap.Decoration(FrontTile) == 4)
-                    return true;
+                if (FrontTile.X == 0 && FrontTile.X == 49 && _backmap.Decoration(FrontTile) == 5)
+                    return 5;
             }
             else
             {
@@ -206,43 +206,53 @@ namespace Abimn
                     _backmap.Decoration(FrontTileLeft) == 5 ||
                     _backmap.Decoration(FrontTileRight) == 5 ||
                     _backmap.Decoration(FrontTileFront) == 5) //id du marchand pour la Soutenance2
-                    return true;
+                    return 5;
             }
-            return false;
+            return 0;
         }
 
 
 
-        /*  /// <summary>
-          /// Appelle une nouvelle map
-          /// </summary>
-          public void Travel()
-          {
-              Pos HighTile = new Pos(_poshero.X, _poshero.Y + 1);
-              if (_backmap.CanChangeMap(HighTile) && ( E.IsPushed(Keys.Up) || E.IsDown(Keys.Up)))
-              {
-                  if (_idmap == 1)
-                  {
-                      _idmap = 2;
-                      _poshero = _backmap.StartPos;
-                  }
+        /// <summary>
+        /// Appelle une nouvelle map
+        /// </summary>
+        public void Travel()
+        {
+            Pos HighTile = new Pos(_poshero.X, _poshero.Y - 1);
+            Pos DownTile = new Pos(_poshero.X, _poshero.Y + 1);
+            if ((_backmap.Decoration(HighTile) == 4 && (E.IsPushed(Keys.Up) || E.IsPushed(Keys.Z))) || (_backmap.Decoration(DownTile) == 4 && (E.IsPushed(Keys.Down) || E.IsPushed(Keys.S))))
+            {
+                _idmap = 2;
+                _backmap = new Map(_idmap);
+                _shift = new Pos(0, 0);
+                _poshero = _backmap.StartPos;
+                _idhero = _backmap.IdStartHero;
+                G.currentGame.Push(new Abimn.Game_States.Transition());
 
-                  else
-                  {
-                      _idmap = 1;
-                      _poshero = new Pos(1, 7);
-                  }
+            }
 
-                  _idmap = 2;
-                  _poshero = _backmap.StartPos;
-                  _backmap = new Map(_idmap);
-                  _idhero = _backmap.IdStartHero;
-                  _shift = new Pos(0, 0);
+            if (((_backmap.Decoration(HighTile) == 3 && (E.IsDown(Keys.Up) || E.IsDown(Keys.Z))) || (_backmap.Decoration(DownTile) == 3 && (E.IsDown(Keys.Down) || E.IsDown(Keys.S)))) && _idmap == 2)
+            {
+                _idmap = 1;
+                _poshero = new Pos(49, 48);
+                _backmap = new Map(_idmap);
+                _idhero = 4;
+                _shift = new Pos(0, 0);
+                G.currentGame.Push(new Abimn.Game_States.Transition());
 
+            }
 
-                  //TODO: ajouter un freeze de quelques milisecondes pour recentrer le perso
-              }
-          }*/
+            if (((_backmap.Decoration(HighTile) == 3 && (E.IsDown(Keys.Up) || E.IsDown(Keys.Z))) || (_backmap.Decoration(DownTile) == 3 && (E.IsDown(Keys.Down) || E.IsDown(Keys.S)))) && _idmap == 3)
+            {
+                _idmap = 1;
+                _backmap = new Map(_idmap);
+                _idhero = 2;
+                _poshero = new Pos(0, 25);
+                _shift = new Pos(0, 0);
+                G.currentGame.Push(new Abimn.Game_States.Transition());
+
+            }
+        }
 
         public override void Update(GameTime gameTime)
         {
@@ -255,8 +265,8 @@ namespace Abimn
             if (E.IsPushed(Keys.Escape))
                 G.currentGame.Push(new PauseMenu());
 
-            if (E.IsPushed(Keys.I))
-                G.currentGame.Push(new Inventory());
+            /*if (E.IsPushed(Keys.I))
+                G.currentGame.Push(new Inventory());*/
 
             if (_backmap.Decoration(_poshero) == 2)
             {
@@ -264,43 +274,11 @@ namespace Abimn
                 _backmap.SetCell(_poshero, new Cell(false, 1, 0));
             }
 
-            if (Interact() == true && E.IsPushed(Keys.Space))
-                G.currentGame.Push(new Inventory());
+            if (Interact() == 5 && E.IsPushed(Keys.Space))
+                G.currentGame.Push(new Abimn.Game_States.Interact());
 
             //Change de map
-            if (_backmap.Decoration(_poshero) == 4 )
-            {
-                _idmap = 2;
-                _backmap = new Map(_idmap);
-                _shift = new Pos(0, 0);
-                 _poshero = _backmap.StartPos;
-                 _idhero = _backmap.IdStartHero;
-                 G.currentGame.Push(new Abimn.Game_States.Transition());
-
-                    
-            }
-
-            if (_backmap.Decoration(_poshero) == 3 && _idmap == 2)
-            {
-                _idmap = 1;
-                _poshero = new Pos(15, 9);
-                _backmap = new Map(_idmap);
-                _idhero = 3;
-                _shift = new Pos(0, 0);
-                G.currentGame.Push(new Abimn.Game_States.Transition());
-
-            }
-
-            if (_backmap.Decoration(_poshero) == 3 && _idmap == 3)
-            {
-                _idmap = 1;
-                _poshero = new Pos(0, 25);
-                _backmap = new Map(_idmap);
-                _idhero = 2;
-                _shift = new Pos(0, 0);
-                G.currentGame.Push(new Abimn.Game_States.Transition());
-
-            }
+            Travel();
 
 
             //Deplacement
@@ -320,12 +298,6 @@ namespace Abimn
             }
             EntityHero.LoadContent("hero", _idhero.ToString());
             MoveTile();
-
-
-
-            //mouv ennemys
-
-            //check présence ennemys pour lancer Fight: dans la classe ennemy en fonction de l'ennemy? post figth: unload?
         }
 
         /// <summary>

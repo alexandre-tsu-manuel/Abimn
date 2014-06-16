@@ -23,7 +23,7 @@ namespace Abimn.Game_States
         public override void Update(Microsoft.Xna.Framework.GameTime gametime)
         {
 
-            System.Threading.Thread.Sleep(1500);
+            System.Threading.Thread.Sleep(1100);
                 this.State = State.Exit;
         }
 

@@ -13,11 +13,12 @@ namespace Abimn
 
         public override void Initialize()
         {
+            Cursor.SetVisibility(true);
         }
 
         public override void Update(GameTime gameTime)
         {
-            if (E.IsPushed(Keys.Escape))
+            if (E.IsPushed(Keys.Escape) || E.IsPushed(Keys.Space))
                 this.State = State.Exit;
         }
 

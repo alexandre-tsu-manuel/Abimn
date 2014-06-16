@@ -109,19 +109,17 @@
 
                 sizeCell = C.sizeCell;
                 dimensions = new Pos(C.nbCellsHorizontal, C.nbCellsVertical);
-                //cells[15][10].Travel = true;
-                //cells[01][06].Travel = true;
                 cells[21][10].IdDeco = 2;
                 cells[25][10].IdDeco = 2;
-                cells[15][10].IdDeco = 4;
                 cells[15][20].IdDeco = 5;
+                cells[49][47].IdDeco = 4;
 
 
                 for (int i = 0; i < C.nbCellsVertical; i++)
                 {
                     for (int j = 0; j < C.nbCellsHorizontal; j++)
                     {
-                        if (cells[i][j].IdFloor == 2 || cells[i][j].IdFloor == 3 || cells[i][j].IdDeco == 5)
+                        if (cells[i][j].IdFloor == 2 || cells[i][j].IdFloor == 3 || cells[i][j].IdDeco == 5 || cells[i][j].IdDeco == 4)
                             cells[i][j].Blocking = true;
 
                     }
@@ -202,14 +200,14 @@
 
                     sizeCell = C.sizeCell;
                     dimensions = new Pos(C.nbCellsHorizontal, C.nbCellsVertical);
-                    cells[18][18].IdDeco = 4;
-                    cells[18][18].IdDeco = 3;
+                    
+                    cells[08][25].IdDeco = 3;
 
                     for (int i = 0; i < C.nbCellsVertical; i++)
                     {
                         for (int j = 0; j < C.nbCellsHorizontal; j++)
                         {
-                            if (cells[i][j].IdFloor == 2 || cells[i][j].IdFloor == 3 || cells[i][j].IdFloor == 8 || cells[i][j].IdFloor == 9)
+                            if (cells[i][j].IdFloor == 2 || cells[i][j].IdFloor == 3 || cells[i][j].IdFloor == 8 || cells[i][j].IdFloor == 9 || cells[i][j].IdDeco == 3)
                                 cells[i][j].Blocking = true;
 
                         }
@@ -241,11 +239,11 @@
                         tab[12] = new byte[C.nbCellsHorizontal] { 9, 9, 9, 9, 9, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 };
                         tab[13] = new byte[C.nbCellsHorizontal] { 9, 9, 9, 9, 9, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 };
                         tab[14] = new byte[C.nbCellsHorizontal] { 9, 9, 9, 9, 9, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 };
-                        tab[15] = new byte[C.nbCellsHorizontal] { 9, 9, 9, 9, 9, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 };
-                        tab[16] = new byte[C.nbCellsHorizontal] { 9, 9, 9, 9, 9, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 };
-                        tab[17] = new byte[C.nbCellsHorizontal] { 9, 9, 9, 9, 9, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 };
-                        tab[18] = new byte[C.nbCellsHorizontal] { 9, 9, 9, 9, 9, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 };
-                        tab[19] = new byte[C.nbCellsHorizontal] { 9, 9, 9, 9, 9, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 };
+                        tab[15] = new byte[C.nbCellsHorizontal] { 9, 9, 9, 1, 1, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 };
+                        tab[16] = new byte[C.nbCellsHorizontal] { 9, 9, 9, 1, 1, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 };
+                        tab[17] = new byte[C.nbCellsHorizontal] { 9, 9, 1, 1, 1, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 };
+                        tab[18] = new byte[C.nbCellsHorizontal] { 9, 9, 9, 1, 1, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 };
+                        tab[19] = new byte[C.nbCellsHorizontal] { 9, 9, 9, 1, 1, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 };
                         tab[20] = new byte[C.nbCellsHorizontal] { 9, 9, 9, 9, 9, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 };
                         tab[21] = new byte[C.nbCellsHorizontal] { 9, 9, 9, 9, 9, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 };
                         tab[22] = new byte[C.nbCellsHorizontal] { 9, 9, 9, 9, 9, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 };
@@ -253,7 +251,7 @@
                         tab[24] = new byte[C.nbCellsHorizontal] { 9, 9, 9, 9, 9, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 1, 1, 1, 1, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 };
                         tab[25] = new byte[C.nbCellsHorizontal] { 9, 9, 9, 9, 9, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 };
                         tab[26] = new byte[C.nbCellsHorizontal] { 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 1, 1, 1, 1, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 };
-                        tab[27] = new byte[C.nbCellsHorizontal] { 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 };
+                        tab[27] = new byte[C.nbCellsHorizontal] { 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 };
                         tab[28] = new byte[C.nbCellsHorizontal] { 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 };
                         tab[29] = new byte[C.nbCellsHorizontal] { 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 };
                         tab[30] = new byte[C.nbCellsHorizontal] { 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 };
@@ -289,13 +287,13 @@
 
                         sizeCell = C.sizeCell;
                         dimensions = new Pos(C.nbCellsHorizontal, C.nbCellsVertical);
-                        cells[27][19].IdDeco = 3;
+                        cells[17][02].IdDeco = 3;
 
                         for (int i = 0; i < C.nbCellsVertical; i++)
                         {
                             for (int j = 0; j < C.nbCellsHorizontal; j++)
                             {
-                                if (cells[i][j].IdFloor == 2 || cells[i][j].IdFloor == 3 || cells[i][j].IdFloor == 8 || cells[i][j].IdFloor == 9)
+                                if (cells[i][j].IdFloor == 2 || cells[i][j].IdFloor == 3 || cells[i][j].IdFloor == 8 || cells[i][j].IdFloor == 9  || cells[i][j].IdDeco == 3)
                                     cells[i][j].Blocking = true;
 
                             }
