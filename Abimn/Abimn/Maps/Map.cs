@@ -111,7 +111,7 @@
                 dimensions = new Pos(C.nbCellsHorizontal, C.nbCellsVertical);
                 cells[21][10].IdDeco = 2;
                 cells[25][10].IdDeco = 2;
-                cells[15][20].IdDeco = 5;
+                cells[04][25].IdDeco = 5;
                 cells[49][47].IdDeco = 4;
 
 

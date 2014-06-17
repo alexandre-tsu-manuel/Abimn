@@ -18,6 +18,7 @@ namespace Abimn
         float _timeSinceMove = 0f;
         float _timeStart = 0f;
         private Entity EntityHero;
+        private bool event1;
 
         public Main() : base(true) { }
 
@@ -33,6 +34,7 @@ namespace Abimn
             this._shift = new Pos();
             this._time = 0;
             EntityHero = new Entity(new Pos((9 * 50), (7 * 50)));
+            this.event1 = false;
 
         }
 
@@ -305,8 +307,14 @@ namespace Abimn
                 _backmap.SetCell(_poshero, new Cell(false, 1, 0));
             }
 
+            if (Interact() == 5 && event1 == false)
+            {
+                G.currentGame.Push(new Abimn.Game_States.Interact(2));
+                event1 = true;
+            }
+
             if (Interact() == 5 && E.IsPushed(Keys.Space))
-                G.currentGame.Push(new Abimn.Game_States.Interact(1));
+                G.currentGame.Push(new Abimn.Game_States.Interact(3));
 
             //Change de map
             Travel();
