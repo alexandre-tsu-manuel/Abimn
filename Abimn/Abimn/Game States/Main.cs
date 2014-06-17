@@ -280,6 +280,18 @@ namespace Abimn
                 G.currentGame.Push(new Abimn.Game_States.Transition());
 
             }
+
+            if (((_backmap.Decoration(_poshero) == 6 && (E.IsDown(Keys.Up) || E.IsDown(Keys.Z))) || (_backmap.Decoration(_poshero) == 6 && (E.IsDown(Keys.Down) || E.IsDown(Keys.S)))) && _idmap == 1)
+            {
+                _idmap = 3;
+                _backmap = new Map(_idmap);
+                _idhero = 0;
+                _dir = "left";
+                _poshero = new Pos(05, 48);
+                _shift = new Pos(0, 0);
+                G.currentGame.Push(new Abimn.Game_States.Transition());
+
+            }
         }
 
         public override void Update(GameTime gameTime)
@@ -290,7 +302,7 @@ namespace Abimn
 
             Cursor.SetVisibility(false);
 
-            if (_timeStart <= 4f)
+            if (_timeStart <= 4f || E.IsPushed(Keys.M))
                 G.currentGame.Push(new Abimn.Game_States.Interact(1));
 
 

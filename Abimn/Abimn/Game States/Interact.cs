@@ -30,7 +30,6 @@ namespace Abimn.Game_States
 
         public override void Initialize()
         {
-            Cursor.SetVisibility(true);
 
             fond_interact = new Entity();
             fond_interact.Initialize(new Pos(fond_interact.Pos.X, fond_interact.Pos.Y + 470));
@@ -53,31 +52,57 @@ namespace Abimn.Game_States
                 case 1: switch (_idtext)
                     {
                         case 1: return "Ou suis-je?";
-                        case 2: return "Le noir... \n Impossible de me souvenir d'autre chose...";
-                        case 3: return "Qui suis-je?";
-                        case 4: return "Il ne me reste rien. Meme pas un nom...";
-                        case 5: return "Mais... J'entends du bruit au loin... Il y a quelqu'un?";
+                        case 3: return "il fait sombre... \nFroid... \nPourquoi suis-je ici?";
+                        case 4: return "Meme mon propre nom...";
+                        case 2: return "Je ne connais pas cette caverne... \nOn dirait une ruine... ou un tombeau? ";
+                        case 5: return "... Que!";
+                        case 6: return "J'entends du bruit au loin... \nPeut-etre que quelqu'un aura des reponses";
                         default:
                             return "";
 
                     }
                 case 2: switch (_idtext)
                     {
-                        case 1: return "Bienvenue jeune ame. \nComment vous sentez vous?\n";
+                        case 1: return "Bien le bonjour. \nComment vous sentez vous?\n";
                         case 2: ask = true;
-                            return " [W]-Comme si j'etait tombee du quatrieme etage... \n [X]-Bien. Merci. \n [C]-Qui etes-vous?";
-                        case 3: return "Ne vous en faites pas. Je suis la pour vous aider. \nJ'aurai besoin de votre nom pour verifier votre dossier.";
-                        case 4: 
-                              ask = true;
-                            return "[W]-Euh... \n[X]-Je ne sais pas... \n[C]-Francoise. \n[V]-J'ai demande avant!";
-                        case 5: if (choice == 4)
-                            { return "Je m'appelle Ferdinand. \nVoulez vous bien me dire votre nom a present?\nVous ne vous souvenez pas de votre nom? Voila qui est curieux... \nEt complique..."; }
+                            return " [W]-Comme si j'etais tombee du quatrieme etage... \n [X]-Bien. Merci. \n [C]-Un renard... qui parle... \n [V]-Qui etes-vous? ";
+                        case 3: return "Ne vous en faites pas. Je suis la pour vous aider. \nVous avez l'air un eu deboussolee mon amie. \nNe vous en faites pas. Tout va bien se passer. \n Quel est votre nom?";
+                        case 4:
+                            ask = true;
+                            if (choice == 4)
+                                return "[W]-Euh... \n[X]-Je ne sais pas... \n[C]-Francoise. \n[V]-J'ai demande avant!";
                             else
-                        { return "Vous ne vous souvenez pas de votre nom? Voila qui est curieux... \nEt complique...";}
+                                return "[W]-Euh... \n[X]-Cela ne vous regarde pas. \n[C]-Marie-France de la Marne.";
+                        case 5: if (choice == 4)
+                            { return "Je m'appelle Mesmer, prince des Abysses. \nVoulez vous bien me dire votre nom a present?\n...\nVous ne vous souvenez pas de votre nom, n'est-ce pas?\n Voila qui est curieux... \nEt complique..."; }
+                            else
+                            { return "Mmmh... Curieux pour un esprit aussi rayonnant... \nVous ne vous souvenez pas de votre nom n'est-ce pas?"; }
                         case 6: return "...";
-                        case 7: return "Cela ne m'arrange pas. Toutes les ames qui arrivent ici doivent etre \netiquetees pour pouvoir etre aiguillees...";
-                        case 8: return "Je ne vois qu'une personne pour regler cette affaire. \nVous devriez aller voir Monsieur Longplancher, \nle responsable de l'orienation.";
-                        case 9: return "Si vous voulez bien me laisser, d'autres arrivants ne devraient pas tarder.";
+                        case 7: return "Et bien je suis navre mais je ne sais pas trop comment vous aider sans \nmeme pouvoir jeter un oeil a votre dossier... \nJe dois rester ici pour accueillir les arrivants qui ont deja \nleurs papiers, voyez-vous...";
+                        case 8: ask = true;
+                            return "[W]-C'est tout ce que ca vous fait?! \n[X]-Mais que m'est-il arrive? Je ne sais meme pas ce que je fais ici...\n    ni quel est cet endroit.";
+                        case 9: return "Calmez-vou. Cela ne sert a rien de s'enerver.";
+                        case 10: return " Vous allez surement trouver cela etrange mais... vous etes morte. \nLaissez moi etre le premier a vous souhaiter la bienvenu dans l'Abimn.";
+                        case 11: return "Certains habitants de votre monde appelle le \nnotre 'Limbes' ou 'Purgatoire' \nMais vous vous rendrez vites compte que ces noms sont \nbien eloignes de la verite.";
+                        case 12: return "Il peut vous paraitre un peu etrange mais vous ne devriez \npas y rester trop longtemps. \nLes ames ne font qu'y passer en general. \n Des que votre probleme d'identite sera regle, vous serez jugee et \npartirez pour votre Repos Eternel: \nle Paradis ou l'Enfer";
+                        case 14: return "Voulez-vous que je vous donne quelques conseils?\n Pour survivre jusqu'a votre depart?";
+                        case 15: ask = true;
+                            return "[w]-Oui, s'il vous plait.\n[X]-Non, merci. Je saurai me debrouiller seule.";
+                        case 16: if (choice == 2)
+                            {
+                                _idtext = 19; 
+                            return "Tres bien."; }
+                            else
+                            { return "Il semble que vous ayez deja compris comment vous deplacer dans \nvotre nouvel environnement...\nSachez que vous pouvez appuyer sur [B] pour courrir.\nCela pourrait etre utile pour sauver votre vie..."; }
+                        case 17: return "Lorsque vous passer a proximiter de formes de vies intelligentes, \nvous pouvez essayer de leur parler en appuyant sur [Espace].\nLors des Dialogues, les quatre touches de reponses sont [W] [X] [C] et [V].";
+                        case 13: return "L'Abimn est un monde plein de danger pour une ame \nsans pouvoir ni souvenir comme vous.\n C'est aussi pour cela qu'elles ne restent pas... Hmmm...";
+                        case 18: return "Faites attention.\nA l'exterieur, des creatures rodes.\nEt je vous prie de me croire sur parole quand je vous dis que \nl'energie d'une ame perdue est leur plat favori.";
+                    case 19: return "Tres bien.\nPour retrouver vos souvenirs, vous devirez aller directement\n demander a l'O.O.O, Organisme d'Orientation d'Outre-tombre. \nLe responsable, Monsieur Longplancher, devrait pouvoir retrouver votre passe.";
+                    case 20: return "Prenez ce couteau. Il vous evitera d'avoir des problemes en chemin.";
+                    case 21: return "\n \n~~~~ Arme: Couteau Spirit ~~~~";
+                    case 22: return "A present partez. Les prochains arrivants ne devraient pas tarder\net je ne peux pas prendre de retard dans mon travail. \nAller a l'Est, vous trouverez l'administration sans probleme.";
+                    case 23: return "Bon courrage, mon amie.";
+
                     default:
                             return "";
 
