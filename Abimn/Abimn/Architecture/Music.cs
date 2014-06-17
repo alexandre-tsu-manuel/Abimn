@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework.Media;
+﻿using System;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Media;
 
 namespace Abimn
 {
@@ -6,6 +8,29 @@ namespace Abimn
     {
         private static string old = "";
         private static string current = "";
+        public static float Volume
+        {
+            get { return volume; }
+            set
+            {
+                volume = MathHelper.Clamp(value, 0f, 100f);
+                MediaPlayer.Volume = MathHelper.Clamp((float)(Math.Log(volume + 1) / Math.Log(101)), 0.0f, 1.0f);
+            }
+        }
+        private static float volume = 100;
+        public static bool Allowed
+        {
+            get { return allowed; }
+            set
+            {
+                allowed = value;
+                if (allowed)
+                    Music.Volume = Music.Volume;
+                else
+                    MediaPlayer.Volume = 0;
+            }
+        }
+        private static bool allowed = true;
 
         public static void Play(string path, bool force = false)
         {

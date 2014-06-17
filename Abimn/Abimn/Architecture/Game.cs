@@ -26,7 +26,6 @@ namespace Abimn
             G.currentGame = new Stack<GameType>();
             G.content = new Hashtable();
 
-            //this.IsMouseVisible = true;
             this.graphics.IsFullScreen = false;
             this.graphics.PreferredBackBufferWidth = C.Screen.Width;
             this.graphics.PreferredBackBufferHeight = C.Screen.Height;
@@ -38,6 +37,9 @@ namespace Abimn
 
             Cursor.Initialize();
             Cursor.SetCursor("cursor", "default", "clicked", new Pos(-15, -5));
+
+            Music.Volume = 80;
+
             G.currentGame.Push(new Menu());
         }
 

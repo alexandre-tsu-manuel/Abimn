@@ -17,8 +17,6 @@ namespace Abimn
         private Entity cannaVol;
         private Entity cannaLum;
 
-        bool son; // vrai si l'utilisateur veux entendre de la musique.
-
         public OptionsMenu() : base(false) { }
 
         public override void Initialize()
@@ -45,8 +43,6 @@ namespace Abimn
             cannaLum = new Entity(new Pos(luminosite.Pos.X + 46, luminosite.Pos.Y + 38));
             cannaVol.LoadContent("options menu", "8", "9", "10");
             cannaLum.LoadContent("options menu", "8", "9", "10");
-
-            son = true; // de base, la musique est activee
         }
 
         /// <summary>
@@ -60,18 +56,20 @@ namespace Abimn
             {
                 sonEnabled.Visible = false;
                 sonDisabled.Visible = true;
-                son = false;
+                Music.Allowed = false;
             }
             else if (sonDisabled.IsClicked())
             {
                 sonEnabled.Visible = true;
                 sonDisabled.Visible = false;
-                son = true;
+                Music.Allowed = true;
             }
 
             if (volume.MouseIsOver(new Pos(30, 0)) && E.LeftIsDown())
             {
                 cannaVol.Pos.I = E.GetMousePosX() - 10;
+                float lol = (cannaVol.Pos.X - volume.Pos.X - 30) / 100;
+                Music.Volume = lol;
             }
 
             if (luminosite.MouseIsOver(new Pos(30, 0)) && E.LeftIsDown())
