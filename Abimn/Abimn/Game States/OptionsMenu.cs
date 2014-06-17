@@ -68,13 +68,13 @@ namespace Abimn
             if (volume.MouseIsOver(new Pos(30, 0)) && E.LeftIsDown())
             {
                 cannaVol.Pos.I = E.GetMousePosX() - 10;
-                float lol = (cannaVol.Pos.X - volume.Pos.X - 30) / 100;
-                Music.Volume = lol;
+                Music.Volume = (cannaVol.Pos.X - volume.Pos.X - 30) / 100;
             }
 
             if (luminosite.MouseIsOver(new Pos(30, 0)) && E.LeftIsDown())
             {
                 cannaLum.Pos.I = E.GetMousePosX() - 10;
+                G.brightness = ((cannaLum.Pos.I - luminosite.Pos.I - 40) * 100 / (luminosite.Rect.Width - 60) + 50) / 2;
             }
 
             if (retour.IsClicked() && E.LeftIsReleased())

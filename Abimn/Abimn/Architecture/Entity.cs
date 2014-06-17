@@ -25,6 +25,16 @@ namespace Abimn
         private bool _visible;
 
         /// <summary>
+        /// Vecteur vitesse de l'entity
+        /// </summary>
+        public float Opacity
+        {
+            get { return _opacity; }
+            set { _opacity = MathHelper.Clamp(value, 0, 1); }
+        }
+        private float _opacity;
+
+        /// <summary>
         /// Position de l'entity
         /// </summary>
         public Pos Pos
@@ -181,6 +191,7 @@ namespace Abimn
             Delta = new Pos();
             Rotation = 0;
             Scale = 1;
+            Opacity = 1;
         }
 
         /// <summary>
@@ -282,11 +293,11 @@ namespace Abimn
             if (this.Visible)
                 if (this.MouseIsOver())
                     if (E.LeftIsDown())
-                        Tile.Draw(KeyTexturePushed, Pos + Delta, Rotation, Scale);
+                        Tile.Draw(KeyTexturePushed, Pos + Delta, Rotation, Scale, Opacity);
                     else
-                        Tile.Draw(KeyTextureOver, Pos + Delta, Rotation, Scale);
+                        Tile.Draw(KeyTextureOver, Pos + Delta, Rotation, Scale, Opacity);
                 else
-                    Tile.Draw(KeyTextureNormal, Pos + Delta, Rotation, Scale);
+                    Tile.Draw(KeyTextureNormal, Pos + Delta, Rotation, Scale, Opacity);
         }
     }
 }

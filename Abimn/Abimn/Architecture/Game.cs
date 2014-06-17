@@ -13,6 +13,7 @@ namespace Abimn
     public class Game : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
+        Entity black, white;
 
         public Game()
         {
@@ -39,6 +40,14 @@ namespace Abimn
             Cursor.SetCursor("cursor", "default", "clicked", new Pos(-15, -5));
 
             Music.Volume = 80;
+            G.brightness = 50;
+
+            black = new Entity();
+            black.LoadContent("black");
+            black.Opacity = 0;
+            white = new Entity();
+            white.LoadContent("white");
+            white.Opacity = 0;
 
             G.currentGame.Push(new Menu());
         }
@@ -62,6 +71,17 @@ namespace Abimn
             }
 
             E.Update();
+
+            if (G.brightness >= 50)
+            {
+                black.Opacity = 0;
+                white.Opacity = ((float)G.brightness - 50) / 50;
+            }
+            if (G.brightness < 50)
+            {
+                white.Opacity = 0;
+                black.Opacity = (50 - (float)G.brightness) / 50;
+            }
 
             G.currentGame.Peek().Update(gameTime);
 
@@ -96,6 +116,10 @@ namespace Abimn
                 G.currentGame.Push(buffer.Pop());
             }
             Cursor.Draw();
+
+            black.Draw();
+            white.Draw();
+
             G.spriteBatch.End();
 
             base.Draw(gameTime);

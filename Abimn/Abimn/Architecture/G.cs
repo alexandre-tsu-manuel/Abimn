@@ -14,5 +14,6 @@ namespace Abimn
         public static Stack<GameType> currentGame;
         public static SpriteBatch spriteBatch;
         public static Hashtable content;
+        public static int brightness;
     }
 }
