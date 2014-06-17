@@ -1,5 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using System.Timers;
+using System;
+
 
 namespace Abimn
 {
@@ -9,26 +12,31 @@ namespace Abimn
     public class Main : GameType
     {
         private Map _backmap;
-        private Pos _poshero;
-        private int _idhero;
-        private int _idmap;
+        private Pos _poshero, _shift;
+        private int _idhero, _idmap, _time;
+        private string _dir;
         float _timeSinceMove = 0f;
-        float _timeSinceStart = 0f;
-        private Pos _shift;
+        float _timeStart = 0f;
         private Entity EntityHero;
 
         public Main() : base(true) { }
 
         public override void Initialize()
         {
+
             Music.Play("1");
             this._idmap = 3;
             this._backmap = new Map(_idmap);
             this._poshero = _backmap.StartPos;
-            this._idhero = 2;
+            this._idhero = 0;
+            this._dir = "right";
             this._shift = new Pos();
+            this._time = 0;
             EntityHero = new Entity(new Pos((9 * 50), (7 * 50)));
+
         }
+
+
 
         /// <summary>
         /// permet de bouger le HERO d'une case à l'autre en fonction de la touche
@@ -36,11 +44,23 @@ namespace Abimn
         /// </summary>
         public void MoveHeros()
         {
-            _timeSinceMove = 0f;
+            _time++;
+
+            if (_time > 10)//changement de l'indice pour les sprites
+            {
+                if (E.IsDown(Keys.B)) //courrir
+                    _idhero = (_idhero + 1) % 3;
+
+                else
+                    _idhero = (_idhero + 1) % 2;
+
+                _time = 0;
+            }
+
 
             if (E.IsPushed(Keys.Q) || E.IsPushed(Keys.Left) || E.IsDown(Keys.Q) || E.IsDown(Keys.Left))
             {
-                _idhero = 1;
+                _dir = "left";
                 Pos NextStep = new Pos(_poshero.X - 1, _poshero.Y);
                 if (_backmap.CanMoveOn(NextStep))
                     _shift.X -= 3;
@@ -59,7 +79,7 @@ namespace Abimn
             {
                 if (E.IsPushed(Keys.D) || E.IsPushed(Keys.Right) || E.IsDown(Keys.D) || E.IsDown(Keys.Right))
                 {
-                    _idhero = 2;
+                    _dir = "right";
                     Pos NextStep = new Pos(_poshero.X + 1, _poshero.Y);
                     if (_backmap.CanMoveOn(NextStep))
                     { _shift.X += 3; }
@@ -79,7 +99,7 @@ namespace Abimn
                 {
                     if (E.IsPushed(Keys.Z) || E.IsPushed(Keys.Up) || E.IsDown(Keys.Z) || E.IsDown(Keys.Up))
                     {
-                        _idhero = 3;
+                        _dir = "up";
                         Pos NextStep = new Pos(_poshero.X, _poshero.Y - 1);
                         if (_backmap.CanMoveOn(NextStep))
                             _shift.Y -= 3;
@@ -98,7 +118,7 @@ namespace Abimn
                     {
                         if (E.IsPushed(Keys.S) || E.IsPushed(Keys.Down) || E.IsDown(Keys.S) || E.IsDown(Keys.Down))
                         {
-                            _idhero = 4;
+                            _dir = "down";
                             Pos NextStep = new Pos(_poshero.X, _poshero.Y + 1);
                             if (_backmap.CanMoveOn(NextStep))
                                 _shift.Y += 3;
@@ -113,9 +133,13 @@ namespace Abimn
                                     _shift.Y += 3;
                             }
                         }
+
+                        else
+                            _idhero = 0;
                     }
                 }
             }
+
         }
 
         /// <summary>
@@ -156,13 +180,13 @@ namespace Abimn
 
             if (FrontTile.X == 0 && FrontTile.X == 49)
             {
-                if (_idhero == 1)
+                if (_dir == "left")
                     FrontTile = new Pos(_poshero.X - 1, _poshero.Y);
-                if (_idhero == 2)
+                if (_dir == "right")
                     FrontTile = new Pos(_poshero.X + 1, _poshero.Y);
-                if (_idhero == 3)
+                if (_dir == "down")
                     FrontTile = new Pos(_poshero.X, _poshero.Y + 1);
-                if (_idhero == 4)
+                if (_dir == "up")
                     FrontTile = new Pos(_poshero.X, _poshero.Y - 1);
                 if (FrontTile.X == 0 && FrontTile.X == 49 && _backmap.Decoration(FrontTile) == 5)
                     return 5;
@@ -173,28 +197,28 @@ namespace Abimn
                 Pos FrontTileRight = new Pos();
                 Pos FrontTileFront = new Pos();
 
-                if (_idhero == 1)
+                if (_dir == "left")
                 {
                     FrontTile = new Pos(_poshero.X - 1, _poshero.Y);
                     FrontTileLeft = new Pos(FrontTile.X, FrontTile.Y - 1);
                     FrontTileRight = new Pos(FrontTile.X, FrontTile.Y + 1);
                     FrontTileFront = new Pos(FrontTile.X - 1, FrontTile.Y);
                 }
-                if (_idhero == 2)
+                if (_dir == "right")
                 {
                     FrontTile = new Pos(_poshero.X + 1, _poshero.Y);
                     FrontTileLeft = new Pos(FrontTile.X, FrontTile.Y - 1);
                     FrontTileRight = new Pos(FrontTile.X, FrontTile.Y + 1);
                     FrontTileFront = new Pos(FrontTile.X + 1, FrontTile.Y);
                 }
-                if (_idhero == 4)
+                if (_dir == "down")
                 {
                     FrontTile = new Pos(_poshero.X, _poshero.Y + 1);
                     FrontTileLeft = new Pos(FrontTile.X - 1, FrontTile.Y);
                     FrontTileRight = new Pos(FrontTile.X + 1, FrontTile.Y);
                     FrontTileFront = new Pos(FrontTile.X, FrontTile.Y + 1);
                 }
-                if (_idhero == 3)
+                if (_dir == "up")
                 {
                     FrontTile = new Pos(_poshero.X, _poshero.Y - 1);
                     FrontTileLeft = new Pos(FrontTile.X - 1, FrontTile.Y);
@@ -226,7 +250,7 @@ namespace Abimn
                 _backmap = new Map(_idmap);
                 _shift = new Pos(0, 0);
                 _poshero = _backmap.StartPos;
-                _idhero = _backmap.IdStartHero;
+                _idhero = 0;
                 G.currentGame.Push(new Abimn.Game_States.Transition());
 
             }
@@ -236,7 +260,8 @@ namespace Abimn
                 _idmap = 1;
                 _poshero = new Pos(49, 48);
                 _backmap = new Map(_idmap);
-                _idhero = 4;
+                _idhero = 0;
+                _dir = "down";
                 _shift = new Pos(0, 0);
                 G.currentGame.Push(new Abimn.Game_States.Transition());
 
@@ -246,7 +271,8 @@ namespace Abimn
             {
                 _idmap = 1;
                 _backmap = new Map(_idmap);
-                _idhero = 2;
+                _idhero = 0;
+                _dir = "right";
                 _poshero = new Pos(0, 25);
                 _shift = new Pos(0, 0);
                 G.currentGame.Push(new Abimn.Game_States.Transition());
@@ -257,10 +283,15 @@ namespace Abimn
         public override void Update(GameTime gameTime)
         {
             _timeSinceMove += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            _timeSinceStart += (float)gameTime.TotalGameTime.TotalSeconds;
+            _timeStart += (float)gameTime.TotalGameTime.TotalSeconds;
             EntityHero = new Entity(new Pos((9 * 50), (7 * 50)));
 
             Cursor.SetVisibility(false);
+
+            if (_timeStart <= 4f)
+                G.currentGame.Push(new Abimn.Game_States.Interact(1));
+
+
             //Change CurrentGame
             if (E.IsPushed(Keys.Escape))
                 G.currentGame.Push(new PauseMenu());
@@ -275,7 +306,7 @@ namespace Abimn
             }
 
             if (Interact() == 5 && E.IsPushed(Keys.Space))
-                G.currentGame.Push(new Abimn.Game_States.Interact());
+                G.currentGame.Push(new Abimn.Game_States.Interact(1));
 
             //Change de map
             Travel();
@@ -285,9 +316,11 @@ namespace Abimn
             if (E.IsDown(Keys.B)) //courrir
             {
                 if (_timeSinceMove > 0.002f)//règle la vitesse de défilement
+                {
                     MoveHeros();
-                MoveHeros();
-                MoveHeros();//Vérifie les touches de mouvements, accumulation pour course (update trop proches)
+                    MoveHeros();
+                    MoveHeros();
+                }//Vérifie les touches de mouvements, accumulation pour course (update trop proches)
 
             }
 
@@ -295,8 +328,9 @@ namespace Abimn
             {
                 if (_timeSinceMove > 0.01f)//règle la vitesse de défilement
                     MoveHeros(); //Vérifie les touches de mouvements
+
             }
-            EntityHero.LoadContent("hero", _idhero.ToString());
+            EntityHero.LoadContent("new hero", _dir + _idhero.ToString());
             MoveTile();
         }
 

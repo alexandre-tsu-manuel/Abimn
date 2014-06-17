@@ -37,7 +37,7 @@ namespace Abimn
         public override void Update(GameTime gameTime)
         {
             if (play.IsClicked())
-                G.currentGame.Push(new HeroCreator());
+                G.currentGame.Push(new Main());
             else if (options.IsClicked())
                 G.currentGame.Push(new OptionsMenu());
             else if (quit.IsClicked())

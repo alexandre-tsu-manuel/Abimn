@@ -20,12 +20,12 @@
         /// <summary>
         /// Récupère ou définit la direction du sprite
         /// </summary>
-        public int IdStartHero
+        public string DirStartHero
         {
-            get { return _idHeroStart; }
-            set { _idHeroStart = value; }
+            get { return _dirHeroStart; }
+            set { _dirHeroStart = value; }
         }
-        private int _idHeroStart;
+        private string _dirHeroStart;
 
         /// <summary>
         /// Récupère ou définit la position de depart du perso
@@ -44,8 +44,8 @@
                 cells = new Cell[C.nbCellsVertical][];
 
                 byte[][] tab = new byte[C.nbCellsVertical][];
-                tab[00] = new byte[C.nbCellsHorizontal] { 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 };
-                tab[01] = new byte[C.nbCellsHorizontal] { 2, 2, 2, 1, 1, 2, 2, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+                tab[00] = new byte[C.nbCellsHorizontal] { 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 };
+                tab[01] = new byte[C.nbCellsHorizontal] { 2, 2, 2, 1, 1, 2, 2, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 9, 9, 9, 9, 9, 1, 9, 9, 9, 9, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
                 tab[02] = new byte[C.nbCellsHorizontal] { 2, 1, 1, 1, 1, 2, 2, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
                 tab[03] = new byte[C.nbCellsHorizontal] { 2, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
                 tab[04] = new byte[C.nbCellsHorizontal] { 2, 2, 2, 5, 1, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
@@ -119,13 +119,13 @@
                 {
                     for (int j = 0; j < C.nbCellsHorizontal; j++)
                     {
-                        if (cells[i][j].IdFloor == 2 || cells[i][j].IdFloor == 3 || cells[i][j].IdDeco == 5 || cells[i][j].IdDeco == 4)
+                        if (cells[i][j].IdFloor == 2 || cells[i][j].IdFloor == 3 || cells[i][j].IdFloor == 9 || cells[i][j].IdDeco == 5 || cells[i][j].IdDeco == 4)
                             cells[i][j].Blocking = true;
 
                     }
                 }
 
-                IdStartHero = 4;
+                DirStartHero = "right";
                 StartPos = new Pos(11, 7);
                 
             }
@@ -213,7 +213,7 @@
                         }
                     }
 
-                    IdStartHero = 3;
+                    DirStartHero = "up";
                     StartPos = new Pos(8, 24);
                 }
 
@@ -299,7 +299,7 @@
                             }
                         }
 
-                        IdStartHero = 4;
+                        DirStartHero = "right";
                         StartPos = new Pos(2, 19);
                     }
                 }
