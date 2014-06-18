@@ -15,5 +15,6 @@ namespace Abimn
         public static SpriteBatch spriteBatch;
         public static Hashtable content;
         public static int brightness;
+        public static bool willFightBoss = false;
     }
 }

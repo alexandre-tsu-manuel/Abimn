@@ -312,6 +312,7 @@ namespace Abimn
             {
 
                 _idmap = 4;
+                Music.Play("map2");
                 _backmap = new Map(_idmap);
                 _idhero = 0;
                 _dir = "up";

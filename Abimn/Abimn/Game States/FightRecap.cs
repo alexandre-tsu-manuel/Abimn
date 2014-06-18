@@ -9,6 +9,7 @@ namespace Abimn
     {
         private Entity fond;
         private Entity exit;
+        private int one, two;
 
         public FightRecap() : base(false) { }
 
@@ -19,6 +20,9 @@ namespace Abimn
 
             exit = new Entity(new Pos(fond.Pos.X + 70, fond.Pos.Y + 370));
             exit.LoadContent("fight recap", "2");
+
+            one = Rand.Int(20, 60);
+            two = Rand.Int(75, 100);
         }
 
         public override void Update(GameTime gameTime)
@@ -34,9 +38,9 @@ namespace Abimn
         {
             fond.Draw();
             exit.Draw();
-            Text.Write("vie", (Hero.Life/100).ToString() + "/100", new Vector2(fond.Pos.X + 120, fond.Pos.Y + 165), Color.Red);
-            Text.Write("vie", "37", new Vector2(fond.Pos.X + 162, fond.Pos.Y + 233), Color.Yellow);
-            Text.Write("vie", "75", new Vector2(fond.Pos.X + 162, fond.Pos.Y + 308), Color.Green);
+            Text.Write("vie", (Hero.Life / 100).ToString() + "/100", new Vector2(fond.Pos.X + 115, fond.Pos.Y + 160), Color.Red, 0.9f);
+            Text.Write("vie", one + "", new Vector2(fond.Pos.X + 158, fond.Pos.Y + 228), Color.Yellow, 0.9f);
+            Text.Write("vie", two + "", new Vector2(fond.Pos.X + 158, fond.Pos.Y + 303), Color.Green, 0.9f);
         }
     }
 }

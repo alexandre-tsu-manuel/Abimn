@@ -288,16 +288,16 @@ namespace Abimn
         /// <summary>
         /// Dessine le sprite en utilisant ses attributs et le spritebatch donné
         /// </summary>
-        public virtual void Draw()
+        public virtual void Draw(bool flip = false)
         {
             if (this.Visible)
                 if (this.MouseIsOver())
                     if (E.LeftIsDown())
-                        Tile.Draw(KeyTexturePushed, Pos + Delta, Rotation, Scale, Opacity);
+                        Tile.Draw(KeyTexturePushed, Pos + Delta, Rotation, Scale, Opacity, flip);
                     else
-                        Tile.Draw(KeyTextureOver, Pos + Delta, Rotation, Scale, Opacity);
+                        Tile.Draw(KeyTextureOver, Pos + Delta, Rotation, Scale, Opacity, flip);
                 else
-                    Tile.Draw(KeyTextureNormal, Pos + Delta, Rotation, Scale, Opacity);
+                    Tile.Draw(KeyTextureNormal, Pos + Delta, Rotation, Scale, Opacity, flip);
         }
     }
 }

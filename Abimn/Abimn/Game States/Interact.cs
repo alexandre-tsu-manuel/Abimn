@@ -27,6 +27,7 @@ namespace Abimn.Game_States
             : base(false)
         {
             conv = n;
+            Music.Play("1");
         }
 
         public override void Initialize()
@@ -56,7 +57,7 @@ namespace Abimn.Game_States
                         case 1: return "Ou suis-je?";
                         case 3: return "il fait sombre... \nFroid... \nPourquoi suis-je ici?";
                         case 4: return "Meme mon propre nom...";
-                        case 2: return "Je ne connais pas cette caverne... \nOn dirait une ruine... ou un tombeau? ";
+                        case 2: return "Je ne connais pas cette caverne... \nOn dirait une ruine... ou un tombeau ? ";
                         case 5: return "... Que!";
                         case 6: return "J'entends du bruit au loin... \nPeut-etre que quelqu'un aura des reponses";
                         default:
@@ -67,12 +68,12 @@ namespace Abimn.Game_States
                     {
                         case 1: return "Bien le bonjour. \nComment vous sentez vous?\n";
                         case 2: ask = true;
-                            return " [W]-Comme si j'etais tombee du quatrieme etage... \n [X]-Bien. Merci. \n [C]-Un renard... qui parle... \n [V]-Qui etes-vous? ";
-                        case 3: return "Ne vous en faites pas. Je suis la pour vous aider. \nVous avez l'air un eu deboussolee mon amie. \nNe vous en faites pas. Tout va bien se passer. \n Quel est votre nom?";
+                            return " [W]-Comme si j'etais tombee du quatrieme etage... \n [X]-Bien. Merci. \n [C]-Un renard... qui parle... \n [V]-Qui etes-vous ? ";
+                        case 3: return "Ne vous en faites pas. Je suis la pour vous aider. \nVous avez l'air un eu deboussolee mon amie. \nNe vous en faites pas. Tout va bien se passer. \n Quel est votre nom ?";
                         case 4:
                             ask = true;
                             if (choice == 4)
-                                return "[W]-Euh... \n[X]-Je ne sais pas... \n[C]-Francoise. \n[V]-J'ai demande avant!";
+                                return "[W]-Euh... \n[X]-Je ne sais pas... \n[C]-Francoise. \n[V]-J'ai demande avant !";
                             else
                                 return "[W]-Euh... \n[X]-Cela ne vous regarde pas. \n[C]-Marie-France de la Marne.";
                         case 5: if (choice == 4)
@@ -136,7 +137,8 @@ namespace Abimn.Game_States
                 case 10 : switch (_idtext)
                     {
                         case 1: return "Alors tu te preSSentes a moi, ChaSSSeur?";
-                        case 2: return "Rentre chez toi. \nTu es trop faible. \nT'aFFronter ne ferais meme pas un bon divertiSSment.";
+                        case 2: return "Rentre chez toi. \nTu es trop faible. \nT'aFFronter ne ferait meme pas un bon divertiSSment.";
+                        case 3: return "Tu veux vraiment m'affronter ? SSoit...";
                         default:
                         return "";
                     }

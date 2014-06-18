@@ -23,6 +23,7 @@ namespace Abimn
 
         protected override void Initialize()
         {
+            G.willFightBoss = true;
             Rand.Init();
             G.currentGame = new Stack<GameType>();
             G.content = new Hashtable();
@@ -39,7 +40,7 @@ namespace Abimn
             Cursor.Initialize();
             Cursor.SetCursor("cursor", "default", "clicked", new Pos(-15, -5));
 
-            Music.Volume = 80;
+            Music.Volume = 7;
             G.brightness = 50;
 
             black = new Entity();

@@ -33,6 +33,17 @@
         }
         private static int _life;
 
+
+        /// <summary>
+        /// Récupère ou définit la vie du hero
+        /// </summary>
+        public static int Mana
+        {
+            get { return _mana; }
+            set { _mana = value; }
+        }
+        private static int _mana;
+
         /// <summary>
         /// Récupère ou définit l'épée du hero
         /// </summary>
