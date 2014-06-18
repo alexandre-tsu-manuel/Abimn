@@ -16,7 +16,7 @@ namespace Abimn
 
         public override void Initialize()
         {
-            Music.Play("1");
+            Music.Play("lullaby");
             Hero.LifeMax = 10000;
             Hero.Life = 10000;
             Cursor.SetVisibility(true);

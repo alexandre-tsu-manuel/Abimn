@@ -18,8 +18,9 @@ namespace Abimn.Game_States
         private Vector2 vect;
         private int _idtext;
         private string talk;
-        private int conv, choice;
+        private int conv, choice, random;
         private bool ask;
+
 
 
         public Interact(int n)
@@ -42,6 +43,7 @@ namespace Abimn.Game_States
             vect.X = 30;
             vect.Y = 500;
             choice = 1;
+            random = 0;
             ask = false;
         }
 
@@ -115,6 +117,30 @@ namespace Abimn.Game_States
                             return "";
 
                     }
+
+                case 4: switch (_idtext)
+                    {
+                        case 1: return "Une humaine... fraiche...";
+                        case 2: return "J'en veux une...";
+                        default:
+                            return "";
+
+                    }
+                case 5: switch (_idtext)
+                    {
+                        case 1: return "Pas rester la...\nDangereux...";
+                        default:
+                            return "";
+                    }
+
+                case 10 : switch (_idtext)
+                    {
+                        case 1: return "Alors tu te preSSentes a moi, ChaSSSeur?";
+                        case 2: return "Rentre chez toi. \nTu es trop faible. \nT'aFFronter ne ferais meme pas un bon divertiSSment.";
+                        default:
+                        return "";
+                    }
+
                 default:
                     return "";
             }
@@ -177,6 +203,8 @@ namespace Abimn.Game_States
             }
         }
 
+
+        
 
         public override void Update(GameTime gameTime)
         {

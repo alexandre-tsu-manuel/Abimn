@@ -231,8 +231,24 @@ namespace Abimn
                 if (_backmap.Decoration(FrontTile) == 5 ||
                     _backmap.Decoration(FrontTileLeft) == 5 ||
                     _backmap.Decoration(FrontTileRight) == 5 ||
-                    _backmap.Decoration(FrontTileFront) == 5) //id du marchand pour la Soutenance2
+                    _backmap.Decoration(FrontTileFront) == 5) //id du renard Mesmer
                     return 5;
+
+                if (_backmap.Decoration(FrontTile) == 7 ||
+                    _backmap.Decoration(FrontTileLeft) == 7 ||
+                    _backmap.Decoration(FrontTileRight) == 7 ||
+                    _backmap.Decoration(FrontTileFront) == 7) //id du PNJ 
+                    return 7;
+
+                if (_backmap.Decoration(FrontTile) == 8 ||
+                    _backmap.Decoration(FrontTileLeft) == 8 ||
+                    _backmap.Decoration(FrontTileRight) == 8) //id du PNJ 
+                    return 8;
+
+                if (_backmap.Decoration(FrontTile) == 9 ||
+                   _backmap.Decoration(FrontTileLeft) == 9 ||
+                   _backmap.Decoration(FrontTileRight) == 9) //id du PNJ 
+                    return 9;
             }
             return 0;
         }
@@ -260,7 +276,7 @@ namespace Abimn
             if (((_backmap.Decoration(HighTile) == 3 && (E.IsDown(Keys.Up) || E.IsDown(Keys.Z))) || (_backmap.Decoration(DownTile) == 3 && (E.IsDown(Keys.Down) || E.IsDown(Keys.S)))) && _idmap == 2)
             {
                 _idmap = 1;
-                _poshero = new Pos(49, 48);
+                _poshero = new Pos(45, 46);
                 _backmap = new Map(_idmap);
                 _idhero = 0;
                 _dir = "down";
@@ -281,13 +297,50 @@ namespace Abimn
 
             }
 
-            if (((_backmap.Decoration(_poshero) == 6 && (E.IsDown(Keys.Up) || E.IsDown(Keys.Z))) || (_backmap.Decoration(_poshero) == 6 && (E.IsDown(Keys.Down) || E.IsDown(Keys.S)))) && _idmap == 1)
+            if (((_backmap.Decoration(_poshero) == 6 && (E.IsDown(Keys.Up) || E.IsDown(Keys.Z))) || (_backmap.Decoration(_poshero) == 6 && (E.IsDown(Keys.Down) || E.IsDown(Keys.S)))) && _idmap == 4)
             {
-                _idmap = 3;
+                _idmap = 1;
+                _backmap = new Map(_idmap);
+                _idhero = 0;
+                _dir = "down";
+                _poshero = new Pos(39, 03);
+                _shift = new Pos(0, 0);
+                G.currentGame.Push(new Abimn.Game_States.Transition());
+
+            }
+            if (((_backmap.Decoration(_poshero) == 6 && (E.IsDown(Keys.Up) || E.IsDown(Keys.Z))) || (_backmap.Decoration(_poshero) == 6 && (E.IsDown(Keys.Down) || E.IsDown(Keys.S)))) && _idmap == 1  && _poshero.X < 40)
+            {
+
+                _idmap = 4;
+                _backmap = new Map(_idmap);
+                _idhero = 0;
+                _dir = "up";
+                _poshero = new Pos(05, 48);
+                _shift = new Pos(0, 0);
+                G.currentGame.Push(new Abimn.Game_States.Transition());
+            }
+
+
+            /* if (((_backmap.Decoration(_poshero) == 6 && (E.IsDown(Keys.Right) || E.IsDown(Keys.D)))) && _idmap == 5  && _poshero.X>40)
+             {
+                 _idmap = 5;
+                 _backmap = new Map(_idmap);
+                 _idhero = 0;
+                 _dir = "right";
+                 _poshero = new Pos(01, 25);
+                 _shift = new Pos(0, 0);
+                 G.currentGame.Push(new Abimn.Game_States.Transition());
+             }*/
+
+
+
+            if (((_backmap.Decoration(_poshero) == 6 && (E.IsDown(Keys.Left) || E.IsDown(Keys.Q)))) && _idmap == 5)
+            {
+                _idmap = 1;
                 _backmap = new Map(_idmap);
                 _idhero = 0;
                 _dir = "left";
-                _poshero = new Pos(05, 48);
+                _poshero = new Pos(48, 25);
                 _shift = new Pos(0, 0);
                 G.currentGame.Push(new Abimn.Game_States.Transition());
 
@@ -327,6 +380,16 @@ namespace Abimn
 
             if (Interact() == 5 && E.IsPushed(Keys.Space))
                 G.currentGame.Push(new Abimn.Game_States.Interact(3));
+
+            if (Interact() == 7 && E.IsPushed(Keys.Space))
+                G.currentGame.Push(new Abimn.Game_States.Interact(4));
+
+            if (Interact() == 8 && E.IsPushed(Keys.Space))
+                G.currentGame.Push(new Abimn.Game_States.Interact(5));
+
+            if (Interact() == 9 && E.IsPushed(Keys.Space))
+                G.currentGame.Push(new Abimn.Game_States.Interact(10));
+
 
             //Change de map
             Travel();
