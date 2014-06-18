@@ -36,6 +36,7 @@ namespace Abimn
         {
             if (current != path || force)
             {
+                MediaPlayer.IsRepeating = true;
                 old = current;
                 current = path;
                 MediaPlayer.Play((Song)G.content[C.musicsFolder + "/" + path]);

@@ -39,8 +39,8 @@ namespace Abimn
             retour = new Entity(new Pos(background.Pos.X + background.Rect.Width / 2, background.Pos.Y + background.Rect.Height / 2 + 100));
             retour.LoadContent("pause menu", "2", "6", "2", Center.All);
 
-            cannaVol = new Entity(new Pos(volume.Pos.X + 46, volume.Pos.Y + 38));
-            cannaLum = new Entity(new Pos(luminosite.Pos.X + 46, luminosite.Pos.Y + 38));
+            cannaVol = new Entity(new Pos(volume.Pos.X + volume.Rect.Width - 42, volume.Pos.Y + 38));
+            cannaLum = new Entity(new Pos(luminosite.Pos.X + luminosite.Rect.Width / 2, luminosite.Pos.Y + 38));
             cannaVol.LoadContent("options menu", "8", "9", "10");
             cannaLum.LoadContent("options menu", "8", "9", "10");
         }

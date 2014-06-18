@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="ISO-8859-1"?> 
-
+<?xml version="1.0" encoding="utf-8" ?>
+<newsList>
     <news>
-        <titre>Previously</titre>
-        <contenu>Depuis la validation du cahier des charges, les Développeurs ont étudié
-pour créer ce monde hors de l'espace et du temps qu'est l'Abîme. Après</contenu>
-        <date>22:56 11/06/2014</date>
+        <title>Previously</title>
+        <date>le 11/06/2014 Ã  22h56</date>
+        <content>Depuis la validation du cahier des charges, les DÃ©veloppeurs ont Ã©tudiÃ© pour crÃ©er ce monde hors de l'espace et du temps qu'est l'AbÃ®me. AprÃ¨s</content>
     </news>
     <news>
-        <titre>HEY</titre>
-        <contenu>yolo</contenu>
+        <title>HEY</title>
         <date>idk</date>
+        <content>yolo</content>
     </news>
+</newsList>

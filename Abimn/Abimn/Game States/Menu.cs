@@ -11,6 +11,7 @@ namespace Abimn
         private Entity options;
         private Entity quit;
         private Entity background;
+        private bool NewsLoaded = false;
 
         public Menu() : base(true) { }
 
@@ -32,6 +33,7 @@ namespace Abimn
 
             background = new Entity();
             background.LoadContent("menu principal/7");
+
         }
 
         public override void Update(GameTime gameTime)
@@ -42,9 +44,11 @@ namespace Abimn
                 G.currentGame.Push(new OptionsMenu());
             else if (quit.IsClicked())
                 G.currentGame.Clear();
-            Pos mousePosition = E.GetMousePos();
-            if (Rand.Int(100) == 1)
-                Rand.Int(1);
+            if (!NewsLoaded)
+            {
+                News.Load();
+                NewsLoaded = true;
+            }
         }
 
         public override void Draw()
@@ -53,6 +57,8 @@ namespace Abimn
             play.Draw();
             options.Draw();
             quit.Draw();
+            if (News.LoadFinished)
+                News.Draw(new Pos(610, 170));
         }
     }
 }
