@@ -17,6 +17,7 @@ namespace Abimn
 
         public override void Initialize()
         {
+            G.willFightBoss = false;
             Music.Play("lullaby");
             Hero.LifeMax = 10000;
             Hero.Life = 10000;

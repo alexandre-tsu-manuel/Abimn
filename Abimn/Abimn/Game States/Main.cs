@@ -19,6 +19,7 @@ namespace Abimn
         float _timeStart = 0f;
         private Entity EntityHero;
         private bool event1;
+        private bool shitIsDone = false;
 
         public Main() : base(true) { }
 
@@ -356,8 +357,11 @@ namespace Abimn
 
             Cursor.SetVisibility(false);
 
-            if (_timeStart <= 4f || E.IsPushed(Keys.M))
+            if (!shitIsDone || E.IsPushed(Keys.M))
+            {
+                shitIsDone = true;
                 G.currentGame.Push(new Abimn.Game_States.Interact(1));
+            }
 
 
             //Change CurrentGame
@@ -389,7 +393,11 @@ namespace Abimn
                 G.currentGame.Push(new Abimn.Game_States.Interact(5));
 
             if (Interact() == 9 && E.IsPushed(Keys.Space))
+            {
+                G.willFightBoss = true;
+                G.currentGame.Push(new Fight());
                 G.currentGame.Push(new Abimn.Game_States.Interact(10));
+            }
 
 
             //Change de map

@@ -14,6 +14,7 @@ namespace Abimn
 
         public override void Initialize()
         {
+            Music.Stop();
             background = new Entity();
             background.LoadContent("fight", "7");
 

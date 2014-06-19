@@ -23,7 +23,6 @@ namespace Abimn
 
         protected override void Initialize()
         {
-            G.willFightBoss = true;
             Rand.Init();
             G.currentGame = new Stack<GameType>();
             G.content = new Hashtable();

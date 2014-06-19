@@ -17,17 +17,25 @@ namespace Abimn
             int height = 500;
             for (int i = 0; i < C.Screen.Width; i++)
             {
-                this.SetPixel(new Pos(i, height), Color.Purple);
-                this.SetPixel(new Pos(i, height + 1), Color.Purple);
-                this.SetPixel(new Pos(i, height + 2), Color.Purple);
-                this.SetPixel(new Pos(i, height + 3), Color.Purple);
-                this.SetPixel(new Pos(i, height + 4), Color.Purple);
+                Color c1 = new Color(78, 66, 97);
+                Color c2 = new Color(24, 18, 34);
+                this.SetPixel(new Pos(i, height), c1);
+                this.SetPixel(new Pos(i, height + 1), c1);
+                this.SetPixel(new Pos(i, height + 2), c1);
+                this.SetPixel(new Pos(i, height + 3), c1);
+                this.SetPixel(new Pos(i, height + 4), c1);
                 for (int j = C.Screen.Height; j > height + 4; j--)
-                    SetPixel(new Pos(i, j), Color.DarkViolet);
+                {
+                    c2.R = (byte)(48 + Rand.Int(-10, 11));
+                    c2.G = (byte)(36 + Rand.Int(-10, 11));
+                    c2.B = (byte)(67 + Rand.Int(-10, 11));
+
+                    SetPixel(new Pos(i, j), c2);
+                }
                 for (int j = height - 1; j >= 0; j--)
                     SetPixel(new Pos(i, j), Color.Transparent);
-                int variation = Rand.Int(-1, 4);
-                if (variation > 1) variation = 0;
+                int variation = Rand.Int(-2, 10);
+                if (variation > 2) variation = 0;
                 height += variation;
             }
         }
@@ -54,7 +62,14 @@ namespace Abimn
         public int GetHeight(int x)
         {
             int y = 0;
-            while (data[y++ * C.Screen.Width + x] == Color.Transparent) ;
+            try
+            {
+                while (data[y++ * C.Screen.Width + x] == Color.Transparent) ;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                return C.Screen.Height - 10;
+            }
             return C.Screen.Height - y;
         }
 
@@ -75,12 +90,13 @@ namespace Abimn
 
             for (int i = pos.I - radius; i < pos.I + radius; i++)
             {
+                Color c3 = new Color(255, 210, 91);
                 int height = C.Screen.Height - GetHeight(i);
-                SetPixel(new Pos(i, height), Color.Purple);
-                SetPixel(new Pos(i, height + 1), Color.Purple);
-                SetPixel(new Pos(i, height + 2), Color.Purple);
-                SetPixel(new Pos(i, height + 3), Color.Purple);
-                SetPixel(new Pos(i, height + 4), Color.Purple);
+                SetPixel(new Pos(i, height), c3);
+                SetPixel(new Pos(i, height + 1), c3);
+                SetPixel(new Pos(i, height + 2), c3);
+                SetPixel(new Pos(i, height + 3), c3);
+                SetPixel(new Pos(i, height + 4), c3);
             }
         }
     }

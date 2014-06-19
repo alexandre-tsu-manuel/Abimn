@@ -55,8 +55,9 @@ namespace Abimn
             _fireball.Visible = false;
 
             _ennemyFireball = new Entity();
-            _ennemyFireball.LoadContent("fight/fireball");
+            _ennemyFireball.LoadContent("fight/fireball2");
             _fireball.Visible = false;
+            _ennemyFireball.Pos = new Pos(_ennemy.Pos.I, _ennemy.Pos.J - 32);
         }
 
         public void moveHero()
@@ -142,7 +143,7 @@ namespace Abimn
                     _ennemy.Life -= 10000 / 14;
             }
             if (_hero.Pos.J + _hero.Rect.Height > C.Screen.Height - heightByHero)
-                _hero.Pos.J = C.Screen.Height - heightByHero - _hero.Rect.Height;
+                _hero.Pos.J = C.Screen.Height - heightByHero - _hero.Rect.Height + 7;
 
             int heightByMonster = _map.GetHeightByHero(_ennemy.Pos.I + 17);
             if (_ennemy.Pos.J + _ennemy.Rect.Height + 7 < C.Screen.Height - heightByMonster)
@@ -150,7 +151,7 @@ namespace Abimn
             else
                 _ennemy.Movement = Vector2.Zero;
             if (_ennemy.Pos.J + _ennemy.Rect.Height + 7 > C.Screen.Height - heightByMonster)
-                _ennemy.Pos.J = C.Screen.Height - heightByMonster - _ennemy.Rect.Height - 7;
+                _ennemy.Pos.J = C.Screen.Height - heightByMonster - _ennemy.Rect.Height;
 
             _hero.Update(gameTime);
                 _ennemy.Update(gameTime);
@@ -192,7 +193,7 @@ namespace Abimn
                     _hero.Movement = new Vector2(0.2f, _hero.Movement.Y);
                 if (E.IsDown(Keys.Left))
                     _hero.Movement = new Vector2(-0.2f, _hero.Movement.Y);
-                _hero.Pos = new Pos(_hero.Pos.I, _hero.Pos.J - 4);
+                _hero.Pos = new Pos(_hero.Pos.I, _hero.Pos.J - 10);
             }
 
             int heightByFireball = C.Screen.Height - _map.GetHeightByHero(_fireball.Pos.I + 9);
@@ -235,6 +236,11 @@ namespace Abimn
                     _ennemyFireball.Visible = false;
                 }
                 _ennemyFireball.Update(gameTime);
+            }
+
+            if (E.IsPushed(Keys.Escape))
+            {
+                G.currentGame.Push(new PauseMenu());
             }
 
             /*

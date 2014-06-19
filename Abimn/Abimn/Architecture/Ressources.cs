@@ -45,6 +45,8 @@ namespace Abimn
             string key = C.imagesFolder + "/" + path;
             if (G.content.ContainsKey(key))
                 return (Texture2D)G.content[key];
+            else if (path == "fight/fireball2")
+                return (Texture2D)G.content["images/fight/fireball"];
             else
                 return (Texture2D)G.content[C.imagesFolder + "/" + "void"];
         }
