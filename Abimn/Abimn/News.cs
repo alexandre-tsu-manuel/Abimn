@@ -20,6 +20,8 @@ namespace Abimn
             doc = new XmlDocument();
             try
             {
+                int foo = 0;
+                int bar = foo / foo;
                 doc.Load("http://localhost/Abimn/news.xml");
             }
             catch
